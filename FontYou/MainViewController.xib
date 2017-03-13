@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="TYV-Gc-6oh">
-                    <rect key="frame" x="0.0" y="458" width="394" height="100"/>
+                    <rect key="frame" x="0.0" y="488" width="394" height="70"/>
                     <subviews>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmr-x5-Rez" userLabel="Menu Button">
                             <rect key="frame" x="18" y="13" width="32" height="24"/>
@@ -36,11 +36,11 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="Sw8-Yc-iOw"/>
+                        <constraint firstAttribute="height" constant="70" id="Sw8-Yc-iOw"/>
                     </constraints>
                 </customView>
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJP-4v-ojp">
-                    <rect key="frame" x="0.0" y="0.0" width="394" height="458"/>
+                    <rect key="frame" x="0.0" y="0.0" width="394" height="488"/>
                 </customView>
             </subviews>
             <constraints>

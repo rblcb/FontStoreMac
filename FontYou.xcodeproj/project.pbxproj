@@ -27,6 +27,13 @@
 		2223DE601E314E4A00D7B0FE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE5E1E314E4A00D7B0FE /* MenuViewController.swift */; };
 		2223DE611E314E4A00D7B0FE /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2223DE5F1E314E4A00D7B0FE /* MenuViewController.xib */; };
 		2223DE631E31531C00D7B0FE /* NSView+BackgroundColored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */; };
+		2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE7A1E76A91000B357E7 /* FontUtility.m */; };
+		2275FE7D1E76A98A00B357E7 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2275FE7C1E76A98A00B357E7 /* Fonts */; };
+		2275FE801E76A9C300B357E7 /* FontStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE7F1E76A9C300B357E7 /* FontStore.swift */; };
+		2275FE821E77002700B357E7 /* FamilyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE811E77002700B357E7 /* FamilyCellView.swift */; };
+		2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB01E7709D90040A34E /* ListingRowView.swift */; };
+		2283BBB31E7711DD0040A34E /* FontCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB21E7711DD0040A34E /* FontCellView.swift */; };
+		2283BBB51E7734ED0040A34E /* OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB41E7734ED0040A34E /* OutlineView.swift */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +81,15 @@
 		2223DE5E1E314E4A00D7B0FE /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2223DE5F1E314E4A00D7B0FE /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+BackgroundColored.swift"; sourceTree = "<group>"; };
+		2275FE781E76A91000B357E7 /* FontYou-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FontYou-Bridging-Header.h"; sourceTree = "<group>"; };
+		2275FE791E76A91000B357E7 /* FontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontUtility.h; sourceTree = "<group>"; };
+		2275FE7A1E76A91000B357E7 /* FontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontUtility.m; sourceTree = "<group>"; };
+		2275FE7C1E76A98A00B357E7 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		2275FE7F1E76A9C300B357E7 /* FontStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontStore.swift; sourceTree = "<group>"; };
+		2275FE811E77002700B357E7 /* FamilyCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCellView.swift; sourceTree = "<group>"; };
+		2283BBB01E7709D90040A34E /* ListingRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingRowView.swift; sourceTree = "<group>"; };
+		2283BBB21E7711DD0040A34E /* FontCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontCellView.swift; sourceTree = "<group>"; };
+		2283BBB41E7734ED0040A34E /* OutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +160,6 @@
 		2223DE1B1E30F74800D7B0FE /* FontYou */ = {
 			isa = PBXGroup;
 			children = (
-				22EDFCDC1E72A84E00D221C7 /* Extensions */,
 				2223DE4F1E3129E000D7B0FE /* Constants.swift */,
 				221E636D1E3237A500944B1B /* StyleKit.swift */,
 				2223DE1C1E30F74800D7B0FE /* AppDelegate.swift */,
@@ -155,6 +170,11 @@
 				2223DE5B1E313B3100D7B0FE /* Logon View */,
 				2223DE5C1E313B4600D7B0FE /* Listing View */,
 				221E636F1E32395200944B1B /* Custom Controls */,
+				22EDFCDC1E72A84E00D221C7 /* Extensions */,
+				2275FE7E1E76A9AA00B357E7 /* FontStore */,
+				2275FE771E76A8F400B357E7 /* FontUtility */,
+				2275FE781E76A91000B357E7 /* FontYou-Bridging-Header.h */,
+				2275FE7C1E76A98A00B357E7 /* Fonts */,
 				2223DE1E1E30F74800D7B0FE /* Assets.xcassets */,
 				2223DE201E30F74800D7B0FE /* MainMenu.xib */,
 				2223DE231E30F74800D7B0FE /* Info.plist */,
@@ -194,6 +214,10 @@
 			children = (
 				2223DE571E312E4F00D7B0FE /* ListingViewController.swift */,
 				2223DE581E312E4F00D7B0FE /* ListingViewController.xib */,
+				2283BBB41E7734ED0040A34E /* OutlineView.swift */,
+				2283BBB01E7709D90040A34E /* ListingRowView.swift */,
+				2275FE811E77002700B357E7 /* FamilyCellView.swift */,
+				2283BBB21E7711DD0040A34E /* FontCellView.swift */,
 			);
 			name = "Listing View";
 			sourceTree = "<group>";
@@ -205,6 +229,23 @@
 				2223DE5F1E314E4A00D7B0FE /* MenuViewController.xib */,
 			);
 			name = "Menu View";
+			sourceTree = "<group>";
+		};
+		2275FE771E76A8F400B357E7 /* FontUtility */ = {
+			isa = PBXGroup;
+			children = (
+				2275FE791E76A91000B357E7 /* FontUtility.h */,
+				2275FE7A1E76A91000B357E7 /* FontUtility.m */,
+			);
+			name = FontUtility;
+			sourceTree = "<group>";
+		};
+		2275FE7E1E76A9AA00B357E7 /* FontStore */ = {
+			isa = PBXGroup;
+			children = (
+				2275FE7F1E76A9C300B357E7 /* FontStore.swift */,
+			);
+			name = FontStore;
 			sourceTree = "<group>";
 		};
 		22EDFCDC1E72A84E00D221C7 /* Extensions */ = {
@@ -333,6 +374,7 @@
 				2223DE5A1E312E4F00D7B0FE /* ListingViewController.xib in Resources */,
 				2223DE481E30FA8A00D7B0FE /* MainViewController.xib in Resources */,
 				2223DE561E312E1000D7B0FE /* LogonViewController.xib in Resources */,
+				2275FE7D1E76A98A00B357E7 /* Fonts in Resources */,
 				2223DE221E30F74800D7B0FE /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,9 +409,15 @@
 				2223DE1D1E30F74800D7B0FE /* AppDelegate.swift in Sources */,
 				221E63711E3239FC00944B1B /* MenuButton.swift in Sources */,
 				2223DE631E31531C00D7B0FE /* NSView+BackgroundColored.swift in Sources */,
+				2283BBB31E7711DD0040A34E /* FontCellView.swift in Sources */,
 				2223DE471E30FA8A00D7B0FE /* MainViewController.swift in Sources */,
 				221E636E1E3237A500944B1B /* StyleKit.swift in Sources */,
+				2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */,
+				2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */,
+				2275FE821E77002700B357E7 /* FamilyCellView.swift in Sources */,
+				2283BBB51E7734ED0040A34E /* OutlineView.swift in Sources */,
 				22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */,
+				2275FE801E76A9C300B357E7 /* FontStore.swift in Sources */,
 				2223DE601E314E4A00D7B0FE /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,12 +559,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MXZ782EHFK;
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/FontYou-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -525,12 +576,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MXZ782EHFK;
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/FontYou-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

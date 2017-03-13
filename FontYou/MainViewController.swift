@@ -53,7 +53,7 @@ class MainViewController: NSViewController {
         
         // Set the default view
         
-        currentViewController = menuViewController
+        currentViewController = listingViewController
     }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
@@ -63,7 +63,11 @@ class MainViewController: NSViewController {
 
 extension MainViewController: MenuViewDelegate {
     
+    func goToFontList() {
+        currentViewController = listingViewController
+    }
+    
     func goToAccount() {
-        currentViewController = logonViewController;
+        currentViewController = logonViewController
     }
 }

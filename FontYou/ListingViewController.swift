@@ -10,9 +10,93 @@ import Cocoa
 
 class ListingViewController: NSViewController {
 
+    @IBOutlet weak var outlineView: OutlineView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        
+        outlineView.action = #selector(onItemClicked)
     }
     
+    @objc private func onItemClicked() {
+        
+        // Allow the user to expand/collapse an item by just clicking on the row
+        
+        let row = outlineView.clickedRow
+        if let item = outlineView.item(atRow: row) as? String {
+            if outlineView.isItemExpanded(item) {
+                outlineView.animator().collapseItem(item)
+            }
+            else {
+                outlineView.animator().expandItem(item)
+            }
+        }
+    }
+    
+}
+
+extension ListingViewController: NSOutlineViewDataSource {
+    
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if let family = item as? String {
+            return FontStore.families[family]!.count
+        }
+        
+        return FontStore.families.count
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if let family = item as? String {
+            return FontStore.families[family]![index]
+        }
+        
+        return FontStore.families.keys.sorted()[index]
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        if let family = item as? String {
+            return FontStore.families[family]!.count > 0
+        }
+        
+        return false
+    }
+}
+
+extension ListingViewController: NSOutlineViewDelegate {
+    
+    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
+        let view = ListingRowView()
+        view.isFamily = item is String        
+        return view
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        if let font = item as? FontStoreItem {
+            let view = outlineView.make(withIdentifier: "Font", owner: self) as? FontCellView
+            if let textField = view?.nameLabel {
+                textField.stringValue = font.name
+                textField.font = NSFont.init(descriptor: font.fontDescriptor, size: 16)
+            }
+            
+            return view
+        }
+        else if let family = item as? String {
+            let view = outlineView.make(withIdentifier: "Family", owner: self) as? FamilyCellView
+            if let textField = view?.nameLabel {
+                textField.stringValue = family
+                textField.font =  NSFont.init(descriptor: FontStore.sharedInstance.primaryFont(forFamily: family)!.fontDescriptor, size: 20)
+            }
+            
+            if let textField = view?.numFontsLabel {
+                let numFonts = FontStore.families[family]!.count
+                textField.stringValue = numFonts > 1 ? "\(numFonts) Fonts" : "1 Font"
+                textField.textColor = StyleKit.textGrey
+            }
+            
+            return view
+        }
+        
+        return nil
+    }
+
 }

@@ -19,8 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="370" height="483"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nHL-zh-lVU" userLabel="Separator line">
-                    <rect key="frame" x="0.0" y="481" width="370" height="22"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="nHL-zh-lVU" userLabel="Separator line">
+                    <rect key="frame" x="0.0" y="481" width="370" height="2"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="ydo-FL-1zF"/>
                     </constraints>
