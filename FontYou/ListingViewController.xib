@@ -48,10 +48,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-es-fsS">
-                                                        <rect key="frame" x="8" y="11" width="459" height="21"/>
+                                                        <rect key="frame" x="8" y="7" width="459" height="30"/>
                                                         <beginningViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-v7-CnL">
-                                                                <rect key="frame" x="-2" y="2" width="40" height="17"/>
+                                                                <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Name" id="CmK-lQ-uDB">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -61,22 +61,28 @@
                                                         </beginningViews>
                                                         <endViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qag-cM-Ait">
-                                                                <rect key="frame" x="330" y="3.5" width="59" height="14"/>
+                                                                <rect key="frame" x="344" y="8" width="59" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Num fonts" id="SYZ-bz-35c">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
-                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A0d-61-VmP">
-                                                                <rect key="frame" x="389" y="-7" width="76" height="32"/>
+                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0d-61-VmP" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
+                                                                <rect key="frame" x="409" y="2.5" width="50" height="25"/>
                                                                 <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="coU-if-cta"/>
                                                                     <constraint firstAttribute="width" constant="64" id="hBn-cA-F2G"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="push" title="Install" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TV9-Jl-wEj">
+                                                                <buttonCell key="cell" type="square" title="Install" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="TV9-Jl-wEj" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </button>
                                                         </endViews>
                                                         <visibilityPriorities>
@@ -107,10 +113,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ssg-mI-UiI">
-                                                        <rect key="frame" x="8" y="11" width="459" height="21"/>
+                                                        <rect key="frame" x="8" y="6.5" width="459" height="30"/>
                                                         <beginningViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-YI-htK">
-                                                                <rect key="frame" x="-2" y="2" width="40" height="17"/>
+                                                                <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
                                                                 <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" title="Name" id="rD2-D7-lGQ">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -119,15 +125,21 @@
                                                             </textField>
                                                         </beginningViews>
                                                         <endViews>
-                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ra-vw-IDG">
-                                                                <rect key="frame" x="389" y="-7" width="76" height="32"/>
+                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ra-vw-IDG" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
+                                                                <rect key="frame" x="413" y="2.5" width="46" height="25"/>
                                                                 <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="cVp-en-CVd"/>
                                                                     <constraint firstAttribute="width" constant="64" id="lg7-sn-lMh"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="push" title="Install" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oV-W6-DaH">
+                                                                <buttonCell key="cell" type="square" title="Install" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oV-W6-DaH" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </button>
                                                         </endViews>
                                                         <visibilityPriorities>

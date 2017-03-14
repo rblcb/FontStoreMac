@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		221E636E1E3237A500944B1B /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E636D1E3237A500944B1B /* StyleKit.swift */; };
-		221E63711E3239FC00944B1B /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E63701E3239FC00944B1B /* MenuButton.swift */; };
+		221E63711E3239FC00944B1B /* MenuButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E63701E3239FC00944B1B /* MenuButtonCell.swift */; };
 		221E63731E36125700944B1B /* ArrowWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E63721E36125700944B1B /* ArrowWindow.swift */; };
 		2223DE1D1E30F74800D7B0FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE1C1E30F74800D7B0FE /* AppDelegate.swift */; };
 		2223DE1F1E30F74800D7B0FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2223DE1E1E30F74800D7B0FE /* Assets.xcassets */; };
@@ -34,6 +34,7 @@
 		2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB01E7709D90040A34E /* ListingRowView.swift */; };
 		2283BBB31E7711DD0040A34E /* FontCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB21E7711DD0040A34E /* FontCellView.swift */; };
 		2283BBB51E7734ED0040A34E /* OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB41E7734ED0040A34E /* OutlineView.swift */; };
+		2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB61E77D31F0040A34E /* RoundedButton.swift */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +57,7 @@
 
 /* Begin PBXFileReference section */
 		221E636D1E3237A500944B1B /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
-		221E63701E3239FC00944B1B /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		221E63701E3239FC00944B1B /* MenuButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonCell.swift; sourceTree = "<group>"; };
 		221E63721E36125700944B1B /* ArrowWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowWindow.swift; sourceTree = "<group>"; };
 		2223DE191E30F74800D7B0FE /* FontYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2223DE1C1E30F74800D7B0FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 		2283BBB01E7709D90040A34E /* ListingRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingRowView.swift; sourceTree = "<group>"; };
 		2283BBB21E7711DD0040A34E /* FontCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontCellView.swift; sourceTree = "<group>"; };
 		2283BBB41E7734ED0040A34E /* OutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
+		2283BBB61E77D31F0040A34E /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +123,8 @@
 		221E636F1E32395200944B1B /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
-				221E63701E3239FC00944B1B /* MenuButton.swift */,
+				221E63701E3239FC00944B1B /* MenuButtonCell.swift */,
+				2283BBB61E77D31F0040A34E /* RoundedButton.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -407,10 +410,11 @@
 				2223DE4A1E30FC6C00D7B0FE /* EventMonitor.swift in Sources */,
 				2223DE591E312E4F00D7B0FE /* ListingViewController.swift in Sources */,
 				2223DE1D1E30F74800D7B0FE /* AppDelegate.swift in Sources */,
-				221E63711E3239FC00944B1B /* MenuButton.swift in Sources */,
+				221E63711E3239FC00944B1B /* MenuButtonCell.swift in Sources */,
 				2223DE631E31531C00D7B0FE /* NSView+BackgroundColored.swift in Sources */,
 				2283BBB31E7711DD0040A34E /* FontCellView.swift in Sources */,
 				2223DE471E30FA8A00D7B0FE /* MainViewController.swift in Sources */,
+				2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */,
 				221E636E1E3237A500944B1B /* StyleKit.swift in Sources */,
 				2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */,
 				2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */,
