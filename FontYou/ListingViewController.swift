@@ -12,8 +12,17 @@ class ListingViewController: NSViewController {
 
     @IBOutlet weak var outlineView: OutlineView!
     
+    @IBOutlet weak var indicatorView: IndicatorStackView!
+    @IBOutlet weak var installedButton: NSButton!
+    @IBOutlet weak var newButton: NSButton!
+    @IBOutlet weak var allButton: NSButton!
+    @IBOutlet weak var searchButton: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchButton.image = StyleKit.imageOfSearchIcon(selected: false)
+        searchButton.alternateImage = StyleKit.imageOfSearchIcon(selected: true)
         
         outlineView.action = #selector(onItemClicked)
     }
@@ -33,6 +42,22 @@ class ListingViewController: NSViewController {
         }
     }
     
+    @IBAction func displayInstalled(_ sender: Any) {
+        indicatorView.positionIndicatorView(view: installedButton, animated: true)
+    }
+
+    @IBAction func displayNew(_ sender: Any) {
+        indicatorView.positionIndicatorView(view: newButton, animated: true)
+    }
+
+    @IBAction func displayAll(_ sender: Any) {
+        indicatorView.positionIndicatorView(view: allButton, animated: true)
+    }
+    
+    @IBAction func displaySearch(_ sender: Any) {
+        indicatorView.positionIndicatorView(view: searchButton, animated: true)
+    }
+
 }
 
 extension ListingViewController: NSOutlineViewDataSource {

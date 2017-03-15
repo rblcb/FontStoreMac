@@ -9,7 +9,7 @@
 import Cocoa
 
 extension NSView {
-    var backgroundColor: NSColor? {
+    @IBInspectable var backgroundColor: NSColor? {
         set {
             if self.layer == nil {
                 self.wantsLayer = true

@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="488" width="394" height="70"/>
                     <subviews>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmr-x5-Rez" userLabel="Menu Button">
-                            <rect key="frame" x="18" y="13" width="32" height="24"/>
+                            <rect key="frame" x="18" y="13" width="22" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="lJc-cJ-qwy">
                                 <behavior key="behavior" lightByContents="YES"/>
