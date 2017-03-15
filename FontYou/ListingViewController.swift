@@ -115,7 +115,6 @@ extension ListingViewController: NSOutlineViewDelegate {
             if let textField = view?.numFontsLabel {
                 let numFonts = FontStore.families[family]!.count
                 textField.stringValue = numFonts > 1 ? "\(numFonts) Fonts" : "1 Font"
-                textField.textColor = StyleKit.textGrey
             }
             
             return view

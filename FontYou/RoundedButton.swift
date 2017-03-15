@@ -24,7 +24,7 @@ class RoundedButton: NSButton {
             style.alignment = .center
             
             let attributes = [
-                NSForegroundColorAttributeName: textColor ?? NSColor.black,
+                NSForegroundColorAttributeName: textColor ?? StyleKit.textBlack,
                 NSParagraphStyleAttributeName: style
                 ] as [String : Any]
             

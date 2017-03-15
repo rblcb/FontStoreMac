@@ -20,6 +20,7 @@ public class StyleKit : NSObject {
     private struct Cache {
         static let primary: NSColor = NSColor(red: 0, green: 0.471, blue: 1, alpha: 1)
         static let textGrey: NSColor = NSColor(red: 0.706, green: 0.706, blue: 0.706, alpha: 1)
+        static let textBlack: NSColor = NSColor(red: 0.106, green: 0.106, blue: 0.106, alpha: 1)
         static let lightGrey: NSColor = NSColor(red: 0.957, green: 0.957, blue: 0.957, alpha: 1)
         static var imageOfDisclosureTriangleOpen: NSImage?
         static var imageOfDisclosureTriangleClosed: NSImage?
@@ -30,6 +31,7 @@ public class StyleKit : NSObject {
 
     public dynamic class var primary: NSColor { return Cache.primary }
     public dynamic class var textGrey: NSColor { return Cache.textGrey }
+    public dynamic class var textBlack: NSColor { return Cache.textBlack }
     public dynamic class var lightGrey: NSColor { return Cache.lightGrey }
 
     //// Drawing Methods
@@ -141,7 +143,7 @@ public class StyleKit : NSObject {
         let white = NSColor(red: 1, green: 1, blue: 1, alpha: 1)
 
         //// Variable Declarations
-        let backgroundColour: NSColor = selected ? StyleKit.textGrey : StyleKit.lightGrey
+        let backgroundColour: NSColor = selected ? StyleKit.textBlack : StyleKit.lightGrey
         let foregroundColour: NSColor = selected ? white : StyleKit.textGrey
 
         //// Oval Drawing

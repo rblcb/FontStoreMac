@@ -13,4 +13,9 @@ class FamilyCellView: NSTableCellView {
     @IBOutlet weak var nameLabel: NSTextField!
     @IBOutlet weak var numFontsLabel: NSTextField!
     @IBOutlet weak var installButton: NSButton!
+    
+    override func awakeFromNib() {
+        self.nameLabel?.textColor = StyleKit.textBlack
+        self.numFontsLabel.textColor = StyleKit.textGrey
+    }
 }

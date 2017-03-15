@@ -12,4 +12,8 @@ class FontCellView: NSTableCellView {
     
     @IBOutlet weak var nameLabel: NSTextField!
     @IBOutlet weak var installButton: NSButton!
+
+    override func awakeFromNib() {
+        self.nameLabel?.textColor = StyleKit.textBlack
+    }
 }
