@@ -10,22 +10,26 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ListingViewController" customModule="FontYou" customModuleProvider="target">
             <connections>
                 <outlet property="allButton" destination="Ahh-XS-Qfa" id="NWm-wx-Yys"/>
+                <outlet property="doSearchButton" destination="Fzy-kP-rGd" id="WHf-bF-nNN"/>
                 <outlet property="indicatorView" destination="XHr-Rg-qyM" id="mz4-Ic-nJy"/>
                 <outlet property="installedButton" destination="qEo-mt-gTm" id="BkU-EE-Pah"/>
                 <outlet property="newButton" destination="eAz-9M-lzQ" id="AJs-hO-5U6"/>
                 <outlet property="outlineView" destination="o9o-Nf-HHg" id="Va8-OS-E59"/>
+                <outlet property="resultsLabel" destination="qm7-vR-QWn" id="3SU-J2-Iz8"/>
                 <outlet property="searchButton" destination="lPv-0B-Caa" id="7ye-va-Xo5"/>
+                <outlet property="searchField" destination="ciq-tC-t2R" id="LDf-eF-gGV"/>
+                <outlet property="searchView" destination="DOX-Ek-Wwx" id="HGn-j1-czI"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="442"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yq1-s3-dPS" userLabel="Header View">
-                    <rect key="frame" x="0.0" y="232" width="480" height="40"/>
+                    <rect key="frame" x="0.0" y="402" width="480" height="40"/>
                     <subviews>
                         <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHr-Rg-qyM" customClass="IndicatorStackView" customModule="FontYou" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
@@ -102,14 +106,70 @@
                         <constraint firstItem="XHr-Rg-qyM" firstAttribute="top" secondItem="yq1-s3-dPS" secondAttribute="top" id="q5z-UQ-lb7"/>
                     </constraints>
                 </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="DOX-Ek-Wwx" userLabel="Search View">
+                    <rect key="frame" x="0.0" y="275" width="480" height="127"/>
+                    <subviews>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="NA2-VU-4Zd" userLabel="Search Background" customClass="RoundedView" customModule="FontYou" customModuleProvider="target">
+                            <rect key="frame" x="14" y="77" width="452" height="30"/>
+                            <subviews>
+                                <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciq-tC-t2R">
+                                    <rect key="frame" x="8" y="6.5" width="436" height="17"/>
+                                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="2cc-Z1-QfN">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </searchFieldCell>
+                                </searchField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="ciq-tC-t2R" secondAttribute="trailing" constant="8" id="0Nw-Jw-ch2"/>
+                                <constraint firstAttribute="height" constant="30" id="0Om-AM-53v"/>
+                                <constraint firstItem="ciq-tC-t2R" firstAttribute="centerY" secondItem="NA2-VU-4Zd" secondAttribute="centerY" id="FeR-Xb-aUF"/>
+                                <constraint firstItem="ciq-tC-t2R" firstAttribute="leading" secondItem="NA2-VU-4Zd" secondAttribute="leading" constant="8" id="poQ-QK-eL9"/>
+                            </constraints>
+                        </customView>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fzy-kP-rGd" userLabel="Search Button" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
+                            <rect key="frame" x="14" y="41" width="452" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="te4-4w-s4i"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" title="Search" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qGw-ph-qSC" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-vR-QWn" userLabel="Results Label">
+                            <rect key="frame" x="222" y="12" width="37" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="OBq-fR-mVz"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="XKC-ag-FFE">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="qm7-vR-QWn" secondAttribute="bottom" priority="750" constant="12" id="32r-fY-YW8"/>
+                        <constraint firstItem="Fzy-kP-rGd" firstAttribute="top" secondItem="NA2-VU-4Zd" secondAttribute="bottom" constant="6" id="5KU-6y-WGa"/>
+                        <constraint firstAttribute="trailing" secondItem="Fzy-kP-rGd" secondAttribute="trailing" priority="750" constant="14" id="64D-SD-VTz"/>
+                        <constraint firstItem="NA2-VU-4Zd" firstAttribute="top" secondItem="DOX-Ek-Wwx" secondAttribute="top" priority="750" constant="20" id="AlC-OD-3Hu"/>
+                        <constraint firstItem="Fzy-kP-rGd" firstAttribute="leading" secondItem="DOX-Ek-Wwx" secondAttribute="leading" priority="750" constant="14" id="NwF-Oz-G9J"/>
+                        <constraint firstAttribute="trailing" secondItem="NA2-VU-4Zd" secondAttribute="trailing" priority="750" constant="14" id="UaZ-v8-Pz6"/>
+                        <constraint firstItem="qm7-vR-QWn" firstAttribute="centerX" secondItem="DOX-Ek-Wwx" secondAttribute="centerX" priority="750" id="Wua-G5-m7T"/>
+                        <constraint firstItem="qm7-vR-QWn" firstAttribute="top" secondItem="Fzy-kP-rGd" secondAttribute="bottom" constant="12" id="h4B-qb-tka"/>
+                        <constraint firstItem="NA2-VU-4Zd" firstAttribute="leading" secondItem="DOX-Ek-Wwx" secondAttribute="leading" priority="750" constant="14" id="zVt-hJ-bEl"/>
+                    </constraints>
+                </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVy-tn-EE5">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="232"/>
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
                     <clipView key="contentView" id="OKJ-bW-fYv">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="232"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="dEy-IU-0nh" id="o9o-Nf-HHg" customClass="OutlineView" customModule="FontYou" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="232"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="gridColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -269,13 +329,16 @@
             <constraints>
                 <constraint firstItem="yq1-s3-dPS" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="91q-Mt-Nb4"/>
                 <constraint firstAttribute="bottom" secondItem="gVy-tn-EE5" secondAttribute="bottom" id="CFy-3H-xdZ"/>
+                <constraint firstItem="DOX-Ek-Wwx" firstAttribute="top" secondItem="yq1-s3-dPS" secondAttribute="bottom" id="D8K-aQ-pOs"/>
                 <constraint firstAttribute="trailing" secondItem="gVy-tn-EE5" secondAttribute="trailing" id="DnX-Xo-zno"/>
                 <constraint firstItem="yq1-s3-dPS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Y9b-FB-Hm1"/>
-                <constraint firstItem="gVy-tn-EE5" firstAttribute="top" secondItem="yq1-s3-dPS" secondAttribute="bottom" id="emM-5b-6lG"/>
+                <constraint firstAttribute="trailing" secondItem="DOX-Ek-Wwx" secondAttribute="trailing" id="mqX-If-6Hx"/>
+                <constraint firstItem="gVy-tn-EE5" firstAttribute="top" secondItem="DOX-Ek-Wwx" secondAttribute="bottom" id="pnB-ni-9af"/>
                 <constraint firstAttribute="trailing" secondItem="yq1-s3-dPS" secondAttribute="trailing" id="qEo-d7-OSy"/>
                 <constraint firstItem="gVy-tn-EE5" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="v0j-Zd-7vA"/>
+                <constraint firstItem="DOX-Ek-Wwx" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="zVA-TR-qXa"/>
             </constraints>
-            <point key="canvasLocation" x="956" y="10"/>
+            <point key="canvasLocation" x="956" y="95"/>
         </customView>
     </objects>
     <resources>

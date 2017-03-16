@@ -33,6 +33,7 @@
 		2283BBB51E7734ED0040A34E /* OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB41E7734ED0040A34E /* OutlineView.swift */; };
 		2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB61E77D31F0040A34E /* RoundedButton.swift */; };
 		2283BBB91E793C6F0040A34E /* IndicatorStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */; };
+		22B16A191E7AF2390012BAF0 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A181E7AF2390012BAF0 /* RoundedView.swift */; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
@@ -90,6 +91,7 @@
 		2283BBB41E7734ED0040A34E /* OutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
 		2283BBB61E77D31F0040A34E /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorStackView.swift; sourceTree = "<group>"; };
+		22B16A181E7AF2390012BAF0 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				2283BBB61E77D31F0040A34E /* RoundedButton.swift */,
 				22DA52A41E7A75AE00697725 /* TabButton.swift */,
+				22B16A181E7AF2390012BAF0 /* RoundedView.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			files = (
 				2223DE551E312E1000D7B0FE /* LogonViewController.swift in Sources */,
 				2223DE501E3129E000D7B0FE /* Constants.swift in Sources */,
+				22B16A191E7AF2390012BAF0 /* RoundedView.swift in Sources */,
 				2223DE4C1E31177700D7B0FE /* DetachableWindow.swift in Sources */,
 				221E63731E36125700944B1B /* ArrowWindow.swift in Sources */,
 				2223DE4A1E30FC6C00D7B0FE /* EventMonitor.swift in Sources */,

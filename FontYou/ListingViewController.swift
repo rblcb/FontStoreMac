@@ -25,7 +25,13 @@ class ListingViewController: NSViewController {
     @IBOutlet weak var allButton: TabButton!
     @IBOutlet weak var searchButton: NSButton!
     
+    @IBOutlet weak var searchView: NSView!
+    @IBOutlet weak var doSearchButton: RoundedButton!
+    @IBOutlet weak var resultsLabel: NSTextField!
+    @IBOutlet weak var searchField: NSSearchField!
+    
     let appFont = NSFont(name: "Litmus-Regular", size: 12)
+    var searchViewConstraint: NSLayoutConstraint? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +41,23 @@ class ListingViewController: NSViewController {
         newButton.baseTitle = "New"
         allButton.baseTitle = "All Fonts"
         
-        let controls12: [NSControl] = [installedButton, newButton, allButton]
+        let controls12: [NSControl] = [installedButton, newButton, allButton, doSearchButton, resultsLabel, searchField]
         for control in controls12 {
             control.font = appFont
         }
         
+        doSearchButton.rectangleColor = StyleKit.textGrey
+        doSearchButton.textColor = NSColor.white
+        
         outlineView.action = #selector(onItemClicked)
         
         setButtonStates()
+        
+        // Create a constraint to show/hide the search view. We start at zero height
+        
+        searchViewConstraint = NSLayoutConstraint(item: searchView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        searchViewConstraint?.priority = 900
+        view.addConstraint(searchViewConstraint!)
     }
     
     var displayed: DisplayedInfo = .installed {
@@ -59,8 +74,18 @@ class ListingViewController: NSViewController {
             }
 
             setButtonStates()
+            
+            // Animate the opening/closing of the search view
+            
+            if oldValue == .search || displayed == .search {
+                NSAnimationContext.runAnimationGroup({ context in
+                    context.allowsImplicitAnimation = true
+                    context.duration = 0.2
+                    searchViewConstraint!.priority = displayed == .search ? NSLayoutPriorityDefaultLow : 900
+                    view.layoutSubtreeIfNeeded()
+                }, completionHandler: nil)
+            }
         }
-        
     }
     
     
