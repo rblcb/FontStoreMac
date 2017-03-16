@@ -8,26 +8,81 @@
 
 import Cocoa
 
+enum DisplayedInfo {
+    case installed
+    case new
+    case all
+    case search
+}
+
 class ListingViewController: NSViewController {
 
     @IBOutlet weak var outlineView: OutlineView!
     
     @IBOutlet weak var indicatorView: IndicatorStackView!
-    @IBOutlet weak var installedButton: NSButton!
-    @IBOutlet weak var newButton: NSButton!
-    @IBOutlet weak var allButton: NSButton!
+    @IBOutlet weak var installedButton: TabButton!
+    @IBOutlet weak var newButton: TabButton!
+    @IBOutlet weak var allButton: TabButton!
     @IBOutlet weak var searchButton: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        installedButton.baseTitle = "Installed"
+        newButton.baseTitle = "New"
+        allButton.baseTitle = "All Fonts"
+        
         searchButton.image = StyleKit.imageOfSearchIcon(selected: false)
         searchButton.alternateImage = StyleKit.imageOfSearchIcon(selected: true)
         
         outlineView.action = #selector(onItemClicked)
+        
+        setButtonStates()
     }
     
-    @objc private func onItemClicked() {
+    var displayed: DisplayedInfo = .installed {
+        didSet {
+            switch displayed {
+            case .installed:
+                indicatorView.positionIndicatorView(view: installedButton, animated: true)
+            case .new:
+                indicatorView.positionIndicatorView(view: newButton, animated: true)
+            case .all:
+                indicatorView.positionIndicatorView(view: allButton, animated: true)
+            case .search:
+                indicatorView.positionIndicatorView(view: searchButton, animated: true)
+            }
+
+            setButtonStates()
+        }
+        
+    }
+    
+    
+    @IBAction func displayInstalled(_ sender: Any) {
+        displayed = .installed
+    }
+
+    @IBAction func displayNew(_ sender: Any) {
+        displayed = .new
+    }
+
+    @IBAction func displayAll(_ sender: Any) {
+        displayed = .all
+    }
+    
+    @IBAction func displaySearch(_ sender: Any) {
+        displayed = .search
+    }
+
+    func setButtonStates() {
+        installedButton.state = displayed == .installed ? NSOnState : NSOffState
+        newButton.state = displayed == .new ? NSOnState : NSOffState
+        allButton.state = displayed == .all ? NSOnState : NSOffState
+        searchButton.state = displayed == .search ? NSOnState : NSOffState
+    }
+    
+    @objc func onItemClicked() {
         
         // Allow the user to expand/collapse an item by just clicking on the row
         
@@ -41,23 +96,6 @@ class ListingViewController: NSViewController {
             }
         }
     }
-    
-    @IBAction func displayInstalled(_ sender: Any) {
-        indicatorView.positionIndicatorView(view: installedButton, animated: true)
-    }
-
-    @IBAction func displayNew(_ sender: Any) {
-        indicatorView.positionIndicatorView(view: newButton, animated: true)
-    }
-
-    @IBAction func displayAll(_ sender: Any) {
-        indicatorView.positionIndicatorView(view: allButton, animated: true)
-    }
-    
-    @IBAction func displaySearch(_ sender: Any) {
-        indicatorView.positionIndicatorView(view: searchButton, animated: true)
-    }
-
 }
 
 extension ListingViewController: NSOutlineViewDataSource {

@@ -30,30 +30,30 @@
                         <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHr-Rg-qyM" customClass="IndicatorStackView" customModule="FontYou" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
                             <subviews>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qEo-mt-gTm">
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qEo-mt-gTm" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="6" width="150" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="Installed (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="2QV-eQ-T5J">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <connections>
                                         <action selector="displayInstalled:" target="-2" id="umE-U7-ZtS"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAz-9M-lzQ" userLabel="New (1)">
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAz-9M-lzQ" userLabel="New (1)" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
                                     <rect key="frame" x="158" y="6" width="101.5" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="New (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="a4U-00-a0k">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <connections>
                                         <action selector="displayNew:" target="-2" id="m8b-bo-bhx"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-XS-Qfa" userLabel="All Fonts (1)">
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-XS-Qfa" userLabel="All Fonts (1)" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
                                     <rect key="frame" x="267.5" y="6" width="154.5" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="All Fonts (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="HAx-1I-M27">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <connections>
@@ -67,7 +67,7 @@
                                         <constraint firstAttribute="height" constant="30" id="Npf-Dc-jHx"/>
                                     </constraints>
                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="V9l-UR-ci4">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <connections>
