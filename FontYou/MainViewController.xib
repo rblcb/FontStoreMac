@@ -9,38 +9,61 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="FontYou" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="wJP-4v-ojp" id="A8V-wE-f0b"/>
+                <outlet property="contextMenu" destination="ohn-ab-2wd" id="R66-i6-n3X"/>
                 <outlet property="headerView" destination="TYV-Gc-6oh" id="NcK-q9-DF1"/>
-                <outlet property="menuButton" destination="rmr-x5-Rez" id="NYB-h6-Jvw"/>
+                <outlet property="menuButton" destination="V7W-H6-W3H" id="bXP-gu-QXR"/>
+                <outlet property="usernameLabel" destination="qHc-SN-S8Q" id="d6s-iL-CHt"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="394" height="558"/>
+            <rect key="frame" x="0.0" y="0.0" width="330" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="TYV-Gc-6oh">
-                    <rect key="frame" x="0.0" y="488" width="394" height="70"/>
+                    <rect key="frame" x="0.0" y="410" width="330" height="70"/>
                     <subviews>
-                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmr-x5-Rez" userLabel="Menu Button">
-                            <rect key="frame" x="18" y="13" width="22" height="19"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="lJc-cJ-qwy">
-                                <behavior key="behavior" lightByContents="YES"/>
+                        <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V7W-H6-W3H">
+                            <rect key="frame" x="296" y="12" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Wma-Gs-ovh"/>
+                                <constraint firstAttribute="height" constant="20" id="yZO-lR-rJJ"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="MenuIconWhite" imagePosition="overlaps" alignment="center" focusRingType="none" inset="2" id="m1l-j5-sxi">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="menuButtonPressed:" target="-2" id="1wX-cN-dSi"/>
+                                <action selector="menuPressed:" target="-2" id="LL6-Ul-fXq"/>
                             </connections>
                         </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHc-SN-S8Q">
+                            <rect key="frame" x="230" y="13" width="60" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome" id="EVq-FJ-qbE">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AUP-JE-WXU">
+                            <rect key="frame" x="14" y="13" width="20" height="16"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Logo" id="Qvl-w4-gtT"/>
+                        </imageView>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="qHc-SN-S8Q" secondAttribute="bottom" constant="13" id="Azt-KM-Zsp"/>
+                        <constraint firstAttribute="trailing" secondItem="V7W-H6-W3H" secondAttribute="trailing" constant="14" id="BAY-Lt-I8M"/>
+                        <constraint firstItem="AUP-JE-WXU" firstAttribute="leading" secondItem="TYV-Gc-6oh" secondAttribute="leading" constant="14" id="JWq-vq-sub"/>
+                        <constraint firstAttribute="bottom" secondItem="AUP-JE-WXU" secondAttribute="bottom" constant="13" id="MJd-KO-c51"/>
                         <constraint firstAttribute="height" constant="70" id="Sw8-Yc-iOw"/>
+                        <constraint firstItem="V7W-H6-W3H" firstAttribute="leading" secondItem="qHc-SN-S8Q" secondAttribute="trailing" constant="8" id="jHZ-GY-U9c"/>
+                        <constraint firstItem="qHc-SN-S8Q" firstAttribute="centerY" secondItem="V7W-H6-W3H" secondAttribute="centerY" id="ubj-QP-HF9"/>
                     </constraints>
                 </customView>
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJP-4v-ojp">
-                    <rect key="frame" x="0.0" y="0.0" width="394" height="488"/>
+                    <rect key="frame" x="0.0" y="0.0" width="330" height="410"/>
                 </customView>
             </subviews>
             <constraints>
@@ -54,5 +77,42 @@
             </constraints>
             <point key="canvasLocation" x="96" y="147"/>
         </customView>
+        <menu id="ohn-ab-2wd">
+            <items>
+                <menuItem title="Account" id="4Mk-Jf-eLp">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="goToAccount:" target="-2" id="PDV-P0-Rkw"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Settings" id="CcL-vD-Rbz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Update App" id="0Xd-Yv-QFG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Visit FontStore" id="ymG-JC-0qh">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Help" id="CSr-Qe-YGT">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="About" id="rZh-QB-waE">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Logout" id="mdo-Lm-D5h">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Vm6-ew-2Fo"/>
+                <menuItem title="Quit" id="QpL-70-xMC">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-145" y="545"/>
+        </menu>
     </objects>
+    <resources>
+        <image name="Logo" width="40" height="32"/>
+        <image name="MenuIconWhite" width="20" height="10"/>
+    </resources>
 </document>

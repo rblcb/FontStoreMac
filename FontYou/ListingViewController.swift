@@ -32,9 +32,6 @@ class ListingViewController: NSViewController {
         newButton.baseTitle = "New"
         allButton.baseTitle = "All Fonts"
         
-        searchButton.image = StyleKit.imageOfSearchIcon(selected: false)
-        searchButton.alternateImage = StyleKit.imageOfSearchIcon(selected: true)
-        
         outlineView.action = #selector(onItemClicked)
         
         setButtonStates()

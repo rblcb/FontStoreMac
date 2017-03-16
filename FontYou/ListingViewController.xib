@@ -25,13 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yq1-s3-dPS" userLabel="Header View">
-                    <rect key="frame" x="0.0" y="228" width="480" height="44"/>
+                    <rect key="frame" x="0.0" y="232" width="480" height="40"/>
                     <subviews>
                         <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHr-Rg-qyM" customClass="IndicatorStackView" customModule="FontYou" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qEo-mt-gTm" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="6" width="150" height="32"/>
+                                    <rect key="frame" x="0.0" y="4" width="148.5" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="Installed (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="2QV-eQ-T5J">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -41,7 +41,7 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAz-9M-lzQ" userLabel="New (1)" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
-                                    <rect key="frame" x="158" y="6" width="101.5" height="32"/>
+                                    <rect key="frame" x="156.5" y="4" width="100.5" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="New (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="a4U-00-a0k">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -51,7 +51,7 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-XS-Qfa" userLabel="All Fonts (1)" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
-                                    <rect key="frame" x="267.5" y="6" width="154.5" height="32"/>
+                                    <rect key="frame" x="265" y="4" width="153" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="All Fonts (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="HAx-1I-M27">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -61,12 +61,12 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lPv-0B-Caa" userLabel="Search Button">
-                                    <rect key="frame" x="430" y="7" width="50" height="30"/>
+                                    <rect key="frame" x="426" y="5" width="54" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="L3p-6c-UG7"/>
                                         <constraint firstAttribute="height" constant="30" id="Npf-Dc-jHx"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="V9l-UR-ci4">
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Search" imagePosition="only" alignment="center" alternateImage="SearchSelected" imageScaling="proportionallyDown" inset="2" id="V9l-UR-ci4">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -95,21 +95,21 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="FJk-aC-tOi"/>
+                        <constraint firstAttribute="height" constant="40" id="FJk-aC-tOi"/>
                         <constraint firstAttribute="trailing" secondItem="XHr-Rg-qyM" secondAttribute="trailing" id="KP8-jN-5iK"/>
                         <constraint firstAttribute="bottom" secondItem="XHr-Rg-qyM" secondAttribute="bottom" id="gpg-78-hxc"/>
                         <constraint firstItem="XHr-Rg-qyM" firstAttribute="leading" secondItem="yq1-s3-dPS" secondAttribute="leading" id="iXW-wy-dR5"/>
                         <constraint firstItem="XHr-Rg-qyM" firstAttribute="top" secondItem="yq1-s3-dPS" secondAttribute="top" id="q5z-UQ-lb7"/>
                     </constraints>
                 </customView>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="44" horizontalPageScroll="10" verticalLineScroll="44" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVy-tn-EE5">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="228"/>
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVy-tn-EE5">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="232"/>
                     <clipView key="contentView" id="OKJ-bW-fYv">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="228"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="232"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="44" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="dEy-IU-0nh" id="o9o-Nf-HHg" customClass="OutlineView" customModule="FontYou" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="228"/>
+                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="dEy-IU-0nh" id="o9o-Nf-HHg" customClass="OutlineView" customModule="FontYou" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="232"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="gridColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,11 +128,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView identifier="Family" id="vGQ-xw-FZ9" customClass="FamilyCellView" customModule="FontYou" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-es-fsS">
-                                                        <rect key="frame" x="8" y="7" width="464" height="30"/>
+                                                        <rect key="frame" x="8" y="5" width="464" height="30"/>
                                                         <beginningViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-v7-CnL">
                                                                 <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
@@ -193,11 +193,11 @@
                                                 </connections>
                                             </tableCellView>
                                             <tableCellView identifier="Font" id="XGE-ea-f9a" userLabel="Font Cell View" customClass="FontCellView" customModule="FontYou" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44" width="480" height="44"/>
+                                                <rect key="frame" x="0.0" y="40" width="480" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ssg-mI-UiI">
-                                                        <rect key="frame" x="8" y="7" width="464" height="30"/>
+                                                        <rect key="frame" x="8" y="5" width="464" height="30"/>
                                                         <beginningViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-YI-htK">
                                                                 <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
@@ -278,4 +278,8 @@
             <point key="canvasLocation" x="956" y="10"/>
         </customView>
     </objects>
+    <resources>
+        <image name="Search" width="54" height="54"/>
+        <image name="SearchSelected" width="54" height="54"/>
+    </resources>
 </document>

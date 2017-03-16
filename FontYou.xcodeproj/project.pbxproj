@@ -23,8 +23,6 @@
 		2223DE561E312E1000D7B0FE /* LogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2223DE541E312E1000D7B0FE /* LogonViewController.xib */; };
 		2223DE591E312E4F00D7B0FE /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE571E312E4F00D7B0FE /* ListingViewController.swift */; };
 		2223DE5A1E312E4F00D7B0FE /* ListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2223DE581E312E4F00D7B0FE /* ListingViewController.xib */; };
-		2223DE601E314E4A00D7B0FE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE5E1E314E4A00D7B0FE /* MenuViewController.swift */; };
-		2223DE611E314E4A00D7B0FE /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2223DE5F1E314E4A00D7B0FE /* MenuViewController.xib */; };
 		2223DE631E31531C00D7B0FE /* NSView+BackgroundColored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */; };
 		2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE7A1E76A91000B357E7 /* FontUtility.m */; };
 		2275FE7D1E76A98A00B357E7 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2275FE7C1E76A98A00B357E7 /* Fonts */; };
@@ -79,8 +77,6 @@
 		2223DE541E312E1000D7B0FE /* LogonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogonViewController.xib; sourceTree = "<group>"; };
 		2223DE571E312E4F00D7B0FE /* ListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		2223DE581E312E4F00D7B0FE /* ListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListingViewController.xib; sourceTree = "<group>"; };
-		2223DE5E1E314E4A00D7B0FE /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		2223DE5F1E314E4A00D7B0FE /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+BackgroundColored.swift"; sourceTree = "<group>"; };
 		2275FE781E76A91000B357E7 /* FontYou-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FontYou-Bridging-Header.h"; sourceTree = "<group>"; };
 		2275FE791E76A91000B357E7 /* FontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontUtility.h; sourceTree = "<group>"; };
@@ -171,7 +167,6 @@
 				2223DE451E30FA8A00D7B0FE /* MainViewController.swift */,
 				2223DE461E30FA8A00D7B0FE /* MainViewController.xib */,
 				221E63761E36813B00944B1B /* Detachable Window */,
-				2223DE5D1E314E2E00D7B0FE /* Menu View */,
 				2223DE5B1E313B3100D7B0FE /* Logon View */,
 				2223DE5C1E313B4600D7B0FE /* Listing View */,
 				221E636F1E32395200944B1B /* Custom Controls */,
@@ -226,15 +221,6 @@
 				2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */,
 			);
 			name = "Listing View";
-			sourceTree = "<group>";
-		};
-		2223DE5D1E314E2E00D7B0FE /* Menu View */ = {
-			isa = PBXGroup;
-			children = (
-				2223DE5E1E314E4A00D7B0FE /* MenuViewController.swift */,
-				2223DE5F1E314E4A00D7B0FE /* MenuViewController.xib */,
-			);
-			name = "Menu View";
 			sourceTree = "<group>";
 		};
 		2275FE771E76A8F400B357E7 /* FontUtility */ = {
@@ -376,7 +362,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2223DE1F1E30F74800D7B0FE /* Assets.xcassets in Resources */,
-				2223DE611E314E4A00D7B0FE /* MenuViewController.xib in Resources */,
 				2223DE5A1E312E4F00D7B0FE /* ListingViewController.xib in Resources */,
 				2223DE481E30FA8A00D7B0FE /* MainViewController.xib in Resources */,
 				2223DE561E312E1000D7B0FE /* LogonViewController.xib in Resources */,
@@ -426,7 +411,6 @@
 				2283BBB51E7734ED0040A34E /* OutlineView.swift in Sources */,
 				22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */,
 				2275FE801E76A9C300B357E7 /* FontStore.swift in Sources */,
-				2223DE601E314E4A00D7B0FE /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

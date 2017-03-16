@@ -12,9 +12,11 @@ class MainViewController: NSViewController {
 
     @IBOutlet weak var headerView: NSView!
     @IBOutlet weak var contentView: NSView!
+    @IBOutlet weak var usernameLabel: NSTextField!
     @IBOutlet weak var menuButton: NSButton!
     
-    let menuViewController: MenuViewController! = MenuViewController(nibName: "MenuViewController", bundle:nil)
+    @IBOutlet var contextMenu: NSMenu!
+    
     let logonViewController: LogonViewController! = LogonViewController(nibName: "LogonViewController", bundle:nil)
     let listingViewController: ListingViewController! = ListingViewController(nibName: "ListingViewController", bundle:nil)
    
@@ -40,34 +42,23 @@ class MainViewController: NSViewController {
 
         headerView.backgroundColor = StyleKit.primary
        
-        menuButton.image = StyleKit.imageOfMenuIcon(imageSize: menuButton.bounds.size, opacity: 1)
-        menuButton.alternateImage = StyleKit.imageOfMenuIcon(imageSize: menuButton.bounds.size, opacity: 0.5)
-
         // Add and setup the child view controllers
         
-        addChildViewController(menuViewController)
         addChildViewController(logonViewController)
         addChildViewController(listingViewController)
-        
-        menuViewController.delegate = self
         
         // Set the default view
         
         currentViewController = listingViewController
     }
     
-    @IBAction func menuButtonPressed(_ sender: Any) {
-        currentViewController = menuViewController
-    }
-}
-
-extension MainViewController: MenuViewDelegate {
-    
-    func goToFontList() {
-        currentViewController = listingViewController
+    @IBAction func menuPressed(_ sender: Any) {
+        if let event = NSApplication.shared().currentEvent {
+            NSMenu.popUpContextMenu(contextMenu!, with: event, for: sender as! NSView)
+        }
     }
     
-    func goToAccount() {
+    @IBAction func goToAccount(_ sender: Any) {
         currentViewController = logonViewController
     }
 }
