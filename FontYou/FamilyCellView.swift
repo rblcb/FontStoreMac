@@ -12,10 +12,14 @@ class FamilyCellView: NSTableCellView {
     
     @IBOutlet weak var nameLabel: NSTextField!
     @IBOutlet weak var numFontsLabel: NSTextField!
-    @IBOutlet weak var installButton: NSButton!
+    @IBOutlet weak var installButton: RoundedButton!
     
     override func awakeFromNib() {
-        self.nameLabel?.textColor = StyleKit.textBlack
-        self.numFontsLabel.textColor = StyleKit.textGrey
+        nameLabel?.textColor = StyleKit.textBlack
+        numFontsLabel.textColor = StyleKit.textGrey
+        installButton.rectangleColor = StyleKit.textGrey
+        
+        numFontsLabel.font = NSFont(name: "Litmus-Regular", size: 9)
+        installButton.font = NSFont(name: "Litmus-Regular", size: 12)
     }
 }

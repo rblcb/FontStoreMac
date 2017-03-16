@@ -25,12 +25,20 @@ class ListingViewController: NSViewController {
     @IBOutlet weak var allButton: TabButton!
     @IBOutlet weak var searchButton: NSButton!
     
+    let appFont = NSFont(name: "Litmus-Regular", size: 12)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         installedButton.baseTitle = "Installed"
         newButton.baseTitle = "New"
         allButton.baseTitle = "All Fonts"
+        
+        let controls12: [NSControl] = [installedButton, newButton, allButton]
+        for control in controls12 {
+            control.font = appFont
+        }
         
         outlineView.action = #selector(onItemClicked)
         

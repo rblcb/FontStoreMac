@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="contentView" destination="wJP-4v-ojp" id="A8V-wE-f0b"/>
                 <outlet property="contextMenu" destination="ohn-ab-2wd" id="R66-i6-n3X"/>
+                <outlet property="fontStoreLabel" destination="Hg0-je-tSY" id="mmJ-7g-IMj"/>
                 <outlet property="headerView" destination="TYV-Gc-6oh" id="NcK-q9-DF1"/>
                 <outlet property="menuButton" destination="V7W-H6-W3H" id="bXP-gu-QXR"/>
                 <outlet property="usernameLabel" destination="qHc-SN-S8Q" id="d6s-iL-CHt"/>
@@ -51,13 +52,24 @@
                             <rect key="frame" x="14" y="13" width="20" height="16"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Logo" id="Qvl-w4-gtT"/>
                         </imageView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hg0-je-tSY">
+                            <rect key="frame" x="42" y="12" width="64" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FontStore" id="sis-fn-5M5">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="V7W-H6-W3H" firstAttribute="leading" secondItem="Hg0-je-tSY" secondAttribute="trailing" constant="192" id="32T-To-9zt"/>
+                        <constraint firstItem="Hg0-je-tSY" firstAttribute="centerY" secondItem="V7W-H6-W3H" secondAttribute="centerY" id="83a-sD-2q3"/>
                         <constraint firstAttribute="bottom" secondItem="qHc-SN-S8Q" secondAttribute="bottom" constant="13" id="Azt-KM-Zsp"/>
                         <constraint firstAttribute="trailing" secondItem="V7W-H6-W3H" secondAttribute="trailing" constant="14" id="BAY-Lt-I8M"/>
                         <constraint firstItem="AUP-JE-WXU" firstAttribute="leading" secondItem="TYV-Gc-6oh" secondAttribute="leading" constant="14" id="JWq-vq-sub"/>
                         <constraint firstAttribute="bottom" secondItem="AUP-JE-WXU" secondAttribute="bottom" constant="13" id="MJd-KO-c51"/>
                         <constraint firstAttribute="height" constant="70" id="Sw8-Yc-iOw"/>
+                        <constraint firstItem="Hg0-je-tSY" firstAttribute="leading" secondItem="TYV-Gc-6oh" secondAttribute="leading" constant="44" id="Zok-Kd-92H"/>
                         <constraint firstItem="V7W-H6-W3H" firstAttribute="leading" secondItem="qHc-SN-S8Q" secondAttribute="trailing" constant="8" id="jHZ-GY-U9c"/>
                         <constraint firstItem="qHc-SN-S8Q" firstAttribute="centerY" secondItem="V7W-H6-W3H" secondAttribute="centerY" id="ubj-QP-HF9"/>
                     </constraints>

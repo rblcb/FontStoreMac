@@ -34,6 +34,7 @@
 		2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB61E77D31F0040A34E /* RoundedButton.swift */; };
 		2283BBB91E793C6F0040A34E /* IndicatorStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
+		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		2283BBB61E77D31F0040A34E /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorStackView.swift; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
+		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +176,7 @@
 				2275FE7E1E76A9AA00B357E7 /* FontStore */,
 				2275FE771E76A8F400B357E7 /* FontUtility */,
 				2275FE781E76A91000B357E7 /* FontYou-Bridging-Header.h */,
+				22DA52A61E7A9EA200697725 /* AppFonts */,
 				2275FE7C1E76A98A00B357E7 /* Fonts */,
 				2223DE1E1E30F74800D7B0FE /* Assets.xcassets */,
 				2223DE201E30F74800D7B0FE /* MainMenu.xib */,
@@ -367,6 +370,7 @@
 				2223DE561E312E1000D7B0FE /* LogonViewController.xib in Resources */,
 				2275FE7D1E76A98A00B357E7 /* Fonts in Resources */,
 				2223DE221E30F74800D7B0FE /* MainMenu.xib in Resources */,
+				22DA52A71E7A9EA200697725 /* AppFonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

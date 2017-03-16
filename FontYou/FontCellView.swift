@@ -11,9 +11,12 @@ import Cocoa
 class FontCellView: NSTableCellView {
     
     @IBOutlet weak var nameLabel: NSTextField!
-    @IBOutlet weak var installButton: NSButton!
+    @IBOutlet weak var installButton: RoundedButton!
 
     override func awakeFromNib() {
-        self.nameLabel?.textColor = StyleKit.textBlack
+        nameLabel?.textColor = StyleKit.textBlack
+        installButton.rectangleColor = StyleKit.textGrey
+        
+        installButton.font = NSFont(name: "Litmus-Regular", size: 12)
     }
 }
