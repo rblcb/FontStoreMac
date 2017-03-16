@@ -49,7 +49,7 @@
                             </textFieldCell>
                         </textField>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AUP-JE-WXU">
-                            <rect key="frame" x="14" y="13" width="20" height="16"/>
+                            <rect key="frame" x="14" y="13" width="40" height="32"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Logo" id="Qvl-w4-gtT"/>
                         </imageView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hg0-je-tSY">
@@ -118,6 +118,9 @@
                 <menuItem isSeparatorItem="YES" id="Vm6-ew-2Fo"/>
                 <menuItem title="Quit" id="QpL-70-xMC">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quit:" target="-2" id="ur2-6d-Qk0"/>
+                    </connections>
                 </menuItem>
             </items>
             <point key="canvasLocation" x="-145" y="545"/>

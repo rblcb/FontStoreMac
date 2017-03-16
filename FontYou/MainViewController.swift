@@ -64,4 +64,8 @@ class MainViewController: NSViewController {
     @IBAction func goToAccount(_ sender: Any) {
         currentViewController = logonViewController
     }
+    
+    @IBAction func quit(_ sender: Any) {
+        NSApp.terminate(sender)
+    }
 }
