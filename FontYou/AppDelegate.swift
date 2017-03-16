@@ -30,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         detachableWindow.contentViewController = mainViewController
         detachableWindow.minSize = NSSize(width: 200, height: 400)
+        detachableWindow.maxSize = NSSize(width: 600, height: 1500)
         
         // Set up status bar icon
         if let button = statusItem.button {
