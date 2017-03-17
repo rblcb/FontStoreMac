@@ -114,6 +114,9 @@
                 </menuItem>
                 <menuItem title="Logout" id="mdo-Lm-D5h">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="logout:" target="-2" id="3QM-Qw-vZf"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Vm6-ew-2Fo"/>
                 <menuItem title="Quit" id="QpL-70-xMC">

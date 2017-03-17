@@ -13,7 +13,7 @@
                 <outlet property="loginButton" destination="mDA-ce-Fbm" id="mdf-TR-Nz0"/>
                 <outlet property="loginLabel" destination="qom-tB-fkQ" id="Zb0-GA-scy"/>
                 <outlet property="memberLabel" destination="k64-38-9kl" id="iWe-Iw-fVf"/>
-                <outlet property="passwordField" destination="3iA-lp-2bT" id="cPB-kV-dcO"/>
+                <outlet property="passwordField" destination="RVY-an-3Ku" id="XKR-F8-vnH"/>
                 <outlet property="rememberMeLabel" destination="5bm-Rc-qb2" id="MOH-4e-e6A"/>
                 <outlet property="seperatorView" destination="KZC-K6-cVD" id="Fhf-CU-I5h"/>
                 <outlet property="signupButton" destination="CWx-ba-omb" id="j3q-IH-TEL"/>
@@ -56,17 +56,6 @@
                                 <constraint firstAttribute="width" constant="42" id="sIX-e1-0Th"/>
                             </constraints>
                         </customView>
-                        <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iA-lp-2bT" userLabel="Password Field">
-                            <rect key="frame" x="20" y="273" width="300" height="29"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="300" id="Tm7-Ra-ebr"/>
-                            </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="center" placeholderString="Password" drawsBackground="YES" id="IQV-bc-LuO">
-                                <font key="font" metaFont="system" size="24"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-ME-ZCq" userLabel="Remember Me Button">
                             <rect key="frame" x="160" y="241" width="21" height="21"/>
                             <constraints>
@@ -133,29 +122,44 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </button>
+                        <secureTextField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVY-an-3Ku">
+                            <rect key="frame" x="20" y="273" width="300" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="7uh-lA-ooj"/>
+                            </constraints>
+                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" alignment="center" placeholderString="Password" drawsBackground="YES" usesSingleLineMode="YES" id="hnd-pd-Eix">
+                                <font key="font" metaFont="system" size="24"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <allowedInputSourceLocales>
+                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                </allowedInputSourceLocales>
+                            </secureTextFieldCell>
+                        </secureTextField>
                     </subviews>
                     <constraints>
                         <constraint firstItem="uHO-ak-Abx" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="2ms-Xu-a7c"/>
                         <constraint firstItem="oKR-ME-ZCq" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="3fB-GX-6Pl"/>
+                        <constraint firstItem="oKR-ME-ZCq" firstAttribute="top" secondItem="RVY-an-3Ku" secondAttribute="bottom" constant="11" id="4Aw-r0-0fM"/>
                         <constraint firstItem="5bm-Rc-qb2" firstAttribute="top" secondItem="oKR-ME-ZCq" secondAttribute="bottom" constant="11" id="78H-CF-XTi"/>
                         <constraint firstItem="pkz-vQ-w1e" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="83H-cY-loE"/>
                         <constraint firstItem="k64-38-9kl" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="D9Y-oL-yaF"/>
+                        <constraint firstItem="RVY-an-3Ku" firstAttribute="width" secondItem="uHO-ak-Abx" secondAttribute="width" id="DFh-Jh-bKg"/>
                         <constraint firstItem="qom-tB-fkQ" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="GGW-Xe-pO7"/>
                         <constraint firstItem="pkz-vQ-w1e" firstAttribute="top" secondItem="mDA-ce-Fbm" secondAttribute="bottom" constant="20" id="KFU-wW-QYn"/>
-                        <constraint firstItem="3iA-lp-2bT" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="KxI-br-iRJ"/>
                         <constraint firstItem="KZC-K6-cVD" firstAttribute="top" secondItem="uHO-ak-Abx" secondAttribute="bottom" constant="12" id="LkJ-wb-6bb"/>
                         <constraint firstItem="CWx-ba-omb" firstAttribute="top" secondItem="k64-38-9kl" secondAttribute="bottom" constant="8" id="PMD-2n-wqu"/>
-                        <constraint firstItem="3iA-lp-2bT" firstAttribute="top" secondItem="KZC-K6-cVD" secondAttribute="bottom" id="WDf-9y-Hr6"/>
+                        <constraint firstItem="RVY-an-3Ku" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="a6n-f4-6oX"/>
                         <constraint firstItem="5bm-Rc-qb2" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="cvJ-L4-eUT"/>
                         <constraint firstItem="uHO-ak-Abx" firstAttribute="leading" secondItem="dKT-Ok-smv" secondAttribute="leading" constant="20" symbolic="YES" id="eI3-hX-pcS"/>
                         <constraint firstItem="CWx-ba-omb" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="hUp-3M-zpn"/>
                         <constraint firstItem="mDA-ce-Fbm" firstAttribute="top" secondItem="5bm-Rc-qb2" secondAttribute="bottom" constant="15" id="iDZ-b7-gNa"/>
-                        <constraint firstItem="oKR-ME-ZCq" firstAttribute="top" secondItem="3iA-lp-2bT" secondAttribute="bottom" constant="11" id="mAi-8L-rW1"/>
                         <constraint firstItem="uHO-ak-Abx" firstAttribute="top" secondItem="qom-tB-fkQ" secondAttribute="bottom" constant="10" id="mjU-aO-A04"/>
                         <constraint firstItem="KZC-K6-cVD" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="n4s-OF-v5v"/>
                         <constraint firstAttribute="bottom" secondItem="CWx-ba-omb" secondAttribute="bottom" constant="34" id="oLg-lB-5RP"/>
                         <constraint firstItem="mDA-ce-Fbm" firstAttribute="centerX" secondItem="dKT-Ok-smv" secondAttribute="centerX" id="q5Q-m8-Juf"/>
                         <constraint firstItem="k64-38-9kl" firstAttribute="top" secondItem="pkz-vQ-w1e" secondAttribute="bottom" constant="45" id="qeo-9P-R3i"/>
+                        <constraint firstItem="RVY-an-3Ku" firstAttribute="top" secondItem="KZC-K6-cVD" secondAttribute="bottom" id="sUY-Zp-XfI"/>
                         <constraint firstItem="qom-tB-fkQ" firstAttribute="top" secondItem="dKT-Ok-smv" secondAttribute="top" constant="40" id="xSM-Vi-LhE"/>
                     </constraints>
                 </customView>

@@ -53,6 +53,18 @@ class MainViewController: NSViewController {
         // Set the default view
         
         currentViewController = logonViewController
+        
+        // Observe for logins
+        
+        FontStore.sharedInstance.authDetails.observeNext { [weak self] authDetails in
+            if let authDetails = authDetails {
+                self?.usernameLabel.stringValue = "\(authDetails.firstName) \(authDetails.lastName)"
+                self?.currentViewController = self?.listingViewController
+            } else {
+                self?.usernameLabel.stringValue = "Welcome"
+                self?.currentViewController = self?.logonViewController
+            }
+        }.dispose(in: reactive.bag)
     }
     
     @IBAction func menuPressed(_ sender: Any) {
@@ -63,6 +75,10 @@ class MainViewController: NSViewController {
     
     @IBAction func goToAccount(_ sender: Any) {
         currentViewController = logonViewController
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        FontStore.sharedInstance.logout()
     }
     
     @IBAction func quit(_ sender: Any) {

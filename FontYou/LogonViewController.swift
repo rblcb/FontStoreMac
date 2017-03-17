@@ -18,7 +18,7 @@ class LogonViewController: NSViewController {
     @IBOutlet weak var memberLabel: NSTextField!
     
     @IBOutlet weak var emailField: NSTextField!
-    @IBOutlet weak var passwordField: NSTextField!
+    @IBOutlet weak var passwordField: NSSecureTextField!
     
     @IBOutlet weak var loginButton: RoundedButton!
     @IBOutlet weak var forgottenButton: NSButton!
@@ -49,7 +49,7 @@ class LogonViewController: NSViewController {
         
         loginButton.font = litmus14
         emailField.font = litmus24
-        passwordField.font = litmus24
+        //passwordField.font = litmus24
         
         let centerStyle = NSMutableParagraphStyle()
         centerStyle.alignment = .center
@@ -83,6 +83,6 @@ class LogonViewController: NSViewController {
     }
     
     @IBAction func doLogin(_ sender: Any) {
-        Swift.print("here")
+        FontStore.sharedInstance.login(email: emailAddress.value, password: password.value)
     }
 }

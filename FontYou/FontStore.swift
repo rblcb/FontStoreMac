@@ -10,6 +10,19 @@ import Foundation
 import CoreText
 import Cocoa
 import Alamofire
+import ReactiveKit
+
+let endpoint = "http://localhost:4000/api/desktop/session"
+
+struct AuthDetails {
+    let firstName: String
+    let lastName: String
+    let accountUrl: NSURL?
+    let settingsUrl: NSURL?
+    let updateUrl: NSURL?
+    let visitUrl: NSURL?
+    let reuseToken: String
+}
 
 struct FontStoreItem {
     let name: String
@@ -23,6 +36,8 @@ class FontStore {
     
     static let sharedInstance: FontStore = FontStore()
     static var families: [String:[FontStoreItem]] = [:]
+    
+    var authDetails = Property<AuthDetails?>(nil)
     
     private init() {
         guard let fontUrl = Bundle.main.url(forResource: "Fonts", withExtension: nil),
@@ -80,7 +95,7 @@ class FontStore {
         return nil
     }
     
-    func login(_ email: String, _ password: String) {
+    func login(email: String, password: String) {
     
         let parameters = [
             "login": email,
@@ -91,14 +106,37 @@ class FontStore {
             "os_version": "10.12.4"
         ]
         
-        Alamofire.request("https://api.fontstore.com/session/desktop", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate().responseJSON { response in
                 switch response.result {
                 case .success:
-                    print("Cool")
+                    guard let json = response.result.value as? [String: Any] else { return }
+                    guard let urls = json["urls"] as? [String: String] else { return }
+
+                    if let firstName = json["first_name"] as? String,
+                        let lastName = json["last_name"] as? String,
+                        let accountUrl = urls["account"],
+                        let settingsUrl = urls["settings"],
+                        let updateUrl = urls["update"],
+                        let visitUrl = urls["visit"],
+                        let reuseToken = json["reuse_token"] as? String {
+                        
+                        self.authDetails.value = AuthDetails(firstName: firstName,
+                                                        lastName: lastName,
+                                                        accountUrl: NSURL(string: accountUrl),
+                                                        settingsUrl: NSURL(string: settingsUrl),
+                                                        updateUrl: NSURL(string: updateUrl),
+                                                        visitUrl: NSURL(string: visitUrl),
+                                                        reuseToken: reuseToken)
+                    }
+
                 case .failure(let error):
                     print(error)
                 }
         }
+    }
+    
+    func logout() {
+        self.authDetails.value = nil
     }
 }
