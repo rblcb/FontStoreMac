@@ -10,7 +10,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ListingViewController" customModule="FontYou" customModuleProvider="target">
             <connections>
                 <outlet property="allButton" destination="Ahh-XS-Qfa" id="NWm-wx-Yys"/>
-                <outlet property="doSearchButton" destination="Fzy-kP-rGd" id="WHf-bF-nNN"/>
                 <outlet property="indicatorView" destination="XHr-Rg-qyM" id="mz4-Ic-nJy"/>
                 <outlet property="installedButton" destination="qEo-mt-gTm" id="BkU-EE-Pah"/>
                 <outlet property="newButton" destination="eAz-9M-lzQ" id="AJs-hO-5U6"/>
@@ -107,18 +106,21 @@
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DOX-Ek-Wwx" userLabel="Search View">
-                    <rect key="frame" x="0.0" y="275" width="480" height="127"/>
+                    <rect key="frame" x="0.0" y="315" width="480" height="87"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="NA2-VU-4Zd" userLabel="Search Background" customClass="RoundedView" customModule="FontYou" customModuleProvider="target">
-                            <rect key="frame" x="14" y="77" width="452" height="30"/>
+                            <rect key="frame" x="14" y="37" width="452" height="30"/>
                             <subviews>
                                 <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciq-tC-t2R">
-                                    <rect key="frame" x="8" y="6.5" width="436" height="17"/>
-                                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="2cc-Z1-QfN">
+                                    <rect key="frame" x="8" y="4" width="436" height="22"/>
+                                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="2cc-Z1-QfN" customClass="BorderlessSearchFieldCell" customModule="FontYou" customModuleProvider="target">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </searchFieldCell>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="K2r-Co-nmt"/>
+                                    </connections>
                                 </searchField>
                             </subviews>
                             <constraints>
@@ -128,22 +130,12 @@
                                 <constraint firstItem="ciq-tC-t2R" firstAttribute="leading" secondItem="NA2-VU-4Zd" secondAttribute="leading" constant="8" id="poQ-QK-eL9"/>
                             </constraints>
                         </customView>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fzy-kP-rGd" userLabel="Search Button" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
-                            <rect key="frame" x="14" y="41" width="452" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="te4-4w-s4i"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" title="Search" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qGw-ph-qSC" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-vR-QWn" userLabel="Results Label">
-                            <rect key="frame" x="222" y="12" width="37" height="17"/>
+                            <rect key="frame" x="216.5" y="12" width="48" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="OBq-fR-mVz"/>
                             </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="XKC-ag-FFE">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1 result" id="XKC-ag-FFE">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -152,24 +144,21 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="qm7-vR-QWn" secondAttribute="bottom" priority="750" constant="12" id="32r-fY-YW8"/>
-                        <constraint firstItem="Fzy-kP-rGd" firstAttribute="top" secondItem="NA2-VU-4Zd" secondAttribute="bottom" constant="6" id="5KU-6y-WGa"/>
-                        <constraint firstAttribute="trailing" secondItem="Fzy-kP-rGd" secondAttribute="trailing" priority="750" constant="14" id="64D-SD-VTz"/>
                         <constraint firstItem="NA2-VU-4Zd" firstAttribute="top" secondItem="DOX-Ek-Wwx" secondAttribute="top" priority="750" constant="20" id="AlC-OD-3Hu"/>
-                        <constraint firstItem="Fzy-kP-rGd" firstAttribute="leading" secondItem="DOX-Ek-Wwx" secondAttribute="leading" priority="750" constant="14" id="NwF-Oz-G9J"/>
+                        <constraint firstItem="qm7-vR-QWn" firstAttribute="top" secondItem="ciq-tC-t2R" secondAttribute="bottom" constant="12" id="HT5-2J-7cI"/>
                         <constraint firstAttribute="trailing" secondItem="NA2-VU-4Zd" secondAttribute="trailing" priority="750" constant="14" id="UaZ-v8-Pz6"/>
                         <constraint firstItem="qm7-vR-QWn" firstAttribute="centerX" secondItem="DOX-Ek-Wwx" secondAttribute="centerX" priority="750" id="Wua-G5-m7T"/>
-                        <constraint firstItem="qm7-vR-QWn" firstAttribute="top" secondItem="Fzy-kP-rGd" secondAttribute="bottom" constant="12" id="h4B-qb-tka"/>
                         <constraint firstItem="NA2-VU-4Zd" firstAttribute="leading" secondItem="DOX-Ek-Wwx" secondAttribute="leading" priority="750" constant="14" id="zVt-hJ-bEl"/>
                     </constraints>
                 </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVy-tn-EE5">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="315"/>
                     <clipView key="contentView" id="OKJ-bW-fYv">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="315"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="dEy-IU-0nh" id="o9o-Nf-HHg" customClass="OutlineView" customModule="FontYou" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="315"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="gridColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -57,6 +57,10 @@ class FontStore {
         for familyName in FontStore.families.keys {
             FontStore.families[familyName] = FontStore.families[familyName]!.sorted { $0.weight > $1.weight }
         }
+        
+        // Tell the world
+        
+        NotificationCenter.default.post(name: Notification.Name.init("FontStoreUpdated"), object: nil)
     }
     
     // The primary font is that one that's displayed as the family name. We choose the least slanted that as near as
