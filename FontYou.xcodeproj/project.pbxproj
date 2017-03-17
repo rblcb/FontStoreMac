@@ -34,6 +34,13 @@
 		2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB61E77D31F0040A34E /* RoundedButton.swift */; };
 		2283BBB91E793C6F0040A34E /* IndicatorStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */; };
 		22B16A191E7AF2390012BAF0 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A181E7AF2390012BAF0 /* RoundedView.swift */; };
+		22B16A1D1E7BE7F60012BAF0 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 22B16A1C1E7BE7F60012BAF0 /* Cartfile */; };
+		22B16A201E7BEB650012BAF0 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1E1E7BEB650012BAF0 /* Starscream.framework */; };
+		22B16A211E7BEB650012BAF0 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1E1E7BEB650012BAF0 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B16A221E7BEB650012BAF0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */; };
+		22B16A231E7BEB650012BAF0 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B16A291E7BEBD40012BAF0 /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */; };
+		22B16A2A1E7BEBD40012BAF0 /* Starscream.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
@@ -55,6 +62,32 @@
 			remoteInfo = FontYou;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22B16A241E7BEB650012BAF0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22B16A211E7BEB650012BAF0 /* Starscream.framework in Embed Frameworks */,
+				22B16A231E7BEB650012BAF0 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B16A261E7BEBAF0012BAF0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				22B16A291E7BEBD40012BAF0 /* Alamofire.framework.dSYM in CopyFiles */,
+				22B16A2A1E7BEBD40012BAF0 /* Starscream.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		221E636D1E3237A500944B1B /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
@@ -92,6 +125,11 @@
 		2283BBB61E77D31F0040A34E /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		2283BBB81E793C6F0040A34E /* IndicatorStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorStackView.swift; sourceTree = "<group>"; };
 		22B16A181E7AF2390012BAF0 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		22B16A1C1E7BE7F60012BAF0 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		22B16A1E1E7BEB650012BAF0 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = ../Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
+		22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
+		22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = ../Carthage/Build/Mac/Alamofire.framework.dSYM; sourceTree = "<group>"; };
+		22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = ../Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
@@ -102,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B16A201E7BEB650012BAF0 /* Starscream.framework in Frameworks */,
+				22B16A221E7BEB650012BAF0 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +186,7 @@
 		2223DE101E30F74800D7B0FE = {
 			isa = PBXGroup;
 			children = (
+				22B16A1C1E7BE7F60012BAF0 /* Cartfile */,
 				2223DE1B1E30F74800D7B0FE /* FontYou */,
 				2223DE2B1E30F74900D7B0FE /* FontYouTests */,
 				2223DE361E30F74900D7B0FE /* FontYouUITests */,
@@ -178,6 +219,7 @@
 				22EDFCDC1E72A84E00D221C7 /* Extensions */,
 				2275FE7E1E76A9AA00B357E7 /* FontStore */,
 				2275FE771E76A8F400B357E7 /* FontUtility */,
+				22B16A251E7BEB850012BAF0 /* Frameworks */,
 				2275FE781E76A91000B357E7 /* FontYou-Bridging-Header.h */,
 				22DA52A61E7A9EA200697725 /* AppFonts */,
 				2275FE7C1E76A98A00B357E7 /* Fonts */,
@@ -246,6 +288,17 @@
 			name = FontStore;
 			sourceTree = "<group>";
 		};
+		22B16A251E7BEB850012BAF0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */,
+				22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */,
+				22B16A1E1E7BEB650012BAF0 /* Starscream.framework */,
+				22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		22EDFCDC1E72A84E00D221C7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +317,8 @@
 				2223DE151E30F74800D7B0FE /* Sources */,
 				2223DE161E30F74800D7B0FE /* Frameworks */,
 				2223DE171E30F74800D7B0FE /* Resources */,
+				22B16A241E7BEB650012BAF0 /* Embed Frameworks */,
+				22B16A261E7BEBAF0012BAF0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -369,6 +424,7 @@
 			files = (
 				2223DE1F1E30F74800D7B0FE /* Assets.xcassets in Resources */,
 				2223DE5A1E312E4F00D7B0FE /* ListingViewController.xib in Resources */,
+				22B16A1D1E7BE7F60012BAF0 /* Cartfile in Resources */,
 				2223DE481E30FA8A00D7B0FE /* MainViewController.xib in Resources */,
 				2223DE561E312E1000D7B0FE /* LogonViewController.xib in Resources */,
 				2275FE7D1E76A98A00B357E7 /* Fonts in Resources */,
@@ -562,6 +618,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MXZ782EHFK;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYou;
@@ -579,6 +639,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MXZ782EHFK;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYou;
