@@ -1,2 +1,5 @@
 github "Alamofire/Alamofire" "4.4.0"
+github "ReactiveKit/Bond" "6.0.4"
+github "ReactiveKit/ReactiveKit" "v3.3.1"
 github "daltoniam/Starscream" "2.0.3"
+github "wokalski/Diff.swift" "0.5.3"

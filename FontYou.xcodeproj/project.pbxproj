@@ -41,6 +41,12 @@
 		22B16A231E7BEB650012BAF0 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22B16A291E7BEBD40012BAF0 /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */; };
 		22B16A2A1E7BEBD40012BAF0 /* Starscream.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */; };
+		22B16A371E7BFCD50012BAF0 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A341E7BFCD50012BAF0 /* Bond.framework */; };
+		22B16A381E7BFCD50012BAF0 /* Bond.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A341E7BFCD50012BAF0 /* Bond.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B16A391E7BFCD50012BAF0 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */; };
+		22B16A3A1E7BFCD50012BAF0 /* ReactiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B16A3B1E7BFCD50012BAF0 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A361E7BFCD50012BAF0 /* Diff.framework */; };
+		22B16A3C1E7BFCD50012BAF0 /* Diff.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A361E7BFCD50012BAF0 /* Diff.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
@@ -70,6 +76,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				22B16A3A1E7BFCD50012BAF0 /* ReactiveKit.framework in Embed Frameworks */,
+				22B16A381E7BFCD50012BAF0 /* Bond.framework in Embed Frameworks */,
+				22B16A3C1E7BFCD50012BAF0 /* Diff.framework in Embed Frameworks */,
 				22B16A211E7BEB650012BAF0 /* Starscream.framework in Embed Frameworks */,
 				22B16A231E7BEB650012BAF0 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -130,6 +139,12 @@
 		22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = ../Carthage/Build/Mac/Alamofire.framework.dSYM; sourceTree = "<group>"; };
 		22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = ../Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
+		22B16A311E7BFCAF0012BAF0 /* Bond.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Bond.framework.dSYM; path = ../Carthage/Build/Mac/Bond.framework.dSYM; sourceTree = "<group>"; };
+		22B16A321E7BFCAF0012BAF0 /* ReactiveKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ReactiveKit.framework.dSYM; path = ../Carthage/Build/Mac/ReactiveKit.framework.dSYM; sourceTree = "<group>"; };
+		22B16A331E7BFCAF0012BAF0 /* Diff.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Diff.framework.dSYM; path = ../Carthage/Build/Mac/Diff.framework.dSYM; sourceTree = "<group>"; };
+		22B16A341E7BFCD50012BAF0 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = ../Carthage/Build/Mac/Bond.framework; sourceTree = "<group>"; };
+		22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = ../Carthage/Build/Mac/ReactiveKit.framework; sourceTree = "<group>"; };
+		22B16A361E7BFCD50012BAF0 /* Diff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Diff.framework; path = ../Carthage/Build/Mac/Diff.framework; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
@@ -140,6 +155,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B16A391E7BFCD50012BAF0 /* ReactiveKit.framework in Frameworks */,
+				22B16A371E7BFCD50012BAF0 /* Bond.framework in Frameworks */,
+				22B16A3B1E7BFCD50012BAF0 /* Diff.framework in Frameworks */,
 				22B16A201E7BEB650012BAF0 /* Starscream.framework in Frameworks */,
 				22B16A221E7BEB650012BAF0 /* Alamofire.framework in Frameworks */,
 			);
@@ -291,10 +309,16 @@
 		22B16A251E7BEB850012BAF0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */,
-				22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */,
 				22B16A1E1E7BEB650012BAF0 /* Starscream.framework */,
 				22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */,
+				22B16A341E7BFCD50012BAF0 /* Bond.framework */,
+				22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */,
+				22B16A361E7BFCD50012BAF0 /* Diff.framework */,
+				22B16A311E7BFCAF0012BAF0 /* Bond.framework.dSYM */,
+				22B16A321E7BFCAF0012BAF0 /* ReactiveKit.framework.dSYM */,
+				22B16A331E7BFCAF0012BAF0 /* Diff.framework.dSYM */,
+				22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */,
+				22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

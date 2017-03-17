@@ -52,7 +52,7 @@ class MainViewController: NSViewController {
         
         // Set the default view
         
-        currentViewController = listingViewController
+        currentViewController = logonViewController
     }
     
     @IBAction func menuPressed(_ sender: Any) {

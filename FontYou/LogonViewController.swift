@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import ReactiveKit
+import Bond
 
 class LogonViewController: NSViewController {
 
@@ -22,11 +24,19 @@ class LogonViewController: NSViewController {
     @IBOutlet weak var forgottenButton: NSButton!
     @IBOutlet weak var signupButton: NSButton!
     
+    let emailAddress = Observable<String>("")
+    let password = Observable<String>("")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set colors
+        
         view.backgroundColor = NSColor.white
         seperatorView.backgroundColor = StyleKit.textBlack
+        loginButton.textColor = NSColor.white
+        
+        // Set fonts
         
         let litmus12 = NSFont(name: "Litmus-Bold", size: 12)
         let litmus14 = NSFont(name: "Litmus-Bold", size: 14)
@@ -51,7 +61,28 @@ class LogonViewController: NSViewController {
             NSParagraphStyleAttributeName: centerStyle
         ] as [String : Any]
         
+        // Set text
+        
         forgottenButton.attributedTitle = NSAttributedString(string: "I've forgotten my password", attributes: attributes)
+        
+        // Set up bindings
+        
+        bindViewModel()
     }
     
+    func bindViewModel() {
+        emailAddress.bidirectionalBind(to: emailField.reactive.editingString)
+        password.bidirectionalBind(to: passwordField.reactive.editingString)
+        
+        let logonAllowedSignal = combineLatest(emailField.reactive.editingString, passwordField.reactive.editingString) { email, pass in
+            return email.characters.count > 0 && pass.characters.count > 0
+        }
+        
+        logonAllowedSignal.bind(to: loginButton.reactive.isEnabled)
+        logonAllowedSignal.map { $0 ? StyleKit.textBlack : StyleKit.lightGrey }.bind(to: loginButton.reactive.rectangleColor)
+    }
+    
+    @IBAction func doLogin(_ sender: Any) {
+        Swift.print("here")
+    }
 }

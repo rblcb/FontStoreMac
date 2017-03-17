@@ -9,6 +9,7 @@
 import Foundation
 import CoreText
 import Cocoa
+import Alamofire
 
 struct FontStoreItem {
     let name: String
@@ -77,5 +78,27 @@ class FontStore {
         }
         
         return nil
+    }
+    
+    func login(_ email: String, _ password: String) {
+    
+        let parameters = [
+            "login": email,
+            "password": password,
+            "protocol_version": "1.0.0",
+            "application_version": "1.0.0",
+            "os": "Mac",
+            "os_version": "10.12.4"
+        ]
+        
+        Alamofire.request("https://api.fontstore.com/session/desktop", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .validate().responseJSON { response in
+                switch response.result {
+                case .success:
+                    print("Cool")
+                case .failure(let error):
+                    print(error)
+                }
+        }
     }
 }

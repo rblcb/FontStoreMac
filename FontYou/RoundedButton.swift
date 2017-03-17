@@ -7,27 +7,27 @@
 //
 
 import Cocoa
+import Bond
+import ReactiveKit
 
 class RoundedButtonCell: NSButtonCell {
 
-  var rectangleColor: NSColor = NSColor.black
+    var curColor = StyleKit.textBlack
     
-  override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
-    rectangleColor.set()
-    NSBezierPath(roundedRect: frame, xRadius: frame.height / 2, yRadius: frame.height / 2).fill()
-  }
+    override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
+        if let roundedButton = controlView as? RoundedButton {
+            let color = roundedButton.isHighlighted ? roundedButton.highlightColor : roundedButton.rectangleColor
+            color.set()
+            NSBezierPath(roundedRect: frame, xRadius: frame.height / 2, yRadius: frame.height / 2).fill()
+        }
+    }
 }
 
 @IBDesignable
 class RoundedButton: NSButton {
     
-    var rectangleColor: NSColor = NSColor.black {
-        didSet {
-            if let c = cell as? RoundedButtonCell {
-                c.rectangleColor = rectangleColor
-            }
-        }
-    }
+    var rectangleColor = NSColor.black
+    var highlightColor = StyleKit.primary
     
     @IBInspectable var textColor: NSColor? {
         didSet { setUpTitle() }
@@ -53,5 +53,13 @@ class RoundedButton: NSButton {
         let attributedTitle = NSAttributedString(string: title, attributes: attributes)
         self.attributedTitle = attributedTitle
 
+    }
+}
+
+extension ReactiveExtensions where Base: RoundedButton {
+    var rectangleColor: Bond<NSColor> {
+        return bond { button, color in
+            button.rectangleColor = color
+        }
     }
 }

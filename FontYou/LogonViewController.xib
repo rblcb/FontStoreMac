@@ -95,6 +95,9 @@
                             <buttonCell key="cell" type="square" title="LOGIN" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bGF-6e-UgM" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="doLogin:" target="-2" id="EYd-Ep-RWd"/>
+                                </connections>
                             </buttonCell>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -165,6 +168,7 @@
             </constraints>
             <point key="canvasLocation" x="106" y="149.5"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="7Qj-yo-M7V"/>
     </objects>
     <resources>
         <image name="Checkbox" width="42" height="42"/>
