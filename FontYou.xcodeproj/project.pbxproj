@@ -47,6 +47,7 @@
 		22B16A3A1E7BFCD50012BAF0 /* ReactiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22B16A3B1E7BFCD50012BAF0 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A361E7BFCD50012BAF0 /* Diff.framework */; };
 		22B16A3C1E7BFCD50012BAF0 /* Diff.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A361E7BFCD50012BAF0 /* Diff.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B16A3E1E7FD7550012BAF0 /* SecureTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
@@ -145,6 +146,7 @@
 		22B16A341E7BFCD50012BAF0 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = ../Carthage/Build/Mac/Bond.framework; sourceTree = "<group>"; };
 		22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = ../Carthage/Build/Mac/ReactiveKit.framework; sourceTree = "<group>"; };
 		22B16A361E7BFCD50012BAF0 /* Diff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Diff.framework; path = ../Carthage/Build/Mac/Diff.framework; sourceTree = "<group>"; };
+		22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureTextFieldCell.swift; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				2283BBB61E77D31F0040A34E /* RoundedButton.swift */,
 				22DA52A41E7A75AE00697725 /* TabButton.swift */,
 				22B16A181E7AF2390012BAF0 /* RoundedView.swift */,
+				22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				2283BBB31E7711DD0040A34E /* FontCellView.swift in Sources */,
 				2223DE471E30FA8A00D7B0FE /* MainViewController.swift in Sources */,
 				2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */,
+				22B16A3E1E7FD7550012BAF0 /* SecureTextFieldCell.swift in Sources */,
 				221E636E1E3237A500944B1B /* StyleKit.swift in Sources */,
 				2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */,
 				2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */,
