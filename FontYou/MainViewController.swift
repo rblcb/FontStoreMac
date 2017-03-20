@@ -18,6 +18,10 @@ class MainViewController: NSViewController {
     
     @IBOutlet var contextMenu: NSMenu!
     
+    @IBOutlet weak var accountMenuItem: NSMenuItem!
+    @IBOutlet weak var settingsMenuItem: NSMenuItem!
+    @IBOutlet weak var logoutMenuItem: NSMenuItem!
+    
     let logonViewController: LogonViewController! = LogonViewController(nibName: "LogonViewController", bundle:nil)
     let listingViewController: ListingViewController! = ListingViewController(nibName: "ListingViewController", bundle:nil)
    
@@ -41,6 +45,8 @@ class MainViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set fonts
+        
         headerView.backgroundColor = StyleKit.primary
         fontStoreLabel.font = NSFont(name: "Litmus-Bold", size: 18)
         usernameLabel.font = NSFont(name: "Litmus-Regular", size: 12)
@@ -60,11 +66,23 @@ class MainViewController: NSViewController {
             if let authDetails = authDetails {
                 self?.usernameLabel.stringValue = "\(authDetails.firstName) \(authDetails.lastName)"
                 self?.currentViewController = self?.listingViewController
+                self?.setUpMenu(loggedOn: true)
             } else {
                 self?.usernameLabel.stringValue = "Welcome"
                 self?.currentViewController = self?.logonViewController
+                self?.setUpMenu(loggedOn: false)
             }
         }.dispose(in: reactive.bag)
+        
+        // Initialise context menu
+        
+        self.setUpMenu(loggedOn: false)
+    }
+    
+    func setUpMenu(loggedOn: Bool) {
+        accountMenuItem.isHidden = !loggedOn
+        settingsMenuItem.isHidden = !loggedOn
+        logoutMenuItem.isHidden = !loggedOn
     }
     
     @IBAction func menuPressed(_ sender: Any) {
@@ -74,7 +92,9 @@ class MainViewController: NSViewController {
     }
     
     @IBAction func goToAccount(_ sender: Any) {
-        currentViewController = logonViewController
+        if let url = FontStore.sharedInstance.authDetails.value?.accountUrl {
+            NSWorkspace.shared().open(url)
+        }
     }
     
     @IBAction func logout(_ sender: Any) {

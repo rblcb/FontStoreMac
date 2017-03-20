@@ -17,10 +17,10 @@ let endpoint = "http://localhost:4000/api/desktop/session"
 struct AuthDetails {
     let firstName: String
     let lastName: String
-    let accountUrl: NSURL?
-    let settingsUrl: NSURL?
-    let updateUrl: NSURL?
-    let visitUrl: NSURL?
+    let accountUrl: URL?
+    let settingsUrl: URL?
+    let updateUrl: URL?
+    let visitUrl: URL?
     let reuseToken: String
 }
 
@@ -126,10 +126,10 @@ class FontStore {
                         
                         self.authDetails.value = AuthDetails(firstName: firstName,
                                                         lastName: lastName,
-                                                        accountUrl: NSURL(string: accountUrl),
-                                                        settingsUrl: NSURL(string: settingsUrl),
-                                                        updateUrl: NSURL(string: updateUrl),
-                                                        visitUrl: NSURL(string: visitUrl),
+                                                        accountUrl: URL(string: accountUrl),
+                                                        settingsUrl: URL(string: settingsUrl),
+                                                        updateUrl: URL(string: updateUrl),
+                                                        visitUrl: URL(string: visitUrl),
                                                         reuseToken: reuseToken)
                     }
 

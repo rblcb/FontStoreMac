@@ -8,11 +8,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="FontYou" customModuleProvider="target">
             <connections>
+                <outlet property="accountMenuItem" destination="4Mk-Jf-eLp" id="xCS-zr-NZA"/>
                 <outlet property="contentView" destination="wJP-4v-ojp" id="A8V-wE-f0b"/>
                 <outlet property="contextMenu" destination="ohn-ab-2wd" id="R66-i6-n3X"/>
                 <outlet property="fontStoreLabel" destination="Hg0-je-tSY" id="mmJ-7g-IMj"/>
                 <outlet property="headerView" destination="TYV-Gc-6oh" id="NcK-q9-DF1"/>
+                <outlet property="logoutMenuItem" destination="mdo-Lm-D5h" id="xZ1-zD-wqo"/>
                 <outlet property="menuButton" destination="V7W-H6-W3H" id="bXP-gu-QXR"/>
+                <outlet property="settingsMenuItem" destination="CcL-vD-Rbz" id="cD6-jb-Cv5"/>
                 <outlet property="usernameLabel" destination="qHc-SN-S8Q" id="d6s-iL-CHt"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
