@@ -97,13 +97,16 @@ class FontStore {
     
     func login(email: String, password: String) {
     
+        let osv = ProcessInfo.processInfo.operatingSystemVersion
+        let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        
         let parameters = [
             "login": email,
             "password": password,
             "protocol_version": "1.0.0",
-            "application_version": "1.0.0",
+            "application_version": appVersion,
             "os": "Mac",
-            "os_version": "10.12.4"
+            "os_version": "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)"
         ]
         
         Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
