@@ -34,6 +34,13 @@
             @catch (NSException *e) {
                 activationRes = NO;
             }
+        } else {
+            NSArray *errors = (__bridge NSArray*)cfErrors;
+            NSError *error = errors[0];
+            
+            // We allow error 105 (Font already activated for this scope)
+            
+            if (error.code == 105) activationRes = YES;
         }
     }
 

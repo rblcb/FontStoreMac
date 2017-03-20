@@ -10,10 +10,15 @@ import Foundation
 import CoreText
 import Cocoa
 import ObjectMapper
+import Alamofire
+
+// Create a download queue that will download up to 3 fonts at a time, as per the spec
+let downloadQueue = MaxConcurrentTasksQueue(withMaxConcurrency: 3)
 
 struct CatalogItem: Mappable {
     
-    var name: String
+    var uid: String
+    var style: String
     var weight: Float
     var slant: Float
     var installed: Bool
@@ -21,22 +26,25 @@ struct CatalogItem: Mappable {
     var downloadUrl: URL?
     var url: URL?
     
-    init(name: String, weight: Float, slant: Float, installed: Bool) {
-        self.name = name
+    init(uid: String, style: String, weight: Float, slant: Float, installed: Bool) {
+        self.uid = uid
+        self.style = style
         self.weight = weight
         self.slant = slant
         self.installed = installed
     }
 
     init?(map: Map) {
-        name = ""
+        uid = ""
+        style = ""
         weight = 0
         slant = 0
         installed = false
     }
 
     mutating func mapping(map: Map) {
-        name <- map["name"]
+        uid <- map["uid"]
+        style <- map["style"]
         weight <- map["weight"]
         slant <- map["slant"]
         installed <- map["installed"]
@@ -61,6 +69,69 @@ struct Catalog: Mappable {
         lastUpdate <- (map["lastUpdate"], DateTransform())
     }
     
+    mutating func addFont(uid: String, familyName: String, style: String, downloadUrl: URL) {
+        
+        // Add a download request to the queue
+        
+        downloadQueue.enqueue {
+            
+            // Function to return the destination path
+            
+            let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+                var fileURL = Catalog.fontsUrl(family: familyName)
+                fileURL.appendPathComponent(downloadUrl.lastPathComponent)
+                return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+            }
+            
+            // Download "synchronously" within this task so that we don't return before we've finished
+            // downloading. This ensures that the downloadQueue remains full until the task is truly finished.
+            
+            let semaphore = DispatchSemaphore(value: 0)
+            var result: DefaultDownloadResponse!
+            
+            Alamofire.download(downloadUrl, to: destination).response { response in
+                result = response
+                semaphore.signal()
+            }
+            
+            _ = semaphore.wait()
+            
+            // Downloading complete, get the font's characteristics
+            
+            if result.error == nil, let fontUrl = result.destinationURL {
+                guard FontUtility.activateFontFile(fontUrl, with: .process) else { return }
+                guard let descriptors = CTFontManagerCreateFontDescriptorsFromURL(fontUrl as CFURL) as? [NSFontDescriptor] else { return }
+                let desc = descriptors.first!
+                
+                let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
+                let weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
+                let slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
+                
+                var item = CatalogItem(uid: uid, style: style, weight: weight, slant: slant, installed: false)
+                item.fontDescriptor = desc
+                item.url = fontUrl
+                
+                // Add the item to the catalog synchronously so that multiple download queues don't try to manipulate
+                // it at the same time.
+                
+                DispatchQueue.main.sync {
+                    var family = self.families[familyName] ?? []
+                    family.append(item)
+                    self.families[familyName] = family
+                
+                    // Sort the fonts in each family by weight
+                
+                    self.families[familyName] = self.families[familyName]!.sorted { $0.weight > $1.weight }
+                
+                    // Save the db and update the interface
+                
+                    self.saveCatalog()
+                    NotificationCenter.default.post(name: Notification.Name.init("FontStoreUpdated"), object: nil)
+                }
+            }
+        }
+    }
+    
     mutating func addFonts(fromUrl url: URL) {
     
         // Activate each font for this application, so that we can display it in the menu
@@ -76,7 +147,7 @@ struct Catalog: Mappable {
                 let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
                 let weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
                 let slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
-                var item = CatalogItem(name: font.fontName, weight: weight, slant: slant, installed: false)
+                var item = CatalogItem(uid: "", style: font.fontName, weight: weight, slant: slant, installed: false)
                 
                 item.fontDescriptor = desc
                 item.url = url
@@ -90,6 +161,10 @@ struct Catalog: Mappable {
                 families[familyName] = families[familyName]!.sorted { $0.weight > $1.weight }
             }
         }
+        
+        // Tell the world
+        
+        NotificationCenter.default.post(name: Notification.Name.init("FontStoreUpdated"), object: nil)
     }
     
     
@@ -122,14 +197,14 @@ struct Catalog: Mappable {
                 
                 // Try to activate each for for use in the application
                 
-                for (familyName, var items) in catalog.families {
+                for (familyName, items) in catalog.families {
                     for (index, var item) in items.enumerated() {
-                        guard FontUtility.activateFontFile(item.url, with: .process) else { print("Unable to activate \(familyName).\(item.name)"); continue; }
+                        guard FontUtility.activateFontFile(item.url, with: .process) else { print("Unable to activate \(familyName).\(item.style)"); continue; }
                         if let desc = (CTFontManagerCreateFontDescriptorsFromURL(item.url as! CFURL) as? [NSFontDescriptor])?.first {
                             item.fontDescriptor = desc
                             catalog.families[familyName]?[index].fontDescriptor = desc
                         } else {
-                            print("Unable to create descriptors for \(familyName).\(item.name)")
+                            print("Unable to create descriptors for \(familyName).\(item.style)")
                         }
                     }
                 }
@@ -145,14 +220,24 @@ struct Catalog: Mappable {
         }
     }
     
-    static func catalogUrl() -> URL {
+    static func appSupportUrl() -> URL {
         let dir = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .allDomainsMask, true).first!
         let folderUrl = URL(fileURLWithPath: dir).appendingPathComponent("FontStore")
-        let fileUrl = folderUrl.appendingPathComponent("catalog.json")
         if !FileManager.default.fileExists(atPath: folderUrl.absoluteString) {
             try? FileManager.default.createDirectory(at: folderUrl, withIntermediateDirectories: true, attributes: nil)
         }
         
-        return fileUrl
+        return folderUrl
+    }
+    
+    static func catalogUrl() -> URL {
+        let asUrl = appSupportUrl()
+        return asUrl.appendingPathComponent("catalog.json")
+    }
+    
+    static func fontsUrl(family: String) -> URL {
+        let asUrl = appSupportUrl()
+        let fontsUrl = asUrl.appendingPathComponent("fonts", isDirectory: true)
+        return fontsUrl.appendingPathComponent(family, isDirectory: true)
     }
 }

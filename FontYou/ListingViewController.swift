@@ -235,7 +235,7 @@ extension ListingViewController: NSOutlineViewDelegate {
         if let font = item as? CatalogItem {
             let view = outlineView.make(withIdentifier: "Font", owner: self) as? FontCellView
             if let textField = view?.nameLabel {
-                textField.stringValue = font.name
+                textField.stringValue = font.style
                 textField.font = NSFont.init(descriptor: font.fontDescriptor!, size: 16)
             }
             
@@ -245,7 +245,7 @@ extension ListingViewController: NSOutlineViewDelegate {
             let view = outlineView.make(withIdentifier: "Family", owner: self) as? FamilyCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = family
-                textField.font =  NSFont.init(descriptor: FontStore.sharedInstance.catalog.primaryFont(forFamily: family)!.fontDescriptor!, size: 20)
+                textField.font =  NSFont.init(descriptor: FontStore.sharedInstance.catalog.primaryFont(forFamily: family)!.fontDescriptor!, size: 18)
             }
             
             if let textField = view?.numFontsLabel {

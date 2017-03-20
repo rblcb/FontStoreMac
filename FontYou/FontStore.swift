@@ -44,10 +44,6 @@ class FontStore {
         } else {
             devInit()
         }
-        
-        // Tell the world
-        
-        NotificationCenter.default.post(name: Notification.Name.init("FontStoreUpdated"), object: nil)
     }
     
     func devInit() {
@@ -107,6 +103,9 @@ class FontStore {
                                                              visitUrl: URL(string: visitUrl),
                                                              reuseToken: reuseToken)
                         
+                        // Create the web socket
+                        
+                        self.connectWebSocket()
 
                     }
                     
@@ -117,6 +116,37 @@ class FontStore {
     }
     
     func logout() {
+        socket?.disconnect()
+        socket = nil
         self.authDetails.value = nil
     }
+    
+    func connectWebSocket() {
+        socket = Socket(url: URL(string: webSocketEndpoint)!, params: ["reuse_token" : authDetails.value!.reuseToken])
+        socket.enableLogging = true
+        
+        socket.onConnect = {
+            
+            let catalogChannel = self.socket.channel("catalog")
+            let userChannel = self.socket.channel("users:\(self.authDetails.value!.uid)")
+            
+            catalogChannel.on("font:description") { message in
+                if let data = message.payload as? [String:String] {
+                    self.catalog.addFont(uid: data["uid"]!, familyName: data["font_family"]!, style: data["font_style"]!, downloadUrl: URL(string: data["download_url"]!)!)
+                }
+            }
+            
+            catalogChannel.on("update:complete") { _ in
+                userChannel.join()
+                userChannel.send("update:request", payload: [:])
+            }
+                        
+            catalogChannel.join()
+            catalogChannel.send("update:request", payload: [:])
+        
+        }
+        
+        socket.connect()
+    }
 }
+
