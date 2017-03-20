@@ -79,12 +79,12 @@ class ListingViewController: NSViewController {
         // Watch for for store changes
         
         NotificationCenter.default.addObserver(forName: Notification.Name.init("FontStoreUpdated"), object: nil, queue: nil) { [weak self] _ in
-            self?.fontFamilies = FontStore.families.keys.sorted()
+            self?.fontFamilies = FontStore.sharedInstance.catalog.families.keys.sorted()
             self?.updateFontList()
         }
         
         // Prepare initial listing
-        fontFamilies = FontStore.families.keys.sorted()
+        fontFamilies = FontStore.sharedInstance.catalog.families.keys.sorted()
         filteredfontFamilies = fontFamilies
         updateFontList()
     }
@@ -200,7 +200,7 @@ extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let family = item as? String {
-            return FontStore.families[family]!.count
+            return FontStore.sharedInstance.catalog.families[family]!.count
         }
         
         return filteredfontFamilies.count
@@ -208,7 +208,7 @@ extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if let family = item as? String {
-            return FontStore.families[family]![index]
+            return FontStore.sharedInstance.catalog.families[family]![index]
         }
         
         return filteredfontFamilies[index]
@@ -216,7 +216,7 @@ extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let family = item as? String {
-            return FontStore.families[family]!.count > 0
+            return FontStore.sharedInstance.catalog.families[family]!.count > 0
         }
         
         return false
@@ -232,11 +232,11 @@ extension ListingViewController: NSOutlineViewDelegate {
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        if let font = item as? FontStoreItem {
+        if let font = item as? CatalogItem {
             let view = outlineView.make(withIdentifier: "Font", owner: self) as? FontCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = font.name
-                textField.font = NSFont.init(descriptor: font.fontDescriptor, size: 16)
+                textField.font = NSFont.init(descriptor: font.fontDescriptor!, size: 16)
             }
             
             return view
@@ -245,11 +245,11 @@ extension ListingViewController: NSOutlineViewDelegate {
             let view = outlineView.make(withIdentifier: "Family", owner: self) as? FamilyCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = family
-                textField.font =  NSFont.init(descriptor: FontStore.sharedInstance.primaryFont(forFamily: family)!.fontDescriptor, size: 20)
+                textField.font =  NSFont.init(descriptor: FontStore.sharedInstance.catalog.primaryFont(forFamily: family)!.fontDescriptor!, size: 20)
             }
             
             if let textField = view?.numFontsLabel {
-                let numFonts = FontStore.families[family]!.count
+                let numFonts = FontStore.sharedInstance.catalog.families[family]!.count
                 textField.stringValue = numFonts > 1 ? "\(numFonts) Fonts" : "1 Font"
             }
             

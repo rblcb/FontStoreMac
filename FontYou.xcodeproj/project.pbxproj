@@ -39,8 +39,6 @@
 		22B16A211E7BEB650012BAF0 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1E1E7BEB650012BAF0 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22B16A221E7BEB650012BAF0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */; };
 		22B16A231E7BEB650012BAF0 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22B16A291E7BEBD40012BAF0 /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */; };
-		22B16A2A1E7BEBD40012BAF0 /* Starscream.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */; };
 		22B16A371E7BFCD50012BAF0 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A341E7BFCD50012BAF0 /* Bond.framework */; };
 		22B16A381E7BFCD50012BAF0 /* Bond.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A341E7BFCD50012BAF0 /* Bond.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22B16A391E7BFCD50012BAF0 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */; };
@@ -48,6 +46,18 @@
 		22B16A3B1E7BFCD50012BAF0 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A361E7BFCD50012BAF0 /* Diff.framework */; };
 		22B16A3C1E7BFCD50012BAF0 /* Diff.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A361E7BFCD50012BAF0 /* Diff.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22B16A3E1E7FD7550012BAF0 /* SecureTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */; };
+		22B16A4E1E8010AB0012BAF0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A491E8010AB0012BAF0 /* Channel.swift */; };
+		22B16A4F1E8010AB0012BAF0 /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A4A1E8010AB0012BAF0 /* Presence.swift */; };
+		22B16A501E8010AB0012BAF0 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A4B1E8010AB0012BAF0 /* Push.swift */; };
+		22B16A511E8010AB0012BAF0 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A4C1E8010AB0012BAF0 /* Response.swift */; };
+		22B16A521E8010AB0012BAF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A4D1E8010AB0012BAF0 /* Socket.swift */; };
+		22B16A561E801DC40012BAF0 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A551E801DC40012BAF0 /* ObjectMapper.framework */; };
+		22B16A571E801DC40012BAF0 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B16A551E801DC40012BAF0 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B16A5E1E801DEB0012BAF0 /* ObjectMapper.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A581E801DEB0012BAF0 /* ObjectMapper.framework.dSYM */; };
+		22B16A5F1E801DEB0012BAF0 /* Bond.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A591E801DEB0012BAF0 /* Bond.framework.dSYM */; };
+		22B16A601E801DEB0012BAF0 /* ReactiveKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A5A1E801DEB0012BAF0 /* ReactiveKit.framework.dSYM */; };
+		22B16A611E801DEB0012BAF0 /* Diff.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A5B1E801DEB0012BAF0 /* Diff.framework.dSYM */; };
+		22B16A631E801ED20012BAF0 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A621E801ED20012BAF0 /* Catalog.swift */; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
@@ -77,6 +87,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				22B16A571E801DC40012BAF0 /* ObjectMapper.framework in Embed Frameworks */,
 				22B16A3A1E7BFCD50012BAF0 /* ReactiveKit.framework in Embed Frameworks */,
 				22B16A381E7BFCD50012BAF0 /* Bond.framework in Embed Frameworks */,
 				22B16A3C1E7BFCD50012BAF0 /* Diff.framework in Embed Frameworks */,
@@ -92,8 +103,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				22B16A291E7BEBD40012BAF0 /* Alamofire.framework.dSYM in CopyFiles */,
-				22B16A2A1E7BEBD40012BAF0 /* Starscream.framework.dSYM in CopyFiles */,
+				22B16A5E1E801DEB0012BAF0 /* ObjectMapper.framework.dSYM in CopyFiles */,
+				22B16A5F1E801DEB0012BAF0 /* Bond.framework.dSYM in CopyFiles */,
+				22B16A601E801DEB0012BAF0 /* ReactiveKit.framework.dSYM in CopyFiles */,
+				22B16A611E801DEB0012BAF0 /* Diff.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,15 +151,23 @@
 		22B16A1C1E7BE7F60012BAF0 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		22B16A1E1E7BEB650012BAF0 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = ../Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
-		22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = ../Carthage/Build/Mac/Alamofire.framework.dSYM; sourceTree = "<group>"; };
-		22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = ../Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
-		22B16A311E7BFCAF0012BAF0 /* Bond.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Bond.framework.dSYM; path = ../Carthage/Build/Mac/Bond.framework.dSYM; sourceTree = "<group>"; };
-		22B16A321E7BFCAF0012BAF0 /* ReactiveKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ReactiveKit.framework.dSYM; path = ../Carthage/Build/Mac/ReactiveKit.framework.dSYM; sourceTree = "<group>"; };
-		22B16A331E7BFCAF0012BAF0 /* Diff.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Diff.framework.dSYM; path = ../Carthage/Build/Mac/Diff.framework.dSYM; sourceTree = "<group>"; };
 		22B16A341E7BFCD50012BAF0 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = ../Carthage/Build/Mac/Bond.framework; sourceTree = "<group>"; };
 		22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = ../Carthage/Build/Mac/ReactiveKit.framework; sourceTree = "<group>"; };
 		22B16A361E7BFCD50012BAF0 /* Diff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Diff.framework; path = ../Carthage/Build/Mac/Diff.framework; sourceTree = "<group>"; };
 		22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureTextFieldCell.swift; sourceTree = "<group>"; };
+		22B16A491E8010AB0012BAF0 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		22B16A4A1E8010AB0012BAF0 /* Presence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
+		22B16A4B1E8010AB0012BAF0 /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
+		22B16A4C1E8010AB0012BAF0 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		22B16A4D1E8010AB0012BAF0 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		22B16A551E801DC40012BAF0 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../Carthage/Build/Mac/ObjectMapper.framework; sourceTree = "<group>"; };
+		22B16A581E801DEB0012BAF0 /* ObjectMapper.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ObjectMapper.framework.dSYM; path = ../Carthage/Build/Mac/ObjectMapper.framework.dSYM; sourceTree = "<group>"; };
+		22B16A591E801DEB0012BAF0 /* Bond.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Bond.framework.dSYM; path = ../Carthage/Build/Mac/Bond.framework.dSYM; sourceTree = "<group>"; };
+		22B16A5A1E801DEB0012BAF0 /* ReactiveKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ReactiveKit.framework.dSYM; path = ../Carthage/Build/Mac/ReactiveKit.framework.dSYM; sourceTree = "<group>"; };
+		22B16A5B1E801DEB0012BAF0 /* Diff.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Diff.framework.dSYM; path = ../Carthage/Build/Mac/Diff.framework.dSYM; sourceTree = "<group>"; };
+		22B16A5C1E801DEB0012BAF0 /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = ../Carthage/Build/Mac/Alamofire.framework.dSYM; sourceTree = "<group>"; };
+		22B16A5D1E801DEB0012BAF0 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = ../Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
+		22B16A621E801ED20012BAF0 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
@@ -157,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B16A561E801DC40012BAF0 /* ObjectMapper.framework in Frameworks */,
 				22B16A391E7BFCD50012BAF0 /* ReactiveKit.framework in Frameworks */,
 				22B16A371E7BFCD50012BAF0 /* Bond.framework in Frameworks */,
 				22B16A3B1E7BFCD50012BAF0 /* Diff.framework in Frameworks */,
@@ -228,6 +250,7 @@
 		2223DE1B1E30F74800D7B0FE /* FontYou */ = {
 			isa = PBXGroup;
 			children = (
+				22B16A3F1E7FEFA10012BAF0 /* Externals */,
 				2223DE4F1E3129E000D7B0FE /* Constants.swift */,
 				221E636D1E3237A500944B1B /* StyleKit.swift */,
 				2223DE1C1E30F74800D7B0FE /* AppDelegate.swift */,
@@ -305,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				2275FE7F1E76A9C300B357E7 /* FontStore.swift */,
+				22B16A621E801ED20012BAF0 /* Catalog.swift */,
 			);
 			name = FontStore;
 			sourceTree = "<group>";
@@ -312,18 +336,40 @@
 		22B16A251E7BEB850012BAF0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22B16A551E801DC40012BAF0 /* ObjectMapper.framework */,
 				22B16A1E1E7BEB650012BAF0 /* Starscream.framework */,
 				22B16A1F1E7BEB650012BAF0 /* Alamofire.framework */,
 				22B16A341E7BFCD50012BAF0 /* Bond.framework */,
 				22B16A351E7BFCD50012BAF0 /* ReactiveKit.framework */,
 				22B16A361E7BFCD50012BAF0 /* Diff.framework */,
-				22B16A311E7BFCAF0012BAF0 /* Bond.framework.dSYM */,
-				22B16A321E7BFCAF0012BAF0 /* ReactiveKit.framework.dSYM */,
-				22B16A331E7BFCAF0012BAF0 /* Diff.framework.dSYM */,
-				22B16A271E7BEBD40012BAF0 /* Alamofire.framework.dSYM */,
-				22B16A281E7BEBD40012BAF0 /* Starscream.framework.dSYM */,
+				22B16A581E801DEB0012BAF0 /* ObjectMapper.framework.dSYM */,
+				22B16A591E801DEB0012BAF0 /* Bond.framework.dSYM */,
+				22B16A5A1E801DEB0012BAF0 /* ReactiveKit.framework.dSYM */,
+				22B16A5B1E801DEB0012BAF0 /* Diff.framework.dSYM */,
+				22B16A5C1E801DEB0012BAF0 /* Alamofire.framework.dSYM */,
+				22B16A5D1E801DEB0012BAF0 /* Starscream.framework.dSYM */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22B16A3F1E7FEFA10012BAF0 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				22B16A401E7FEFAA0012BAF0 /* Birdsong */,
+			);
+			name = Externals;
+			sourceTree = "<group>";
+		};
+		22B16A401E7FEFAA0012BAF0 /* Birdsong */ = {
+			isa = PBXGroup;
+			children = (
+				22B16A491E8010AB0012BAF0 /* Channel.swift */,
+				22B16A4A1E8010AB0012BAF0 /* Presence.swift */,
+				22B16A4B1E8010AB0012BAF0 /* Push.swift */,
+				22B16A4C1E8010AB0012BAF0 /* Response.swift */,
+				22B16A4D1E8010AB0012BAF0 /* Socket.swift */,
+			);
+			name = Birdsong;
 			sourceTree = "<group>";
 		};
 		22EDFCDC1E72A84E00D221C7 /* Extensions */ = {
@@ -486,7 +532,9 @@
 				22B16A191E7AF2390012BAF0 /* RoundedView.swift in Sources */,
 				2223DE4C1E31177700D7B0FE /* DetachableWindow.swift in Sources */,
 				221E63731E36125700944B1B /* ArrowWindow.swift in Sources */,
+				22B16A521E8010AB0012BAF0 /* Socket.swift in Sources */,
 				2223DE4A1E30FC6C00D7B0FE /* EventMonitor.swift in Sources */,
+				22B16A511E8010AB0012BAF0 /* Response.swift in Sources */,
 				2223DE591E312E4F00D7B0FE /* ListingViewController.swift in Sources */,
 				22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */,
 				2223DE1D1E30F74800D7B0FE /* AppDelegate.swift in Sources */,
@@ -497,11 +545,15 @@
 				2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */,
 				22B16A3E1E7FD7550012BAF0 /* SecureTextFieldCell.swift in Sources */,
 				221E636E1E3237A500944B1B /* StyleKit.swift in Sources */,
+				22B16A501E8010AB0012BAF0 /* Push.swift in Sources */,
+				22B16A631E801ED20012BAF0 /* Catalog.swift in Sources */,
 				2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */,
 				2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */,
 				2275FE821E77002700B357E7 /* FamilyCellView.swift in Sources */,
+				22B16A4E1E8010AB0012BAF0 /* Channel.swift in Sources */,
 				2283BBB51E7734ED0040A34E /* OutlineView.swift in Sources */,
 				22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */,
+				22B16A4F1E8010AB0012BAF0 /* Presence.swift in Sources */,
 				2275FE801E76A9C300B357E7 /* FontStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

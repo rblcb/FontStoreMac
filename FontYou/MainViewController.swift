@@ -73,10 +73,6 @@ class MainViewController: NSViewController {
                 self?.setUpMenu(loggedOn: false)
             }
         }.dispose(in: reactive.bag)
-        
-        // Initialise context menu
-        
-        self.setUpMenu(loggedOn: false)
     }
     
     func setUpMenu(loggedOn: Bool) {

@@ -113,7 +113,7 @@
                             <subviews>
                                 <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciq-tC-t2R">
                                     <rect key="frame" x="8" y="4" width="436" height="22"/>
-                                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="2cc-Z1-QfN" customClass="BorderlessSearchFieldCell" customModule="FontYou" customModuleProvider="target">
+                                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="2cc-Z1-QfN">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -131,7 +131,7 @@
                             </constraints>
                         </customView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-vR-QWn" userLabel="Results Label">
-                            <rect key="frame" x="216.5" y="12" width="48" height="17"/>
+                            <rect key="frame" x="216" y="12" width="48" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="OBq-fR-mVz"/>
                             </constraints>
