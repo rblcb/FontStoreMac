@@ -112,6 +112,15 @@ class FontStore {
         socket?.disconnect()
         socket = nil
         self.authDetails.value = nil
+        
+        for (_, item) in catalog?.fonts ?? [:] {
+            if let fontUrl = item.installedUrl {
+                FontUtility.deactivateFontFile(fontUrl, with: .process)
+                FontUtility.deactivateFontFile(fontUrl, with: .user)
+            }
+        }
+        
+        catalog = nil
     }
     
     func connectWebSocket() {
