@@ -167,6 +167,7 @@ class FontStore {
     
     func downloadFont(item: CatalogItem) {
         guard let downloadUrl = item.downloadUrl else { return }
+        guard item.installedUrl == nil else { return }
         
         downloadQueue.addOperation {
             
@@ -206,7 +207,6 @@ class FontStore {
                 downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
                 downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
                 downloadItem.installedUrl = fontUrl
-                downloadItem.downloadUrl = nil
                 downloadItem.fontDescriptor = desc
                 
                 // Add the item to the catalog synchronously so that multiple download queues don't try to manipulate

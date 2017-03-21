@@ -12,6 +12,20 @@ import Cocoa
 import ObjectMapper
 import Alamofire
 
+let transformURLIfExists = TransformOf<URL, Any?>(
+    fromJSON: { (value: Any?) -> URL? in
+        guard let urlString = value as? String else { return nil }
+        guard let url = URL(string: urlString) else { return nil }
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
+},
+    toJSON: { (value: URL?) -> String? in
+        if let URL = value {
+            return URL.absoluteString
+        }
+        return nil
+})
+
 struct CatalogItem: Mappable {
     
     var uid: String
@@ -51,7 +65,7 @@ struct CatalogItem: Mappable {
         slant <- map["slant"]
         installed <- map["installed"]
         downloadUrl <- (map["downloadUrl"], URLTransform(shouldEncodeURLString: false))
-        installedUrl <- (map["installedUrl"], URLTransform(shouldEncodeURLString: false))
+        installedUrl <- (map["installedUrl"], transformURLIfExists)
     }
 }
 
