@@ -58,7 +58,6 @@
 		22B16A601E801DEB0012BAF0 /* ReactiveKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A5A1E801DEB0012BAF0 /* ReactiveKit.framework.dSYM */; };
 		22B16A611E801DEB0012BAF0 /* Diff.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B16A5B1E801DEB0012BAF0 /* Diff.framework.dSYM */; };
 		22B16A631E801ED20012BAF0 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A621E801ED20012BAF0 /* Catalog.swift */; };
-		22B16A651E80739A0012BAF0 /* MaxConcurrentTasksQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B16A641E80739A0012BAF0 /* MaxConcurrentTasksQueue.swift */; };
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
@@ -169,7 +168,6 @@
 		22B16A5C1E801DEB0012BAF0 /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = ../Carthage/Build/Mac/Alamofire.framework.dSYM; sourceTree = "<group>"; };
 		22B16A5D1E801DEB0012BAF0 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = ../Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
 		22B16A621E801ED20012BAF0 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
-		22B16A641E80739A0012BAF0 /* MaxConcurrentTasksQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxConcurrentTasksQueue.swift; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 			children = (
 				2275FE7F1E76A9C300B357E7 /* FontStore.swift */,
 				22B16A621E801ED20012BAF0 /* Catalog.swift */,
-				22B16A641E80739A0012BAF0 /* MaxConcurrentTasksQueue.swift */,
 			);
 			name = FontStore;
 			sourceTree = "<group>";
@@ -558,7 +555,6 @@
 				22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */,
 				22B16A4F1E8010AB0012BAF0 /* Presence.swift in Sources */,
 				2275FE801E76A9C300B357E7 /* FontStore.swift in Sources */,
-				22B16A651E80739A0012BAF0 /* MaxConcurrentTasksQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
