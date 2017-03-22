@@ -11,7 +11,6 @@
 @interface FontUtility : NSObject
 
 /*!
-    @function activateFontFile
     @abstract Activate a font from a file on the file system.
  
     @param  fileUrl
@@ -25,7 +24,6 @@
 +(BOOL) activateFontFile:(NSURL*)fileUrl withScope:(CTFontManagerScope)scope;
 
 /*!
-    @function deactivateFontFile
     @abstract Deactivate a font from a file on the file system.
  
     @param  fileUrl
@@ -39,7 +37,6 @@
 +(BOOL) deactivateFontFile:(NSURL*)fileUrl withScope:(CTFontManagerScope)scope;
 
 /*!
-    @function isFontActive
     @abstract Test if a font is active on the system.
 
     @param  fileUrl

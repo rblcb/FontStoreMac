@@ -222,7 +222,7 @@ class FontStore {
                 guard let descriptors = CTFontManagerCreateFontDescriptorsFromURL(fontUrl as CFURL) as? [NSFontDescriptor] else { return }
                 let desc = descriptors.first!
                 
-                var downloadItem = item
+                let downloadItem = item
                 let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
                 downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
                 downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
@@ -282,7 +282,7 @@ class FontStore {
     }
     
     func installFont(uid: String, installed: Bool) {
-        guard var item = catalog.value?.fonts[uid] else { return }
+        guard let item = catalog.value?.fonts[uid] else { return }
         
         if (item.installedUrl != nil) {
             if installed {
