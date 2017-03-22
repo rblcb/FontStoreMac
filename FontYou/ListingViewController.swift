@@ -31,9 +31,10 @@ class ListingViewController: NSViewController {
     
     private let appFont = NSFont(name: "Litmus-Regular", size: 12)
     private var searchViewConstraint: NSLayoutConstraint? = nil
+    
+    fileprivate var tree: [String:[CatalogItem]] = [:]
     fileprivate var fontFamilies: [String] = []
     fileprivate var filteredfontFamilies: [String] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,17 +77,7 @@ class ListingViewController: NSViewController {
         resultsLabel.stringValue = ""
         searchField.action = #selector(doSearch)
         
-        // Watch for for store changes
-        
-        NotificationCenter.default.addObserver(forName: Notification.Name.init("FontStoreUpdated"), object: nil, queue: nil) { [weak self] _ in
-            self?.fontFamilies = FontStore.sharedInstance.catalog?.tree.keys.sorted() ?? []
-            self?.updateFontList()
-        }
-        
-        // Prepare initial listing
-        fontFamilies = FontStore.sharedInstance.catalog?.tree.keys.sorted() ?? []
-        filteredfontFamilies = fontFamilies
-        updateFontList()
+        bindViewModel()
     }
     
     var displayed: DisplayedInfo = .installed {
@@ -118,7 +109,6 @@ class ListingViewController: NSViewController {
         }
     }
     
-    
     @IBAction func displayInstalled(_ sender: Any) {
         displayed = .installed
     }
@@ -135,6 +125,95 @@ class ListingViewController: NSViewController {
         displayed = .search
     }
 
+    @IBAction func installedFamilyPressed(_ sender: Any) {
+        let row = outlineView.row(for: sender as! NSView)
+        let item = outlineView.item(atRow: row)
+        
+        if let familyName = item as? String,
+            let family = tree[familyName] {
+            let allInstalled = isFamilyInstalled(familyName: familyName)
+            for item in family {
+                FontStore.sharedInstance.installFont(uid: item.uid, installed: !allInstalled)
+            }
+        }
+    }
+    
+    @IBAction func installFontPressed(_ sender: Any) {
+        let row = outlineView.row(for: sender as! NSView)
+        let item = outlineView.item(atRow: row)
+        
+        if let catalogItem = item as? CatalogItem {
+            FontStore.sharedInstance.toggleInstall(uid: catalogItem.uid)
+        }
+    }
+    
+    func isFamilyInstalled(familyName: String) -> Bool {
+        if let family = tree[familyName] {
+            if family.contains(where: { $0.installed == false }) {
+                return false
+            }
+            return true
+        }
+        
+        return false
+    }
+    
+    func bindViewModel() {
+        
+        // Watch for for store changes
+        
+        FontStore.sharedInstance.catalog.observeNext { catalog in
+            if let catalog = catalog {
+                
+                func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                    for index in indexes {
+                        let (_, item) = catalog.fonts[index]
+                        if item.installedUrl != nil {
+                            self.updateTree()
+                            return
+                        }
+                    }
+                }
+                
+                func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                    let rows = NSMutableIndexSet()
+                    for index in indexes {
+                        let (uid, item) = catalog.fonts[index]
+                        if let siblings = self.tree[item.family],
+                            let i = siblings.index(where: { $0.uid == uid }) {
+                            self.tree[item.family]![i] = item
+                            let row = self.outlineView.row(forItem: item)
+                            if row != -1 {
+                                rows.add(row)
+                            }
+                        }
+                    }
+                    
+                    self.outlineView.reloadData(forRowIndexes: rows as IndexSet, columnIndexes: IndexSet(integer: 0))
+                }
+                
+                catalog.fonts.observeNext { update in
+                    switch update.kind {
+                    case .reset:
+                        self.updateTree()
+                    case .inserts(let indexes):
+                        updateTreeIfNecessary(forIndexes: indexes)
+                    case .deletes(let indexes):
+                        updateTreeIfNecessary(forIndexes: indexes)
+                    case .updates(let indexes):
+                        updateItemsIfNecessary(forIndexes: indexes)
+                    default:
+                        break
+                    }
+                    }.dispose(in: self.reactive.bag)
+                }
+            }.dispose(in: self.reactive.bag)
+        
+        // Prepare initial listing
+        
+        updateFontList()
+    }
+    
     func setButtonStates() {
         installedButton.state = displayed == .installed ? NSOnState : NSOffState
         newButton.state = displayed == .new ? NSOnState : NSOffState
@@ -194,13 +273,54 @@ class ListingViewController: NSViewController {
             resultsLabel.attributedStringValue = str
         }
     }
+
+    // Creates a tree of available fonts based on family name
+    
+    func updateTree() {
+        if let fonts = FontStore.sharedInstance.catalog.value?.fonts {
+        
+            var tree: [String:[CatalogItem]] = [:]
+            for (_, item) in fonts {
+                if item.installedUrl != nil {
+                    let family = item.family
+                    var siblings = tree[family] ?? []
+                    siblings.append(item)
+                    tree[family] = siblings
+                }
+            }
+            
+            for (family, siblings) in tree {
+                tree[family] = siblings.sorted { $0.weight! > $1.weight! }
+            }
+            
+            self.tree = tree
+            self.fontFamilies = tree.keys.sorted()
+            updateFontList()
+        }
+    }
+
+    // The primary font is that one that's displayed as the family name. We choose the least slanted that as near as
+    // possible to zero in weight
+    
+    func primaryFont(forFamily family:String) -> CatalogItem? {
+        if let family = tree[family] {
+            let minSlant = family.reduce(family.first?.slant ?? 0) { return $0 < $1.slant! ? $0 : $1.slant! }
+            let leastSlanted = family.filter { return $0.slant! == minSlant }
+            let minWeight = leastSlanted.reduce(family.first?.weight! ?? 0) { return abs($0) < abs($1.weight!) ? $0 : $1.weight! }
+            let mostRegular = leastSlanted.first { return $0.weight! == minWeight }
+            
+            return mostRegular
+        }
+        
+        return nil
+    }
 }
 
 extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let family = item as? String {
-            return FontStore.sharedInstance.catalog?.tree[family]!.count ?? 0
+            return tree[family]!.count
         }
         
         return filteredfontFamilies.count
@@ -208,7 +328,7 @@ extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if let family = item as? String {
-            return FontStore.sharedInstance.catalog!.tree[family]![index]
+            return tree[family]![index]
         }
         
         return filteredfontFamilies[index]
@@ -216,9 +336,8 @@ extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let family = item as? String {
-            return FontStore.sharedInstance.catalog!.tree[family]!.count > 0
-        }
-        
+            return tree[family]!.count > 0
+        }        
         return false
     }
 }
@@ -239,19 +358,30 @@ extension ListingViewController: NSOutlineViewDelegate {
                 textField.font = NSFont.init(descriptor: font.fontDescriptor!, size: 16)
             }
             
+            view?.installButton.title = font.installed ? "Uninstall" : "Install"
+            view?.installButton.rectangleColor = font.installed ? StyleKit.textGrey : StyleKit.primary
+            view?.installButton.highlightColor = font.installed ? StyleKit.primary : StyleKit.textGrey
+            view?.installButton.textColor = NSColor.white
+            
             return view
         }
         else if let family = item as? String {
             let view = outlineView.make(withIdentifier: "Family", owner: self) as? FamilyCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = family
-                textField.font =  NSFont.init(descriptor: FontStore.sharedInstance.catalog!.primaryFont(forFamily: family)!.fontDescriptor!, size: 18)
+                textField.font =  NSFont.init(descriptor: primaryFont(forFamily: family)!.fontDescriptor!, size: 18)
             }
             
             if let textField = view?.numFontsLabel {
-                let numFonts = FontStore.sharedInstance.catalog!.tree[family]!.count
+                let numFonts = tree[family]!.count
                 textField.stringValue = numFonts > 1 ? "\(numFonts) Fonts" : "1 Font"
             }
+            
+            let installed = isFamilyInstalled(familyName: family)
+            view?.installButton.title = installed ? "Uninstall" : "Install"
+            view?.installButton.rectangleColor = installed ? StyleKit.textGrey : StyleKit.primary
+            view?.installButton.highlightColor = installed ? StyleKit.primary : StyleKit.textGrey
+            view?.installButton.textColor = NSColor.white
             
             return view
         }

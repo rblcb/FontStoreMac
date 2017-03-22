@@ -176,8 +176,65 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="Family" id="vGQ-xw-FZ9" customClass="FamilyCellView" customModule="FontYou" customModuleProvider="target">
+                                            <tableCellView identifier="Font" id="XGE-ea-f9a" userLabel="Font Cell View" customClass="FontCellView" customModule="FontYou" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ssg-mI-UiI">
+                                                        <rect key="frame" x="8" y="5" width="464" height="30"/>
+                                                        <beginningViews>
+                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-YI-htK">
+                                                                <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
+                                                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" title="Name" id="rD2-D7-lGQ">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
+                                                        </beginningViews>
+                                                        <endViews>
+                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ra-vw-IDG" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
+                                                                <rect key="frame" x="418" y="2.5" width="46" height="25"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="cVp-en-CVd"/>
+                                                                    <constraint firstAttribute="width" constant="80" id="lg7-sn-lMh"/>
+                                                                </constraints>
+                                                                <buttonCell key="cell" type="square" title="Install" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oV-W6-DaH" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="installFontPressed:" target="-2" id="g5S-66-Lue"/>
+                                                                </connections>
+                                                            </button>
+                                                        </endViews>
+                                                        <visibilityPriorities>
+                                                            <real value="460"/>
+                                                            <integer value="1000"/>
+                                                        </visibilityPriorities>
+                                                        <customSpacing>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                        </customSpacing>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="ssg-mI-UiI" firstAttribute="centerY" secondItem="XGE-ea-f9a" secondAttribute="centerY" id="2BG-LX-K8z"/>
+                                                    <constraint firstItem="ssg-mI-UiI" firstAttribute="leading" secondItem="XGE-ea-f9a" secondAttribute="leading" constant="8" id="sNs-0O-EIa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ssg-mI-UiI" secondAttribute="trailing" constant="8" id="wz2-Eo-u2c"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="installButton" destination="7Ra-vw-IDG" id="2PH-OU-XAf"/>
+                                                    <outlet property="nameLabel" destination="YRH-YI-htK" id="nNz-53-LbG"/>
+                                                </connections>
+                                            </tableCellView>
+                                            <tableCellView identifier="Family" id="vGQ-xw-FZ9" customClass="FamilyCellView" customModule="FontYou" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="40" width="480" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-es-fsS">
@@ -216,6 +273,9 @@
                                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="installedFamilyPressed:" target="-2" id="9Cu-kh-BRm"/>
+                                                                </connections>
                                                             </button>
                                                         </endViews>
                                                         <visibilityPriorities>
@@ -239,60 +299,6 @@
                                                     <outlet property="installButton" destination="A0d-61-VmP" id="VWJ-Qo-f6j"/>
                                                     <outlet property="nameLabel" destination="yE2-v7-CnL" id="I6L-fp-BfD"/>
                                                     <outlet property="numFontsLabel" destination="Qag-cM-Ait" id="Rxr-xr-HIB"/>
-                                                </connections>
-                                            </tableCellView>
-                                            <tableCellView identifier="Font" id="XGE-ea-f9a" userLabel="Font Cell View" customClass="FontCellView" customModule="FontYou" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="40" width="480" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ssg-mI-UiI">
-                                                        <rect key="frame" x="8" y="5" width="464" height="30"/>
-                                                        <beginningViews>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-YI-htK">
-                                                                <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
-                                                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" title="Name" id="rD2-D7-lGQ">
-                                                                    <font key="font" metaFont="system"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                        </beginningViews>
-                                                        <endViews>
-                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ra-vw-IDG" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
-                                                                <rect key="frame" x="418" y="2.5" width="46" height="25"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="cVp-en-CVd"/>
-                                                                    <constraint firstAttribute="width" constant="80" id="lg7-sn-lMh"/>
-                                                                </constraints>
-                                                                <buttonCell key="cell" type="square" title="Install" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oV-W6-DaH" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
-                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                    <font key="font" metaFont="system"/>
-                                                                </buttonCell>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </button>
-                                                        </endViews>
-                                                        <visibilityPriorities>
-                                                            <real value="460"/>
-                                                            <integer value="1000"/>
-                                                        </visibilityPriorities>
-                                                        <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                        </customSpacing>
-                                                    </stackView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="ssg-mI-UiI" firstAttribute="centerY" secondItem="XGE-ea-f9a" secondAttribute="centerY" id="2BG-LX-K8z"/>
-                                                    <constraint firstItem="ssg-mI-UiI" firstAttribute="leading" secondItem="XGE-ea-f9a" secondAttribute="leading" constant="8" id="sNs-0O-EIa"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ssg-mI-UiI" secondAttribute="trailing" constant="8" id="wz2-Eo-u2c"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="installButton" destination="7Ra-vw-IDG" id="2PH-OU-XAf"/>
-                                                    <outlet property="nameLabel" destination="YRH-YI-htK" id="nNz-53-LbG"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>

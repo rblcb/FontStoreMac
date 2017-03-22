@@ -31,7 +31,7 @@ class FontStore {
     static let sharedInstance: FontStore = FontStore()
     
     var authDetails = Property<AuthDetails?>(nil)
-    var catalog: Catalog? = nil
+    var catalog = Property<Catalog?>(nil)
     let downloadQueue = OperationQueue()
     
     fileprivate var socket: Socket! = nil
@@ -84,9 +84,9 @@ class FontStore {
                         // Try to load the saved catalog
                         
                         if let savedCatalog = Catalog.loadCatalog(userId: uid) {
-                            self.catalog = savedCatalog
+                            self.catalog.value = savedCatalog
                         } else {
-                            self.catalog = Catalog(userId: uid)
+                            self.catalog.value = Catalog(userId: uid)
                             self.installBuiltInFonts()
                         }
                         
@@ -113,14 +113,18 @@ class FontStore {
         socket = nil
         self.authDetails.value = nil
         
-        for (_, item) in catalog?.fonts ?? [:] {
-            if let fontUrl = item.installedUrl {
-                FontUtility.deactivateFontFile(fontUrl, with: .process)
-                FontUtility.deactivateFontFile(fontUrl, with: .user)
+        downloadQueue.cancelAllOperations()
+        
+        if let catalog = catalog.value {
+            for (_, item) in catalog.fonts {
+                if let fontUrl = item.installedUrl {
+                    FontUtility.deactivateFontFile(fontUrl, with: .process)
+                    FontUtility.deactivateFontFile(fontUrl, with: .user)
+                }
             }
         }
         
-        catalog = nil
+        catalog.value = nil
     }
     
     func connectWebSocket() {
@@ -140,11 +144,11 @@ class FontStore {
                     // include the fonts that we've already been told about, but that won't matter since they'll still be store in
                     // the catalog awaiting download
 
-                    let item = self.catalog!.addFont(uid: data["uid"]!,
-                                                     date: Int(data["created_at"]!)!,
-                                                     familyName: data["font_family"]!,
-                                                     style: data["font_style"]!,
-                                                     downloadUrl: URL(string: data["download_url"]!)!)
+                    let item = self.catalog.value!.addFont(uid: data["uid"]!,
+                                                           date: Int(data["created_at"]!)!,
+                                                           familyName: data["font_family"]!,
+                                                           style: data["font_style"]!,
+                                                           downloadUrl: URL(string: data["download_url"]!)!)
                     
                     self.downloadFont(item: item)
                 }
@@ -155,10 +159,16 @@ class FontStore {
                 userChannel.join()
                 userChannel.send("update:request", payload: [:])
             }
-                        
+            
+            userChannel.on("font:activation") { message in
+                if let data = message.payload as? [String:String] {
+                    self.installFont(uid: data["uid"]!, installed: true)
+                }
+            }
+            
             catalogChannel.join()
-            catalogChannel.send("update:request", payload: [:])
-        
+            let payload: Socket.Payload = self.catalog.value?.lastUpdate != nil ? ["last_update_date": self.catalog.value!.lastUpdate!] : [:]
+            catalogChannel.send("update:request", payload: payload)
         }
         
         socket.connect()
@@ -168,9 +178,10 @@ class FontStore {
         
         // Find all the fonts which haven't yet been downloaded
         
-        let fontsToDownload = catalog!.fonts.values.filter { $0.installedUrl == nil }
-        for item in fontsToDownload {
-            self.downloadFont(item: item)
+        for (_, item) in catalog.value!.fonts {
+            if item.installedUrl == nil {
+                self.downloadFont(item: item)
+            }
         }
     }
     
@@ -218,17 +229,13 @@ class FontStore {
                 downloadItem.installedUrl = fontUrl
                 downloadItem.fontDescriptor = desc
                 
-                // Add the item to the catalog synchronously so that multiple download queues don't try to manipulate
+                // If this item is d
+                
+                // Update the catalog synchronously so that multiple download queues don't try to manipulate
                 // it at the same time.
                 
-                DispatchQueue.main.sync {
-                    
-                    self.catalog?.fonts[item.uid] = downloadItem
-                    
-                    // Save the db
-                    
-                    self.catalog?.saveCatalog()
-                    self.catalog?.updateTree()
+                DispatchQueue.main.sync {                    
+                    self.catalog.value?.updateItem(item: downloadItem)
                 }
             }
         }
@@ -236,7 +243,7 @@ class FontStore {
     
     func installBuiltInFonts() {
         
-        guard var catalog = catalog,
+        guard var catalog = catalog.value,
             let fontUrl = Bundle.main.url(forResource: "Fonts", withExtension: nil),
             let enumerator = FileManager.default.enumerator(at: fontUrl, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles], errorHandler: nil)
             else {
@@ -270,9 +277,27 @@ class FontStore {
         }
     
         catalog.saveCatalog()
-        catalog.updateTree()
         
-        self.catalog = catalog
+        self.catalog.value = catalog
+    }
+    
+    func installFont(uid: String, installed: Bool) {
+        guard var item = catalog.value?.fonts[uid] else { return }
+        
+        if (item.installedUrl != nil) {
+            if installed {
+                FontUtility.activateFontFile(item.installedUrl, with: .user)
+            } else {
+                FontUtility.deactivateFontFile(item.installedUrl, with: .user)
+            }
+        }
+        
+        item.installed = installed
+        catalog.value!.updateItem(item: item)
     }
 
+    func toggleInstall(uid: String) {
+        guard let item = catalog.value?.fonts[uid] else { return }
+        installFont(uid: uid, installed: !item.installed)
+    }
 }

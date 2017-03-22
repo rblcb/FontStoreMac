@@ -65,12 +65,19 @@ class MainViewController: NSViewController {
         FontStore.sharedInstance.authDetails.observeNext { [weak self] authDetails in
             if let authDetails = authDetails {
                 self?.usernameLabel.stringValue = "\(authDetails.firstName) \(authDetails.lastName)"
-                self?.currentViewController = self?.listingViewController
                 self?.setUpMenu(loggedOn: true)
             } else {
                 self?.usernameLabel.stringValue = "Welcome"
                 self?.currentViewController = self?.logonViewController
                 self?.setUpMenu(loggedOn: false)
+            }
+        }.dispose(in: reactive.bag)
+        
+        // Observer for catalog changes
+        
+        FontStore.sharedInstance.catalog.observeNext { [weak self] catalog in
+            if catalog != nil {
+                self?.currentViewController = self?.listingViewController
             }
         }.dispose(in: reactive.bag)
     }

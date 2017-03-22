@@ -11,6 +11,8 @@ import CoreText
 import Cocoa
 import ObjectMapper
 import Alamofire
+import ReactiveKit
+import Bond
 
 let transformURLIfExists = TransformOf<URL, Any?>(
     fromJSON: { (value: Any?) -> URL? in
@@ -26,7 +28,10 @@ let transformURLIfExists = TransformOf<URL, Any?>(
         return nil
 })
 
-struct CatalogItem: Mappable {
+// This should really be struct, not a class, but since we're directly displaying these items
+// in the NSOutlineView then we have no choice, otherwise rowForItem fails to work.
+
+class CatalogItem: Mappable {
     
     var uid: String
     var date: Int
@@ -48,7 +53,7 @@ struct CatalogItem: Mappable {
         self.installed = false
     }
 
-    init?(map: Map) {
+    required init?(map: Map) {
         uid = ""
         date = 0
         family = ""
@@ -56,7 +61,7 @@ struct CatalogItem: Mappable {
         installed = false
     }
 
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         uid <- map["uid"]
         date <- map["date"]
         family <- map["family"]
@@ -72,8 +77,7 @@ struct CatalogItem: Mappable {
 struct Catalog: Mappable {
     
     var userId: String
-    var fonts: [String:CatalogItem] = [:]
-    var tree: [String:[CatalogItem]] = [:]
+    var fonts = MutableObservableDictionary<String, CatalogItem>([:])
     var lastUpdate: Int?
     
     init?(map: Map) {
@@ -132,37 +136,13 @@ struct Catalog: Mappable {
         
         return item!
     }
-
-    // Creates a tree of available fonts based on family name
     
-    mutating func updateTree() {
-        let allFamilies = fonts.values.filter { $0.installedUrl != nil }.map { $0.family }
-        let families = Set<String>(allFamilies)
+    mutating func updateItem(item: CatalogItem) {
         
-        var tree: [String:[CatalogItem]] = [:]
-        for family in families {
-            tree[family] = fonts.values.filter { $0.family == family && $0.installedUrl != nil }.sorted { $0.weight! > $1.weight! }
-        }
+        // Update the catalog
         
-        self.tree = tree
-        
-        NotificationCenter.default.post(name: Notification.Name.init("FontStoreUpdated"), object: nil)
-    }
-    
-    // The primary font is that one that's displayed as the family name. We choose the least slanted that as near as
-    // possible to zero in weight
-    
-    func primaryFont(forFamily family:String) -> CatalogItem? {
-        if let family = tree[family] {
-            let minSlant = family.reduce(family.first?.slant ?? 0) { return $0 < $1.slant! ? $0 : $1.slant! }
-            let leastSlanted = family.filter { return $0.slant! == minSlant }
-            let minWeight = leastSlanted.reduce(family.first?.weight! ?? 0) { return abs($0) < abs($1.weight!) ? $0 : $1.weight! }
-            let mostRegular = leastSlanted.first { return $0.weight! == minWeight }
-            
-            return mostRegular
-        }
-        
-        return nil
+        fonts[item.uid] = item
+        saveCatalog()
     }
     
     func saveCatalog() {
@@ -174,7 +154,7 @@ struct Catalog: Mappable {
         let fileUrl = Catalog.catalogUrl(userId: userId)
         do {
             let json = try String(contentsOf: fileUrl, encoding: String.Encoding.utf8)
-            if var catalog = Catalog(JSONString: json) {
+            if let catalog = Catalog(JSONString: json) {
                 
                 // Try to activate each for for use in the application
                 
@@ -188,7 +168,6 @@ struct Catalog: Mappable {
                     }
                 }
                 
-                catalog.updateTree()
                 return catalog
             
             } else {

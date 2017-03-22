@@ -12,8 +12,6 @@ import ReactiveKit
 
 class RoundedButtonCell: NSButtonCell {
 
-    var curColor = StyleKit.textBlack
-    
     override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
         if let roundedButton = controlView as? RoundedButton {
             let color = roundedButton.isHighlighted ? roundedButton.highlightColor : roundedButton.rectangleColor
