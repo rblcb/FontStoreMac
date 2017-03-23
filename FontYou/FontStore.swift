@@ -116,10 +116,11 @@ class FontStore {
         downloadQueue.cancelAllOperations()
         
         if let catalog = catalog.value {
-            for (_, item) in catalog.fonts {
-                if let fontUrl = item.installedUrl {
-                    FontUtility.deactivateFontFile(fontUrl, with: .process)
-                    FontUtility.deactivateFontFile(fontUrl, with: .user)
+            DispatchQueue.global().async {
+                for (_, item) in catalog.fonts {
+                    if let fontUrl = item.installedUrl, item.installed {
+                        FontUtility.deactivateFontFile(fontUrl, with: .user)
+                    }
                 }
             }
         }
