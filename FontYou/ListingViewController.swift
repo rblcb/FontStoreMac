@@ -94,11 +94,11 @@ class ListingViewController: NSViewController {
             }
 
             setButtonStates()
+            updateFontList()
             
             // Animate the opening/closing of the search view
             
             if oldValue == .search || displayed == .search {
-                updateFontList()
                 NSAnimationContext.runAnimationGroup({ context in
                     context.allowsImplicitAnimation = true
                     context.duration = 0.2
@@ -156,6 +156,17 @@ class ListingViewController: NSViewController {
         }
         
         return false
+    }
+    
+    func isFamilyUninstalled(familyName: String) -> Bool {
+        if let family = tree[familyName] {
+            if family.contains(where: { $0.installed == true }) {
+                return false
+            }
+            return true
+        }
+        
+        return true
     }
     
     func bindViewModel() {
@@ -237,12 +248,22 @@ class ListingViewController: NSViewController {
     }
     
     func updateFontList() {
-        if displayed == .search && searchField.stringValue.characters.count > 0 {
-            filteredfontFamilies = fontFamilies.filter { $0.localizedCaseInsensitiveContains(searchField.stringValue) }
-        } else {
-            filteredfontFamilies = fontFamilies
-        }
         
+        switch displayed {
+        case .all:
+            filteredfontFamilies = fontFamilies
+        case .installed:
+            filteredfontFamilies = fontFamilies.filter { !isFamilyUninstalled(familyName: $0) }
+        case .new:
+            filteredfontFamilies = fontFamilies
+        case .search:
+            if searchField.stringValue.characters.count > 0 {
+                filteredfontFamilies = fontFamilies.filter { $0.localizedCaseInsensitiveContains(searchField.stringValue) }
+            } else {
+                filteredfontFamilies = fontFamilies
+            }
+        }
+
         outlineView.reloadData()
     }
     
@@ -320,13 +341,27 @@ extension ListingViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let family = item as? String {
-            return tree[family]!.count
+            switch displayed {
+            case .installed:
+                return tree[family]!.filter { $0.installed == true }.count
+            default:
+                return tree[family]!.count
+            }
         }
         
         return filteredfontFamilies.count
     }
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if let family = item as? String {
+            switch displayed {
+            case .installed:
+                return tree[family]!.filter { $0.installed == true }[index]
+            default:
+                return tree[family]![index]
+            }
+        }
+        
         if let family = item as? String {
             return tree[family]![index]
         }
@@ -337,7 +372,8 @@ extension ListingViewController: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let family = item as? String {
             return tree[family]!.count > 0
-        }        
+        }
+        
         return false
     }
 }
