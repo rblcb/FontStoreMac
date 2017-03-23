@@ -176,41 +176,41 @@ class ListingViewController: NSViewController {
         FontStore.sharedInstance.catalog.observeNext { catalog in
             if let catalog = catalog {
                 
-                func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
-                    for index in indexes {
-                        let (_, item) = catalog.fonts[index]
-                        if item.installedUrl != nil {
-                            self.updateTree()
-                            return
-                        }
-                    }
-                }
-                
-                func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
-                    let rows = NSMutableIndexSet()
-                    for index in indexes {
-                        let (uid, item) = catalog.fonts[index]
-                        if let siblings = self.tree[item.family],
-                            let i = siblings.index(where: { $0.uid == uid }) {
-                            self.tree[item.family]![i] = item
-                            let row = self.outlineView.row(forItem: item)
-                            if row != -1 {
-                                rows.add(row)
+                catalog.fonts.observeOn(.main).observeNext { [weak self] update in
+
+                    func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                        for index in indexes {
+                            let (_, item) = catalog.fonts[index]
+                            if item.installedUrl != nil {
+                                self?.updateTree()
+                                return
                             }
                         }
                     }
                     
-                    self.outlineView.reloadData(forRowIndexes: rows as IndexSet, columnIndexes: IndexSet(integer: 0))
-                }
-                
-                catalog.fonts.observeNext { update in
+                    func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                        let rows = NSMutableIndexSet()
+                        for index in indexes {
+                            let (uid, item) = catalog.fonts[index]
+                            if let siblings = self?.tree[item.family],
+                                let i = siblings.index(where: { $0.uid == uid }) {
+                                self?.tree[item.family]![i] = item
+                                if let row = self?.outlineView.row(forItem: item), row != -1 {
+                                    rows.add(row)
+                                }
+                            }
+                        }
+                        
+                        self?.outlineView.reloadData(forRowIndexes: rows as IndexSet, columnIndexes: IndexSet(integer: 0))
+                    }
+                    
                     switch update.kind {
                     case .reset:
-                        self.updateTree()
+                        self?.updateTree()
                     case .inserts(let indexes):
                         updateTreeIfNecessary(forIndexes: indexes)
                     case .deletes:
-                        self.updateTree()
+                        self?.updateTree()
                     case .updates(let indexes):
                         updateItemsIfNecessary(forIndexes: indexes)
                     default:
