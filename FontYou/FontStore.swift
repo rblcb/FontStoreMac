@@ -90,8 +90,6 @@ class FontStore {
                             self.installBuiltInFonts()
                         }
                         
-                        NotificationCenter.default.post(name: Notification.Name.init("FontStoreUpdated"), object: nil)
-                        
                         // Start downloading fonts that we didn't finish downloading last time
                         
                         self.downloadFonts()
@@ -115,6 +113,8 @@ class FontStore {
         
         downloadQueue.cancelAllOperations()
         
+        // Disactivate fonts
+        
         if let catalog = catalog.value {
             DispatchQueue.global().async {
                 for (_, item) in catalog.fonts {
@@ -137,12 +137,14 @@ class FontStore {
             let catalogChannel = self.socket.channel("catalog")
             let userChannel = self.socket.channel("users:\(self.authDetails.value!.uid)")
             
+            // Catalog channel events
+            
             catalogChannel.on("font:description") { message in
                 if let data = message.payload as? [String:String] {
                     
                     // Note that we add items *before* they are downloaded. This allows to save the catalog as the
                     // downloads proceed. In the event of en error or disconnection, the next request to the server won't
-                    // include the fonts that we've already been told about, but that won't matter since they'll still be store in
+                    // include the fonts that we've already been told about, but that won't matter since they'll still be stored in
                     // the catalog awaiting download
 
                     let item = self.catalog.value!.addFont(uid: data["uid"]!,
@@ -155,15 +157,39 @@ class FontStore {
                 }
             }
             
+            catalogChannel.on("font:deletion") { message in
+                
+                if let data = message.payload as? [String:String],
+                    let uid = data["uid"],
+                    let item = self.catalog.value?.fonts[uid] {
+                    
+                    if let url = item.installedUrl {
+                        try? FileManager.default.removeItem(at: url)
+                    }
+                    
+                    self.catalog.value?.remove(uid: uid)
+                }
+            }
+            
             catalogChannel.on("update:complete") { _ in
+                
+                // Once the font list is up-to-date we join the user channel
                 
                 userChannel.join()
                 userChannel.send("update:request", payload: [:])
             }
             
+            // User channel events
+            
             userChannel.on("font:activation") { message in
                 if let data = message.payload as? [String:String] {
                     self.installFont(uid: data["uid"]!, installed: true)
+                }
+            }
+            
+            userChannel.on("font:deactivation") { message in
+                if let data = message.payload as? [String:String] {
+                    self.installFont(uid: data["uid"]!, installed: false)
                 }
             }
             
@@ -236,7 +262,7 @@ class FontStore {
                 // it at the same time.
                 
                 DispatchQueue.main.sync {                    
-                    self.catalog.value?.updateItem(item: downloadItem)
+                    self.catalog.value?.update(item: downloadItem)
                 }
             }
         }
@@ -294,7 +320,7 @@ class FontStore {
         }
         
         item.installed = installed
-        catalog.value!.updateItem(item: item)
+        catalog.value!.update(item: item)
     }
 
     func toggleInstall(uid: String) {

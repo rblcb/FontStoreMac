@@ -137,11 +137,19 @@ struct Catalog: Mappable {
         return item!
     }
     
-    mutating func updateItem(item: CatalogItem) {
+    mutating func update(item: CatalogItem) {
         
         // Update the catalog
         
         fonts[item.uid] = item
+        saveCatalog()
+    }
+    
+    mutating func remove(uid: String) {
+        
+        // Update the catalog
+        
+        fonts.removeValue(forKey: uid)
         saveCatalog()
     }
     

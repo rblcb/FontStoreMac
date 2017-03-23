@@ -209,8 +209,8 @@ class ListingViewController: NSViewController {
                         self.updateTree()
                     case .inserts(let indexes):
                         updateTreeIfNecessary(forIndexes: indexes)
-                    case .deletes(let indexes):
-                        updateTreeIfNecessary(forIndexes: indexes)
+                    case .deletes:
+                        self.updateTree()
                     case .updates(let indexes):
                         updateItemsIfNecessary(forIndexes: indexes)
                     default:
