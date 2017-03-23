@@ -19,6 +19,7 @@ class LogonViewController: NSViewController {
     
     @IBOutlet weak var emailField: NSTextField!
     @IBOutlet weak var passwordField: NSTextField!
+    @IBOutlet weak var rememberMeButton: NSButton!
     
     @IBOutlet weak var loginButton: RoundedButton!
     @IBOutlet weak var forgottenButton: NSButton!
@@ -26,6 +27,7 @@ class LogonViewController: NSViewController {
     
     let emailAddress = Observable<String>("")
     let password = Observable<String>("")
+    let rememberMe = Observable<Int>(NSOffState)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,7 @@ class LogonViewController: NSViewController {
     func bindViewModel() {
         emailAddress.bidirectionalBind(to: emailField.reactive.editingString)
         password.bidirectionalBind(to: passwordField.reactive.editingString)
+        rememberMe.bidirectionalBind(to: rememberMeButton.reactive.state)
         
         // Change colour and enabled state of the login button when the user has typed into both fields
         

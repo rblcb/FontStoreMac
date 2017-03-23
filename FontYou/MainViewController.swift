@@ -69,6 +69,11 @@ class MainViewController: NSViewController {
             } else {
                 self?.usernameLabel.stringValue = "Welcome"
                 self?.currentViewController = self?.logonViewController
+                
+                self?.logonViewController.emailAddress.value = ""
+                self?.logonViewController.password.value = ""
+                self?.logonViewController.rememberMe.value = NSOffState
+                
                 self?.setUpMenu(loggedOn: false)
             }
         }.dispose(in: reactive.bag)

@@ -14,6 +14,7 @@
                 <outlet property="loginLabel" destination="qom-tB-fkQ" id="Zb0-GA-scy"/>
                 <outlet property="memberLabel" destination="k64-38-9kl" id="iWe-Iw-fVf"/>
                 <outlet property="passwordField" destination="kwh-IY-2Yh" id="qPb-NB-zbm"/>
+                <outlet property="rememberMeButton" destination="oKR-ME-ZCq" id="htU-tc-MSE"/>
                 <outlet property="rememberMeLabel" destination="5bm-Rc-qb2" id="MOH-4e-e6A"/>
                 <outlet property="seperatorView" destination="KZC-K6-cVD" id="Fhf-CU-I5h"/>
                 <outlet property="signupButton" destination="CWx-ba-omb" id="j3q-IH-TEL"/>
@@ -73,7 +74,7 @@
                                 <constraint firstAttribute="height" constant="21" id="aEt-Je-8TZ"/>
                                 <constraint firstAttribute="width" constant="21" id="xSN-3m-MZu"/>
                             </constraints>
-                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="Checkbox" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="OpQ-bz-Xxp">
+                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="Checkbox" imagePosition="overlaps" alignment="center" alternateImage="CheckboxSelected" imageScaling="proportionallyDown" inset="2" id="OpQ-bz-Xxp">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -173,5 +174,6 @@
     </objects>
     <resources>
         <image name="Checkbox" width="42" height="42"/>
+        <image name="CheckboxSelected" width="42" height="42"/>
     </resources>
 </document>
