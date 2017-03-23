@@ -13,6 +13,7 @@ class MainViewController: NSViewController {
     @IBOutlet weak var headerView: NSView!
     @IBOutlet weak var contentView: NSView!
     @IBOutlet weak var usernameLabel: NSTextField!
+    @IBOutlet weak var contextMenuButton: NSButton!
     @IBOutlet weak var menuButton: NSButton!
     @IBOutlet weak var fontStoreLabel: NSTextField!
     
@@ -65,9 +66,14 @@ class MainViewController: NSViewController {
         FontStore.sharedInstance.authDetails.observeNext { [weak self] authDetails in
             if let authDetails = authDetails {
                 self?.usernameLabel.stringValue = "\(authDetails.firstName) \(authDetails.lastName)"
+                self?.usernameLabel.textColor = NSColor.white
+                self?.contextMenuButton.image = NSImage(named: "MenuIconBlack")
                 self?.setUpMenu(loggedOn: true)
             } else {
                 self?.usernameLabel.stringValue = "Welcome"
+                self?.usernameLabel.textColor = StyleKit.textBlack
+                self?.contextMenuButton.image = NSImage(named: "MenuIconWhite")
+                
                 self?.currentViewController = self?.logonViewController
                 
                 self?.logonViewController.emailAddress.value = ""

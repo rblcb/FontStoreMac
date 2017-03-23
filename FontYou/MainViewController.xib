@@ -11,6 +11,7 @@
                 <outlet property="accountMenuItem" destination="4Mk-Jf-eLp" id="xCS-zr-NZA"/>
                 <outlet property="contentView" destination="wJP-4v-ojp" id="A8V-wE-f0b"/>
                 <outlet property="contextMenu" destination="ohn-ab-2wd" id="R66-i6-n3X"/>
+                <outlet property="contextMenuButton" destination="V7W-H6-W3H" id="UNu-0O-haW"/>
                 <outlet property="fontStoreLabel" destination="Hg0-je-tSY" id="mmJ-7g-IMj"/>
                 <outlet property="headerView" destination="TYV-Gc-6oh" id="NcK-q9-DF1"/>
                 <outlet property="logoutMenuItem" destination="mdo-Lm-D5h" id="xZ1-zD-wqo"/>
