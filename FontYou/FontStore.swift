@@ -11,19 +11,57 @@ import CoreText
 import Cocoa
 import Alamofire
 import ReactiveKit
+import ObjectMapper
 
 let authEndpoint = "http://localhost:4000/api/desktop/session"
 let webSocketEndpoint = "ws://localhost:4000/"
 
-struct AuthDetails {
-    let uid: String
-    let firstName: String
-    let lastName: String
-    let accountUrl: URL?
-    let settingsUrl: URL?
-    let updateUrl: URL?
-    let visitUrl: URL?
-    let reuseToken: String
+struct AuthDetails: Mappable {
+    var uid: String
+    var firstName: String
+    var lastName: String
+    var accountUrl: URL?
+    var settingsUrl: URL?
+    var updateUrl: URL?
+    var visitUrl: URL?
+    var reuseToken: String
+
+    init?(map: Map) {
+        uid = ""
+        firstName = ""
+        lastName = ""
+        reuseToken = ""
+    }
+    
+    init(uid: String,
+         firstName: String,
+         lastName: String,
+         accountUrl: URL?,
+         settingsUrl: URL?,
+         updateUrl: URL?,
+         visitUrl: URL?,
+         reuseToken: String) {
+        
+        self.uid = uid
+        self.firstName = firstName
+        self.lastName = lastName
+        self.accountUrl = accountUrl
+        self.updateUrl = updateUrl
+        self.visitUrl = visitUrl
+        self.reuseToken = reuseToken
+    }
+    
+    mutating func mapping(map: Map) {
+        uid <- map["uid"]
+        firstName <- map["firstName"]
+        lastName <- map["lastName"]
+        accountUrl <- (map["accountUrl"], URLTransform(shouldEncodeURLString: false))
+        settingsUrl <- (map["settingsUrl"], URLTransform(shouldEncodeURLString: false))
+        updateUrl <- (map["updateUrl"], URLTransform(shouldEncodeURLString: false))
+        visitUrl <- (map["visitUrl"], URLTransform(shouldEncodeURLString: false))
+        reuseToken <- map["reuseToken"]
+
+    }
 }
 
 class FontStore {
@@ -41,8 +79,8 @@ class FontStore {
         // Create a download queue that will download up to 3 fonts at a time, as per the spec
         downloadQueue.maxConcurrentOperationCount = 3
     }
-
-    func login(email: String, password: String) {
+    
+    func login(email: String, password: String, rememberMe: Bool) {
     
         let osv = ProcessInfo.processInfo.operatingSystemVersion
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
@@ -81,23 +119,13 @@ class FontStore {
                                                              visitUrl: URL(string: visitUrl),
                                                              reuseToken: reuseToken)
                         
-                        // Try to load the saved catalog
+                        // Remember if required
                         
-                        if let savedCatalog = Catalog.loadCatalog(userId: uid) {
-                            self.catalog.value = savedCatalog
-                        } else {
-                            self.catalog.value = Catalog(userId: uid)
-                            self.installBuiltInFonts()
+                        if rememberMe {
+                            try? self.authDetails.value?.toJSONString()?.write(to: self.preferencesUrl(), atomically: true, encoding: String.Encoding.utf8)
                         }
                         
-                        // Start downloading fonts that we didn't finish downloading last time
-                        
-                        self.downloadFonts()
-                        
-                        // Create the web socket
-                        
-                        self.connectWebSocket()
-
+                        self.completeLogin()
                     }
                     
                 case .failure(let error):
@@ -106,10 +134,47 @@ class FontStore {
         }
     }
     
+    func logonUsingStoredDetails() {
+        do {
+            let json = try String(contentsOf: preferencesUrl(), encoding: String.Encoding.utf8)
+            if let authDetails = AuthDetails(JSONString: json) {
+                self.authDetails.value = authDetails
+                self.completeLogin()
+            }
+        }
+        catch {
+        }
+    }
+    
+    func completeLogin() {
+        
+        if let uid = authDetails.value?.uid {
+            
+            // Try to load the saved catalog
+            
+            if let savedCatalog = Catalog.loadCatalog(userId: uid) {
+                self.catalog.value = savedCatalog
+            } else {
+                self.catalog.value = Catalog(userId: uid)
+                self.installBuiltInFonts()
+            }
+            
+            // Start downloading fonts that we didn't finish downloading last time
+            
+            self.downloadFonts()
+            
+            // Create the web socket
+            
+            self.connectWebSocket()
+        }
+    }
+    
     func logout() {
         socket?.disconnect()
         socket = nil
         self.authDetails.value = nil
+        
+        try? FileManager.default.removeItem(at: preferencesUrl())
         
         downloadQueue.cancelAllOperations()
         
@@ -126,6 +191,11 @@ class FontStore {
         }
         
         catalog.value = nil
+    }
+    
+    func preferencesUrl() -> URL {
+        let dir = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .allDomainsMask, true).first!
+        return URL(fileURLWithPath: dir).appendingPathComponent("Preferences/com.fontstore.logon.json")
     }
     
     func connectWebSocket() {

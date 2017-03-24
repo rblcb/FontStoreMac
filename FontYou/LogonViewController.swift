@@ -88,6 +88,6 @@ class LogonViewController: NSViewController {
     }
     
     @IBAction func doLogin(_ sender: Any) {
-        FontStore.sharedInstance.login(email: emailAddress.value, password: password.value)
+        FontStore.sharedInstance.login(email: emailAddress.value, password: password.value, rememberMe: rememberMe.value == NSOnState)
     }
 }

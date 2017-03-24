@@ -91,6 +91,10 @@ class MainViewController: NSViewController {
                 self?.currentViewController = self?.listingViewController
             }
         }.dispose(in: reactive.bag)
+        
+        // Try to log in from stored details
+        
+        FontStore.sharedInstance.logonUsingStoredDetails()
     }
     
     func setUpMenu(loggedOn: Bool) {
