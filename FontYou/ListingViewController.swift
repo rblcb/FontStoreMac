@@ -15,6 +15,8 @@ enum DisplayedInfo {
     case search
 }
 
+let daysForNewFonts: Int = 30
+
 class ListingViewController: NSViewController {
 
     @IBOutlet weak var outlineView: OutlineView!
@@ -169,6 +171,26 @@ class ListingViewController: NSViewController {
         return true
     }
     
+    func isNew(item: CatalogItem) -> Bool {
+        if let fromDate = NSCalendar.current.date(byAdding: .day, value: -daysForNewFonts, to: Date()) {
+            return Date(timeIntervalSince1970: item.date) >= fromDate
+        }
+        
+        return false
+    }
+    
+    func hasFamilyNewFonts(familyName: String) -> Bool {
+        if let fromDate = NSCalendar.current.date(byAdding: .day, value: -daysForNewFonts, to: Date()),
+            let family = tree[familyName] {
+            if family.contains(where: { Date(timeIntervalSince1970: $0.date) >= fromDate }) {
+                return true
+            }
+            return false
+        }
+        
+        return false
+    }
+    
     func bindViewModel() {
         
         // Watch for for store changes
@@ -180,10 +202,12 @@ class ListingViewController: NSViewController {
 
                     func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
                         for index in indexes {
-                            let (_, item) = catalog.fonts[index]
-                            if item.installedUrl != nil {
-                                self?.updateTree()
-                                return
+                            if catalog.fonts.dictionary.indices.contains(index) {
+                                let (_, item) = catalog.fonts[index]
+                                if item.installedUrl != nil {
+                                    self?.updateTree()
+                                    return
+                                }
                             }
                         }
                     }
@@ -255,7 +279,7 @@ class ListingViewController: NSViewController {
         case .installed:
             filteredfontFamilies = fontFamilies.filter { !isFamilyUninstalled(familyName: $0) }
         case .new:
-            filteredfontFamilies = fontFamilies
+            filteredfontFamilies = fontFamilies.filter { hasFamilyNewFonts(familyName: $0) }
         case .search:
             if searchField.stringValue.characters.count > 0 {
                 filteredfontFamilies = fontFamilies.filter { $0.localizedCaseInsensitiveContains(searchField.stringValue) }
@@ -263,7 +287,7 @@ class ListingViewController: NSViewController {
                 filteredfontFamilies = fontFamilies
             }
         }
-
+        
         outlineView.reloadData()
     }
     
@@ -317,6 +341,10 @@ class ListingViewController: NSViewController {
             self.tree = tree
             self.fontFamilies = tree.keys.sorted()
             updateFontList()
+            
+            installedButton.count = fontFamilies.filter { !isFamilyUninstalled(familyName: $0) }.count
+            newButton.count = fontFamilies.filter { hasFamilyNewFonts(familyName: $0) }.count
+            allButton.count = fontFamilies.count
         }
     }
 
@@ -344,6 +372,8 @@ extension ListingViewController: NSOutlineViewDataSource {
             switch displayed {
             case .installed:
                 return tree[family]!.filter { $0.installed == true }.count
+            case .new:
+                return tree[family]!.filter { isNew(item: $0) }.count
             default:
                 return tree[family]!.count
             }
@@ -357,6 +387,8 @@ extension ListingViewController: NSOutlineViewDataSource {
             switch displayed {
             case .installed:
                 return tree[family]!.filter { $0.installed == true }[index]
+            case .new:
+                return tree[family]!.filter { isNew(item: $0) }[index]
             default:
                 return tree[family]![index]
             }

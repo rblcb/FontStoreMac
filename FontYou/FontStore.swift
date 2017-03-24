@@ -218,7 +218,7 @@ class FontStore {
                     // the catalog awaiting download
 
                     let item = self.catalog.value!.addFont(uid: data["uid"]!,
-                                                           date: Int(data["created_at"]!)!,
+                                                           date: Double(data["created_at"]!)!,
                                                            familyName: data["font_family"]!,
                                                            style: data["font_style"]!,
                                                            downloadUrl: URL(string: data["download_url"]!)!)

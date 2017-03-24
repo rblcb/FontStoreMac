@@ -34,7 +34,7 @@ let transformURLIfExists = TransformOf<URL, Any?>(
 class CatalogItem: Mappable {
     
     var uid: String
-    var date: Int
+    var date: Double
     var family: String
     var style: String
     var weight: Float?
@@ -45,7 +45,7 @@ class CatalogItem: Mappable {
 
     var fontDescriptor: NSFontDescriptor?
     
-    init(uid: String, date: Int, family: String, style: String) {
+    init(uid: String, date: Double, family: String, style: String) {
         self.uid = uid
         self.date = date
         self.family = family
@@ -78,7 +78,7 @@ struct Catalog: Mappable {
     
     var userId: String
     var fonts = MutableObservableDictionary<String, CatalogItem>([:])
-    var lastUpdate: Int?
+    var lastUpdate: Double?
     
     init?(map: Map) {
         self.userId = ""
@@ -96,7 +96,7 @@ struct Catalog: Mappable {
     
     @discardableResult
     mutating func addFont(uid: String,
-                          date: Int,
+                          date: Double,
                           familyName: String,
                           style: String,
                           weight: Float? = nil,
@@ -131,6 +131,7 @@ struct Catalog: Mappable {
         
         // Update the catalog. 
         
+        print(item?.style)
         fonts[uid] = item!
         lastUpdate = max(date, lastUpdate ?? 0)
         
