@@ -170,9 +170,9 @@ class FontStore {
     }
     
     func logout() {
+        self.authDetails.value = nil
         socket?.disconnect()
         socket = nil
-        self.authDetails.value = nil
         
         try? FileManager.default.removeItem(at: preferencesUrl())
         
@@ -268,6 +268,20 @@ class FontStore {
             let payload: Socket.Payload = self.catalog.value?.lastCatalogUpdate != nil ? ["last_update_date": self.catalog.value!.lastCatalogUpdate!] : [:]
             catalogChannel.send("update:request", payload: payload)
         }
+        
+        socket.onDisconnect = { error in
+            
+            if self.authDetails.value != nil {
+                
+                // If we still have authentication details then this wasn't a logout - we've simply lost connection
+                // We just keep trying to reconnect...
+                
+                self.downloadQueue.cancelAllOperations()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) { self.socket.connect() }
+            }
+        }
+        
+        // Try to connect
         
         socket.connect()
     }
