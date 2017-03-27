@@ -13,8 +13,8 @@ import Alamofire
 import ReactiveKit
 import ObjectMapper
 
-let authEndpoint = "http://localhost:4000/api/desktop/session"
-let webSocketEndpoint = "ws://localhost:4000/"
+let authEndpoint = "http://localhost:4000/desktop/session"
+let webSocketEndpoint = "ws://localhost:4000/socket/websocket"
 
 struct AuthDetails: Mappable {
     var uid: String
@@ -246,7 +246,8 @@ class FontStore {
                 // Once the font list is up-to-date we join the user channel
                 
                 userChannel.join()
-                userChannel.send("update:request", payload: [:])
+                let payload: Socket.Payload = self.catalog.value?.lastUserUpdate != nil ? ["last_update_date": self.catalog.value!.lastUserUpdate!] : [:]
+                userChannel.send("update:request", payload: payload)
             }
             
             // User channel events
@@ -264,7 +265,7 @@ class FontStore {
             }
             
             catalogChannel.join()
-            let payload: Socket.Payload = self.catalog.value?.lastUpdate != nil ? ["last_update_date": self.catalog.value!.lastUpdate!] : [:]
+            let payload: Socket.Payload = self.catalog.value?.lastCatalogUpdate != nil ? ["last_update_date": self.catalog.value!.lastCatalogUpdate!] : [:]
             catalogChannel.send("update:request", payload: payload)
         }
         
@@ -325,8 +326,6 @@ class FontStore {
                 downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
                 downloadItem.installedUrl = fontUrl
                 downloadItem.fontDescriptor = desc
-                
-                // If this item is d
                 
                 // Update the catalog synchronously so that multiple download queues don't try to manipulate
                 // it at the same time.
