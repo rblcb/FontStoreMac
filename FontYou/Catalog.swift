@@ -78,7 +78,8 @@ struct Catalog: Mappable {
     
     var userId: String
     var fonts = MutableObservableDictionary<String, CatalogItem>([:])
-    var lastUpdate: Double?
+    var lastCatalogUpdate: Double?
+    var lastUserUpdate: Double?
     
     init?(map: Map) {
         self.userId = ""
@@ -91,7 +92,8 @@ struct Catalog: Mappable {
     mutating func mapping(map: Map) {
         userId <- map["userId"]
         fonts <- map["fonts"]
-        lastUpdate <- map["lastUpdate"]
+        lastCatalogUpdate <- map["lastCatalogUpdate"]
+        lastUserUpdate <- map["lastUserUpdate"]
     }
     
     @discardableResult
@@ -133,7 +135,7 @@ struct Catalog: Mappable {
         
         print(item?.style)
         fonts[uid] = item!
-        lastUpdate = max(date, lastUpdate ?? 0)
+        lastCatalogUpdate = max(date, lastCatalogUpdate ?? 0)
         
         return item!
     }
