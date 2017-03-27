@@ -13,7 +13,7 @@ import Alamofire
 import ReactiveKit
 import ObjectMapper
 
-let authEndpoint = "http://localhost:4000/desktop/session"
+let authEndpoint = "http://localhost:4000/session/desktop"
 let webSocketEndpoint = "ws://localhost:4000/socket/websocket"
 
 struct AuthDetails: Mappable {

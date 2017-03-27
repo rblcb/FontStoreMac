@@ -81,6 +81,8 @@ struct Catalog: Mappable {
     var lastCatalogUpdate: Double?
     var lastUserUpdate: Double?
     
+    private var lock = NSLock()
+    
     init?(map: Map) {
         self.userId = ""
     }
@@ -133,7 +135,6 @@ struct Catalog: Mappable {
         
         // Update the catalog. 
         
-        print(item?.style)
         fonts[uid] = item!
         lastCatalogUpdate = max(date, lastCatalogUpdate ?? 0)
         
@@ -157,6 +158,7 @@ struct Catalog: Mappable {
     }
     
     func saveCatalog() {
+        lock.lock(); defer { lock.unlock() }
         let fileUrl = Catalog.catalogUrl(userId: userId)
         try? self.toJSONString()?.write(to: fileUrl, atomically: true, encoding: String.Encoding.utf8)
     }
