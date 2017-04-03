@@ -15,7 +15,6 @@ class MainViewController: NSViewController {
     @IBOutlet weak var usernameLabel: NSTextField!
     @IBOutlet weak var contextMenuButton: NSButton!
     @IBOutlet weak var menuButton: NSButton!
-    @IBOutlet weak var fontStoreLabel: NSTextField!
     
     @IBOutlet var contextMenu: NSMenu!
     
@@ -49,7 +48,6 @@ class MainViewController: NSViewController {
         // Set fonts
         
         headerView.backgroundColor = StyleKit.primary
-        fontStoreLabel.font = NSFont(name: "Litmus-Bold", size: 18)
         usernameLabel.font = NSFont(name: "Litmus-Regular", size: 12)
        
         // Add and setup the child view controllers

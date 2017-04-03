@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Set up status bar icon
         if let button = statusItem.button {
-            button.image = StyleKit.imageOfMenubar(imageSize: NSSize(width: 18, height: 18))
+            button.image = NSImage(named: "MenuBarIcon")
             button.target = detachableWindow
         }
     }
