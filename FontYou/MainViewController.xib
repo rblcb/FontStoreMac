@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="FontYou" customModuleProvider="target">
@@ -16,21 +17,24 @@
                 <outlet property="logoutMenuItem" destination="mdo-Lm-D5h" id="xZ1-zD-wqo"/>
                 <outlet property="menuButton" destination="V7W-H6-W3H" id="bXP-gu-QXR"/>
                 <outlet property="settingsMenuItem" destination="CcL-vD-Rbz" id="cD6-jb-Cv5"/>
+                <outlet property="spinnerImageView" destination="DWt-l2-Ecn" id="QSz-a7-2RQ"/>
+                <outlet property="spinnerLabel" destination="MWj-DT-PlD" id="DrC-cS-NIj"/>
+                <outlet property="spinnerView" destination="sBq-WO-boa" id="rX3-Xu-N5z"/>
                 <outlet property="usernameLabel" destination="qHc-SN-S8Q" id="d6s-iL-CHt"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="330" height="480"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="TYV-Gc-6oh">
-                    <rect key="frame" x="0.0" y="410" width="330" height="70"/>
+                    <rect key="frame" x="0.0" y="410" width="382" height="70"/>
                     <subviews>
                         <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V7W-H6-W3H">
-                            <rect key="frame" x="296" y="12" width="20" height="20"/>
+                            <rect key="frame" x="348" y="12" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="Wma-Gs-ovh"/>
                                 <constraint firstAttribute="height" constant="20" id="yZO-lR-rJJ"/>
@@ -44,7 +48,7 @@
                             </connections>
                         </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHc-SN-S8Q">
-                            <rect key="frame" x="230" y="13" width="60" height="17"/>
+                            <rect key="frame" x="282" y="13" width="60" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome" id="EVq-FJ-qbE">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -68,17 +72,64 @@
                     </constraints>
                 </customView>
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJP-4v-ojp">
-                    <rect key="frame" x="0.0" y="0.0" width="330" height="410"/>
+                    <rect key="frame" x="0.0" y="0.0" width="382" height="410"/>
+                </customView>
+                <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sBq-WO-boa" userLabel="SpinnerView">
+                    <rect key="frame" x="0.0" y="0.0" width="382" height="410"/>
+                    <subviews>
+                        <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-bs-1h2">
+                            <rect key="frame" x="147" y="168" width="88" height="75"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWt-l2-Ecn" customClass="AnimatedImageView" customModule="FontYou" customModuleProvider="target">
+                                    <rect key="frame" x="9" y="25" width="70" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="70" id="Un6-Bz-Wow"/>
+                                        <constraint firstAttribute="height" constant="50" id="sgH-J8-jQe"/>
+                                    </constraints>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="No0-FQ-SbZ"/>
+                                </imageView>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MWj-DT-PlD">
+                                    <rect key="frame" x="-2" y="0.0" width="92" height="17"/>
+                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Multiline Label" id="g3P-Ra-WFY">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="DAT-bs-1h2" firstAttribute="centerY" secondItem="sBq-WO-boa" secondAttribute="centerY" id="hmN-Mu-jke"/>
+                        <constraint firstItem="DAT-bs-1h2" firstAttribute="centerX" secondItem="sBq-WO-boa" secondAttribute="centerX" id="kdl-mG-tFF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="wJP-4v-ojp" secondAttribute="bottom" id="G3E-Sz-n1L"/>
+                <constraint firstItem="sBq-WO-boa" firstAttribute="centerX" secondItem="wJP-4v-ojp" secondAttribute="centerX" id="HeP-IK-PBd"/>
                 <constraint firstItem="wJP-4v-ojp" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Pd6-Ug-c9K"/>
                 <constraint firstItem="TYV-Gc-6oh" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="VeP-55-hFl"/>
                 <constraint firstItem="TYV-Gc-6oh" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="WOc-CX-tM1"/>
                 <constraint firstAttribute="trailing" secondItem="TYV-Gc-6oh" secondAttribute="trailing" id="bto-Vy-Bb3"/>
+                <constraint firstItem="sBq-WO-boa" firstAttribute="height" secondItem="wJP-4v-ojp" secondAttribute="height" id="jWc-Pv-cPX"/>
+                <constraint firstItem="sBq-WO-boa" firstAttribute="centerY" secondItem="wJP-4v-ojp" secondAttribute="centerY" id="mVm-2u-ket"/>
                 <constraint firstItem="wJP-4v-ojp" firstAttribute="top" secondItem="TYV-Gc-6oh" secondAttribute="bottom" id="sMm-zA-jgs"/>
                 <constraint firstAttribute="trailing" secondItem="wJP-4v-ojp" secondAttribute="trailing" id="w9r-ie-L8G"/>
+                <constraint firstItem="sBq-WO-boa" firstAttribute="width" secondItem="wJP-4v-ojp" secondAttribute="width" id="xBP-U2-VtL"/>
             </constraints>
             <point key="canvasLocation" x="96" y="147"/>
         </customView>

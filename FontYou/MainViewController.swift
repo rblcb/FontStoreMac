@@ -12,10 +12,13 @@ class MainViewController: NSViewController {
 
     @IBOutlet weak var headerView: NSView!
     @IBOutlet weak var contentView: NSView!
+    @IBOutlet weak var spinnerView: NSView!
+    @IBOutlet weak var spinnerImageView: AnimatedImageView!
     @IBOutlet weak var usernameLabel: NSTextField!
     @IBOutlet weak var contextMenuButton: NSButton!
     @IBOutlet weak var menuButton: NSButton!
     
+    @IBOutlet weak var spinnerLabel: NSTextField!
     @IBOutlet var contextMenu: NSMenu!
     
     @IBOutlet weak var accountMenuItem: NSMenuItem!
@@ -50,6 +53,10 @@ class MainViewController: NSViewController {
         headerView.backgroundColor = StyleKit.primary
         usernameLabel.font = NSFont(name: "Litmus-Regular", size: 12)
        
+        // Set up spinner view
+        
+        spinnerView.backgroundColor = NSColor(calibratedWhite: 1, alpha: 0.8)
+        
         // Add and setup the child view controllers
         
         addChildViewController(logonViewController)
@@ -90,8 +97,20 @@ class MainViewController: NSViewController {
             }
         }.dispose(in: reactive.bag)
         
-        // Try to log in from stored details
+        FontStore.sharedInstance.status.observeNext { [weak self] status in
+            if let status = status {
+                self?.spinnerLabel.stringValue = status
+                self?.spinnerView.animator().isHidden = false
+                self?.spinnerImageView.startAnimation()
+            }
+            else {
+                self?.spinnerView.animator().isHidden = true
+                self?.spinnerImageView.stopAnimation()
+            }
+        }.dispose(in: reactive.bag)
         
+        // Try to log in from stored details
+
         FontStore.sharedInstance.logonUsingStoredDetails()
     }
     

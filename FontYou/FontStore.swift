@@ -70,6 +70,7 @@ class FontStore {
     
     var authDetails = Property<AuthDetails?>(nil)
     var catalog = Property<Catalog?>(nil)
+    var status = Property<String?>(nil)
     let downloadQueue = OperationQueue()
     
     fileprivate var socket: Socket! = nil
@@ -174,6 +175,8 @@ class FontStore {
         socket?.disconnect()
         socket = nil
         
+        status.value = nil
+        
         try? FileManager.default.removeItem(at: preferencesUrl())
         
         downloadQueue.cancelAllOperations()
@@ -199,6 +202,9 @@ class FontStore {
     }
     
     func connectWebSocket() {
+        
+        status.value = "Connecting to server"
+        
         socket = Socket(url: URL(string: webSocketEndpoint)!, params: ["reuse_token" : authDetails.value!.reuseToken])
         socket.enableLogging = true
         
@@ -206,6 +212,8 @@ class FontStore {
             
             let catalogChannel = self.socket.channel("catalog")
             let userChannel = self.socket.channel("users:\(self.authDetails.value!.uid)")
+            
+            self.status.value = "Updating catalog..."
             
             // Catalog channel events
             
@@ -264,6 +272,10 @@ class FontStore {
                 }
             }
             
+            userChannel.on("update:complete") { _ in
+                self.status.value = nil
+            }
+            
             catalogChannel.join()
             let payload: Socket.Payload = self.catalog.value?.lastCatalogUpdate != nil ? ["last_update_date": self.catalog.value!.lastCatalogUpdate!] : [:]
             catalogChannel.send("update:request", payload: payload)
@@ -278,6 +290,8 @@ class FontStore {
                 
                 self.downloadQueue.cancelAllOperations()
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) { self.socket.connect() }
+                
+                self.status.value = "Connecting to server..."
             }
         }
         
@@ -397,6 +411,7 @@ class FontStore {
         if (item.installedUrl != nil) {
             if installed {
                 FontUtility.activateFontFile(item.installedUrl, with: .user)
+                
             } else {
                 FontUtility.deactivateFontFile(item.installedUrl, with: .user)
             }
