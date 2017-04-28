@@ -157,7 +157,6 @@ class FontStore {
                 self.catalog.value = savedCatalog
             } else {
                 self.catalog.value = Catalog(userId: uid)
-                self.installBuiltInFonts()
             }
             
             // Start downloading fonts that we didn't finish downloading last time
@@ -363,46 +362,6 @@ class FontStore {
                 }
             }
         }
-    }
-    
-    func installBuiltInFonts() {
-        
-        guard var catalog = catalog.value,
-            let fontUrl = Bundle.main.url(forResource: "Fonts", withExtension: nil),
-            let enumerator = FileManager.default.enumerator(at: fontUrl, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles], errorHandler: nil)
-            else {
-                return
-            }
-        
-        while let url = enumerator.nextObject() as? URL {
-            
-            guard FontUtility.activateFontFile(url, with: .process) else { continue }
-            guard let descriptors = CTFontManagerCreateFontDescriptorsFromURL(url as CFURL) as? [NSFontDescriptor] else { return }
-            
-            // Add the font to the catalogue
-            
-            for desc in descriptors {
-                if let font = NSFont.init(descriptor: desc, size: 16),
-                    let familyName = font.familyName {
-                    let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
-                    let weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
-                    let slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
-                    catalog.addFont(uid: font.fontName,
-                                    date: 0,
-                                    familyName: familyName,
-                                    style: font.fontName,
-                                    weight: weight,
-                                    slant: slant,
-                                    installedUrl: url,
-                                    fontDescriptor: desc)
-                }
-            }
-        
-        }
-    
-        catalog.saveCatalog()
-        
-        self.catalog.value = catalog
     }
     
     func installFont(uid: String, installed: Bool) {
