@@ -99,4 +99,34 @@
     return scope == expectedScope;
 }
 
++(CGFontRef) createCGFontFromData:(NSData*)data {
+    if (data == nil) {
+        return NULL;
+    }
+
+    CFDataRef cfdata = (__bridge CFDataRef)data;
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData(cfdata);
+
+    CGFontRef cgfont = CGFontCreateWithDataProvider(provider);
+    CGDataProviderRelease(provider);
+
+    return cgfont;
+}
+
++(BOOL) activateCGFont:(CGFontRef)font {
+    if (font == NULL) {
+        return NO;
+    }
+
+    return CTFontManagerRegisterGraphicsFont(font, NULL);
+}
+
++(BOOL) deactivateCGFont:(CGFontRef)font {
+    if (font == NULL) {
+        return NO;
+    }
+
+    return CTFontManagerUnregisterGraphicsFont(font, NULL);
+}
+
 @end
