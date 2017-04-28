@@ -74,6 +74,7 @@ class FontStore {
     let downloadQueue = OperationQueue()
     
     fileprivate var socket: Socket! = nil
+    fileprivate var userChannel: Channel? = nil
     
     private init() {
 
@@ -210,7 +211,7 @@ class FontStore {
         socket.onConnect = {
             
             let catalogChannel = self.socket.channel("catalog")
-            let userChannel = self.socket.channel("users:\(self.authDetails.value!.uid)")
+            self.userChannel = self.socket.channel("users:\(self.authDetails.value!.uid)")
             
             self.status.value = "Updating catalog..."
             
@@ -252,26 +253,26 @@ class FontStore {
                 
                 // Once the font list is up-to-date we join the user channel
                 
-                userChannel.join()
+                self.userChannel!.join()
                 let payload: Socket.Payload = self.catalog.value?.lastUserUpdate != nil ? ["last_update_date": self.catalog.value!.lastUserUpdate!] : [:]
-                userChannel.send("update:request", payload: payload)
+                self.userChannel!.send("update:request", payload: payload)
             }
             
             // User channel events
             
-            userChannel.on("font:activation") { message in
+            self.userChannel!.on("font:activation") { message in
                 if let data = message.payload as? [String:String] {
                     self.installFont(uid: data["uid"]!, installed: true)
                 }
             }
             
-            userChannel.on("font:deactivation") { message in
+            self.userChannel!.on("font:deactivation") { message in
                 if let data = message.payload as? [String:String] {
                     self.installFont(uid: data["uid"]!, installed: false)
                 }
             }
             
-            userChannel.on("update:complete") { _ in
+            self.userChannel!.on("update:complete") { _ in
                 self.status.value = nil
             }
             
@@ -370,6 +371,21 @@ class FontStore {
         }
     }
     
+    func requestFontInstall(uid: String, installed: Bool) {
+        guard let userChannel = userChannel else { return }
+        let payload: Socket.Payload = ["uid": uid]
+        if installed {
+            userChannel.send("font:activation-request", payload: payload)
+        } else {
+            userChannel.send("font:deactivation-request", payload: payload)
+        }
+    }
+    
+    func toggleInstall(uid: String) {
+        guard let item = catalog.value?.fonts[uid] else { return }
+        requestFontInstall(uid: uid, installed: !item.installed)
+    }
+    
     func installFont(uid: String, installed: Bool) {
         guard let item = catalog.value?.fonts[uid] else { return }
         
@@ -399,10 +415,5 @@ class FontStore {
         
         item.installed = installed
         catalog.value!.update(item: item)
-    }
-
-    func toggleInstall(uid: String) {
-        guard let item = catalog.value?.fonts[uid] else { return }
-        installFont(uid: uid, installed: !item.installed)
     }
 }

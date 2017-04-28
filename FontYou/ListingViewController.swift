@@ -135,7 +135,7 @@ class ListingViewController: NSViewController {
             let family = tree[familyName] {
             let allInstalled = isFamilyInstalled(familyName: familyName)
             for item in family {
-                FontStore.sharedInstance.installFont(uid: item.uid, installed: !allInstalled)
+                FontStore.sharedInstance.requestFontInstall(uid: item.uid, installed: !allInstalled)
             }
         }
     }
