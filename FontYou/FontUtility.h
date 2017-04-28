@@ -64,7 +64,7 @@
  
     @remarks Before using the CGFont to render text, the font must be set in the current graphics state by calling CGContextSetFontSize.
  */
-+(CGFontRef) createCGFontFromData:(NSData*)data;
++(CGFontRef) createCGFontFromData:(NSData*)data CF_RETURNS_RETAINED;
 
 /*!
     @function activateFontMem

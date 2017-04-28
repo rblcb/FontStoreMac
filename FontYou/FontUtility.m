@@ -99,7 +99,7 @@
     return scope == expectedScope;
 }
 
-+(CGFontRef) createCGFontFromData:(NSData*)data {
++(CGFontRef) createCGFontFromData:(NSData*)data CF_RETURNS_RETAINED {
     if (data == nil) {
         return NULL;
     }
