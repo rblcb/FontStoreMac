@@ -42,8 +42,36 @@ class CatalogItem: Mappable {
     var installed: Bool
     var downloadUrl: URL?
     var installedUrl: URL?
-
+    var encryptedUrl: URL? {
+        didSet {
+            cachedDecryptedData = nil
+        }
+    }
+    
     var fontDescriptor: NSFontDescriptor?
+    private var cachedDecryptedData: Data?
+
+    var decryptedData: Data? {
+        get {
+            if cachedDecryptedData != nil {
+                return cachedDecryptedData
+            }
+            
+            guard let encryptedUrl = encryptedUrl else { return nil }
+            
+            do {
+                var data = try Data.init(contentsOf: encryptedUrl)
+                data.xor(key: "secret".data(using: .ascii)!)
+                cachedDecryptedData = data
+                return cachedDecryptedData
+            } catch {
+                print("Exception when loading contents of \(encryptedUrl)")
+                return nil
+            }
+            
+            return nil
+        }
+    }
     
     init(uid: String, date: Double, family: String, style: String) {
         self.uid = uid
@@ -71,7 +99,10 @@ class CatalogItem: Mappable {
         installed <- map["installed"]
         downloadUrl <- (map["downloadUrl"], URLTransform(shouldEncodeURLString: false))
         installedUrl <- (map["installedUrl"], transformURLIfExists)
+        encryptedUrl <- (map["encryptedUrl"], transformURLIfExists)
     }
+    
+    
 }
 
 struct Catalog: Mappable {
@@ -106,7 +137,7 @@ struct Catalog: Mappable {
                           weight: Float? = nil,
                           slant: Float? = nil,
                           downloadUrl: URL? = nil,
-                          installedUrl: URL? = nil,
+                          encryptedUrl: URL? = nil,
                           fontDescriptor: NSFontDescriptor? = nil) -> CatalogItem {
         
         // Try to find this item in the catalog
@@ -118,7 +149,7 @@ struct Catalog: Mappable {
                 // We have it, but the date's changed, so we need to download it again
                 
                 item!.downloadUrl = downloadUrl
-                item!.installedUrl = nil
+                item!.encryptedUrl = nil
             } else {
                 // We have it already, just return
                 return item!
@@ -129,7 +160,7 @@ struct Catalog: Mappable {
             item!.weight = weight
             item!.slant = slant
             item!.downloadUrl = downloadUrl
-            item!.installedUrl = installedUrl
+            item!.encryptedUrl = encryptedUrl
             item!.fontDescriptor = fontDescriptor
         }
         
@@ -169,12 +200,15 @@ struct Catalog: Mappable {
             let json = try String(contentsOf: fileUrl, encoding: String.Encoding.utf8)
             if let catalog = Catalog(JSONString: json) {
                 
-                // Try to activate each for for use in the application
+                // Try to activate each font for use in the application
+                // We decrypt each find and activate the font in-memory for this process.
                 
                 for (uid, item) in catalog.fonts {
-                    guard item.installedUrl != nil else { continue }
-                    guard FontUtility.activateFontFile(item.installedUrl, with: .process) else { print("Unable to activate \(item.family).\(item.style)"); continue; }
-                    if let desc = (CTFontManagerCreateFontDescriptorsFromURL(item.installedUrl as! CFURL) as? [NSFontDescriptor])?.first {
+                    guard item.encryptedUrl != nil else { continue }
+                    let data = item.decryptedData
+                    guard let font = FontUtility.createCGFont(from: data) else { print("Unable to create font from data for \(item.family).\(item.style)"); continue; }
+                    guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); continue; }
+                    if let desc = CTFontManagerCreateFontDescriptorFromData(data as! CFData) {
                         catalog.fonts[uid]!.fontDescriptor = desc
                     } else {
                         print("Unable to create descriptors for \(item.family).\(item.style)")
@@ -210,5 +244,15 @@ struct Catalog: Mappable {
     static func fontsUrl() -> URL {
         let asUrl = appSupportUrl()
         return asUrl.appendingPathComponent("fonts", isDirectory: true)
+    }
+
+    static func installedUrl() -> URL {
+        let asUrl = appSupportUrl()
+        let folderUrl = asUrl.appendingPathComponent("installed", isDirectory: true)
+        if !FileManager.default.fileExists(atPath: folderUrl.absoluteString) {
+            try? FileManager.default.createDirectory(at: folderUrl, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        return folderUrl
     }
 }

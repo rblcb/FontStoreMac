@@ -204,7 +204,7 @@ class ListingViewController: NSViewController {
                         for index in indexes {
                             if catalog.fonts.dictionary.indices.contains(index) {
                                 let (_, item) = catalog.fonts[index]
-                                if item.installedUrl != nil {
+                                if item.encryptedUrl != nil {
                                     self?.updateTree()
                                     return
                                 }
@@ -326,7 +326,7 @@ class ListingViewController: NSViewController {
         
             var tree: [String:[CatalogItem]] = [:]
             for (_, item) in fonts {
-                if item.installedUrl != nil {
+                if item.encryptedUrl != nil {
                     let family = item.family
                     var siblings = tree[family] ?? []
                     siblings.append(item)

@@ -185,7 +185,7 @@ class FontStore {
         if let catalog = catalog.value {
             DispatchQueue.global().async {
                 for (_, item) in catalog.fonts {
-                    if let fontUrl = item.installedUrl, item.installed {
+                    if let fontUrl = item.encryptedUrl, item.installed {
                         FontUtility.deactivateFontFile(fontUrl, with: .user)
                     }
                 }
@@ -240,7 +240,7 @@ class FontStore {
                     let uid = data["uid"],
                     let item = self.catalog.value?.fonts[uid] {
                     
-                    if let url = item.installedUrl {
+                    if let url = item.encryptedUrl {
                         try? FileManager.default.removeItem(at: url)
                     }
                     
@@ -304,7 +304,7 @@ class FontStore {
         // Find all the fonts which haven't yet been downloaded
         
         for (_, item) in catalog.value!.fonts {
-            if item.installedUrl == nil {
+            if item.encryptedUrl == nil {
                 self.downloadFont(item: item)
             }
         }
@@ -312,7 +312,7 @@ class FontStore {
     
     func downloadFont(item: CatalogItem) {
         guard let downloadUrl = item.downloadUrl else { return }
-        guard item.installedUrl == nil else { return }
+        guard item.encryptedUrl == nil else { return }
         
         downloadQueue.addOperation {
             
@@ -343,22 +343,28 @@ class FontStore {
             // Downloading complete, get the font's characteristics
             
             if result.error == nil, let fontUrl = result.destinationURL {
-                guard FontUtility.activateFontFile(fontUrl, with: .process) else { return }
-                guard let descriptors = CTFontManagerCreateFontDescriptorsFromURL(fontUrl as CFURL) as? [NSFontDescriptor] else { return }
-                let desc = descriptors.first!
                 
-                let downloadItem = item
-                let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
-                downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
-                downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
-                downloadItem.installedUrl = fontUrl
-                downloadItem.fontDescriptor = desc
+                item.encryptedUrl = fontUrl
+                let data = item.decryptedData
                 
-                // Update the catalog synchronously so that multiple download queues don't try to manipulate
-                // it at the same time.
-                
-                DispatchQueue.main.sync {                    
-                    self.catalog.value?.update(item: downloadItem)
+                guard let font = FontUtility.createCGFont(from: data) else { print("Unable to create font from data for \(item.family).\(item.style)"); return; }
+                guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); return; }
+                if let desc = CTFontManagerCreateFontDescriptorFromData(data as! CFData) as? NSFontDescriptor {
+                    let downloadItem = item
+                    let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
+                    downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
+                    downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
+                    downloadItem.encryptedUrl = fontUrl
+                    downloadItem.fontDescriptor = desc
+                    
+                    // Update the catalog synchronously so that multiple download queues don't try to manipulate
+                    // it at the same time.
+                    
+                    DispatchQueue.main.sync {
+                        self.catalog.value?.update(item: downloadItem)
+                    }
+                } else {
+                    print("Unable to create descriptors for \(item.family).\(item.style)")
                 }
             }
         }
@@ -367,12 +373,27 @@ class FontStore {
     func installFont(uid: String, installed: Bool) {
         guard let item = catalog.value?.fonts[uid] else { return }
         
-        if (item.installedUrl != nil) {
+        if (item.encryptedUrl != nil) {
             if installed {
-                FontUtility.activateFontFile(item.installedUrl, with: .user)
+                let data = item.decryptedData
+                let installedUrl = Catalog.installedUrl().appendingPathComponent(item.uid)
+                try? FileManager.default.removeItem(at: installedUrl)
+                
+                do {
+                    try data!.write(to: installedUrl, options: .atomicWrite)
+                    item.installedUrl = installedUrl
+                    FontUtility.activateFontFile(item.installedUrl, with: .user)
+                }
+                catch {
+                    print("Unable to write to \(installedUrl)")
+                }
                 
             } else {
-                FontUtility.deactivateFontFile(item.installedUrl, with: .user)
+                if let installedUrl = item.installedUrl {
+                    FontUtility.deactivateFontFile(installedUrl, with: .user)
+                    try? FileManager.default.removeItem(at: installedUrl)
+                    item.installedUrl = nil
+                }
             }
         }
         

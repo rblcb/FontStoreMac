@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+public extension Data {
+    
+    public mutating func xor(key: Data) {
+        for i in 0..<self.count {
+            self[i] ^= key[i % key.count]
+        }
+    }
+}
