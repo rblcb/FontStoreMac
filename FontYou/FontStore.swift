@@ -109,7 +109,7 @@ class FontStore {
                         let settingsUrl = urls["settings"],
                         let updateUrl = urls["update"],
                         let visitUrl = urls["visit"],
-                        let reuseToken = json["reuse_token"] as? String {
+                        let reuseToken = json["reusable_token"] as? String {
                         
                         self.authDetails.value = AuthDetails(uid: uid,
                                                              firstName: firstName,
