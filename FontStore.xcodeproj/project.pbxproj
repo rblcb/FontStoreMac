@@ -270,15 +270,15 @@
 		221F86991E978B31001097A8 /* loader_00035@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loader_00035@2x.png"; sourceTree = "<group>"; };
 		221F869A1E978B31001097A8 /* loader_00036@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loader_00036@2x.png"; sourceTree = "<group>"; };
 		221F86C01E978C70001097A8 /* AnimatedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedImageView.swift; sourceTree = "<group>"; };
-		2223DE191E30F74800D7B0FE /* FontYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2223DE191E30F74800D7B0FE /* FontStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2223DE1C1E30F74800D7B0FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2223DE1E1E30F74800D7B0FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2223DE211E30F74800D7B0FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2223DE231E30F74800D7B0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2223DE281E30F74900D7B0FE /* FontYouTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontYouTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2223DE281E30F74900D7B0FE /* FontStoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontStoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2223DE2C1E30F74900D7B0FE /* FontYouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontYouTests.swift; sourceTree = "<group>"; };
 		2223DE2E1E30F74900D7B0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2223DE331E30F74900D7B0FE /* FontYouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontYouUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2223DE331E30F74900D7B0FE /* FontStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2223DE371E30F74900D7B0FE /* FontYouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontYouUITests.swift; sourceTree = "<group>"; };
 		2223DE391E30F74900D7B0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2223DE451E30FA8A00D7B0FE /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -483,9 +483,9 @@
 		2223DE1A1E30F74800D7B0FE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2223DE191E30F74800D7B0FE /* FontYou.app */,
-				2223DE281E30F74900D7B0FE /* FontYouTests.xctest */,
-				2223DE331E30F74900D7B0FE /* FontYouUITests.xctest */,
+				2223DE191E30F74800D7B0FE /* FontStore.app */,
+				2223DE281E30F74900D7B0FE /* FontStoreTests.xctest */,
+				2223DE331E30F74900D7B0FE /* FontStoreUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -647,9 +647,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2223DE181E30F74800D7B0FE /* FontYou */ = {
+		2223DE181E30F74800D7B0FE /* FontStore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2223DE3C1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontYou" */;
+			buildConfigurationList = 2223DE3C1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontStore" */;
 			buildPhases = (
 				2223DE151E30F74800D7B0FE /* Sources */,
 				2223DE161E30F74800D7B0FE /* Frameworks */,
@@ -661,14 +661,14 @@
 			);
 			dependencies = (
 			);
-			name = FontYou;
+			name = FontStore;
 			productName = FontYou;
-			productReference = 2223DE191E30F74800D7B0FE /* FontYou.app */;
+			productReference = 2223DE191E30F74800D7B0FE /* FontStore.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2223DE271E30F74900D7B0FE /* FontYouTests */ = {
+		2223DE271E30F74900D7B0FE /* FontStoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2223DE3F1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontYouTests" */;
+			buildConfigurationList = 2223DE3F1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontStoreTests" */;
 			buildPhases = (
 				2223DE241E30F74900D7B0FE /* Sources */,
 				2223DE251E30F74900D7B0FE /* Frameworks */,
@@ -679,14 +679,14 @@
 			dependencies = (
 				2223DE2A1E30F74900D7B0FE /* PBXTargetDependency */,
 			);
-			name = FontYouTests;
+			name = FontStoreTests;
 			productName = FontYouTests;
-			productReference = 2223DE281E30F74900D7B0FE /* FontYouTests.xctest */;
+			productReference = 2223DE281E30F74900D7B0FE /* FontStoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2223DE321E30F74900D7B0FE /* FontYouUITests */ = {
+		2223DE321E30F74900D7B0FE /* FontStoreUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2223DE421E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontYouUITests" */;
+			buildConfigurationList = 2223DE421E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontStoreUITests" */;
 			buildPhases = (
 				2223DE2F1E30F74900D7B0FE /* Sources */,
 				2223DE301E30F74900D7B0FE /* Frameworks */,
@@ -697,9 +697,9 @@
 			dependencies = (
 				2223DE351E30F74900D7B0FE /* PBXTargetDependency */,
 			);
-			name = FontYouUITests;
+			name = FontStoreUITests;
 			productName = FontYouUITests;
-			productReference = 2223DE331E30F74900D7B0FE /* FontYouUITests.xctest */;
+			productReference = 2223DE331E30F74900D7B0FE /* FontStoreUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -734,7 +734,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontYou" */;
+			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -747,9 +747,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2223DE181E30F74800D7B0FE /* FontYou */,
-				2223DE271E30F74900D7B0FE /* FontYouTests */,
-				2223DE321E30F74900D7B0FE /* FontYouUITests */,
+				2223DE181E30F74800D7B0FE /* FontStore */,
+				2223DE271E30F74900D7B0FE /* FontStoreTests */,
+				2223DE321E30F74900D7B0FE /* FontStoreUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -921,12 +921,12 @@
 /* Begin PBXTargetDependency section */
 		2223DE2A1E30F74900D7B0FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2223DE181E30F74800D7B0FE /* FontYou */;
+			target = 2223DE181E30F74800D7B0FE /* FontStore */;
 			targetProxy = 2223DE291E30F74900D7B0FE /* PBXContainerItemProxy */;
 		};
 		2223DE351E30F74900D7B0FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2223DE181E30F74800D7B0FE /* FontYou */;
+			target = 2223DE181E30F74800D7B0FE /* FontStore */;
 			targetProxy = 2223DE341E30F74900D7B0FE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1086,7 +1086,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYouTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontYou.app/Contents/MacOS/FontYou";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontStore.app/Contents/MacOS/FontStore";
 			};
 			name = Debug;
 		};
@@ -1102,7 +1102,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYouTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontYou.app/Contents/MacOS/FontYou";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontStore.app/Contents/MacOS/FontStore";
 			};
 			name = Release;
 		};
@@ -1139,7 +1139,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontYou" */ = {
+		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE3A1E30F74900D7B0FE /* Debug */,
@@ -1148,7 +1148,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2223DE3C1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontYou" */ = {
+		2223DE3C1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE3D1E30F74900D7B0FE /* Debug */,
@@ -1157,7 +1157,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2223DE3F1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontYouTests" */ = {
+		2223DE3F1E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontStoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE401E30F74900D7B0FE /* Debug */,
@@ -1166,7 +1166,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2223DE421E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontYouUITests" */ = {
+		2223DE421E30F74900D7B0FE /* Build configuration list for PBXNativeTarget "FontStoreUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE431E30F74900D7B0FE /* Debug */,

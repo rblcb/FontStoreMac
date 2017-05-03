@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:FontYou.xcodeproj">
+      location = "self:/Users/Tim/Development/Clients/FontYou/FontYouApp/FontStore.xcodeproj">
    </FileRef>
 </Workspace>
