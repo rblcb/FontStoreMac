@@ -15,7 +15,7 @@ let indicatorOverlap: CGFloat = 3
 
 class IndicatorStackView: NSStackView {
     
-    let indicatorView = NSImageView(image: StyleKit.imageOfStackViewIndicator)
+    let indicatorView = NSImageView()
     var indicatorConstraints: [NSLayoutConstraint] = []
     weak var highlightedView: NSView? = nil
     
@@ -23,6 +23,7 @@ class IndicatorStackView: NSStackView {
         
         super.init(coder: coder)
         
+        indicatorView.image = StyleKit.imageOfStackViewIndicator
         indicatorView.imageScaling = .scaleProportionallyUpOrDown
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
         
