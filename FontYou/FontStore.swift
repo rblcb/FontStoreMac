@@ -13,8 +13,10 @@ import Alamofire
 import ReactiveKit
 import ObjectMapper
 
-let authEndpoint = "http://localhost:4000/session/desktop"
-let webSocketEndpoint = "ws://localhost:4000/socket/websocket"
+//let authEndpoint = "http://localhost:4000/session/desktop"
+//let webSocketEndpoint = "ws://localhost:4000/socket/websocket"
+let authEndpoint = "https://api.staging.fontstore.com/session/desktop"
+let webSocketEndpoint = "wss://api.staging.fontstore.com/socket/websocket"
 
 struct AuthDetails: Mappable {
     var uid: String
@@ -205,7 +207,7 @@ class FontStore {
         
         status.value = "Connecting to server"
         
-        socket = Socket(url: URL(string: webSocketEndpoint)!, params: ["reuse_token" : authDetails.value!.reuseToken])
+        socket = Socket(url: URL(string: webSocketEndpoint)!, params: ["reusable_token" : authDetails.value!.reuseToken])
         socket.enableLogging = true
         
         socket.onConnect = {
