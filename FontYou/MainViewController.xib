@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="FontYou" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="FontStore" customModuleProvider="target">
             <connections>
                 <outlet property="accountMenuItem" destination="4Mk-Jf-eLp" id="xCS-zr-NZA"/>
                 <outlet property="contentView" destination="wJP-4v-ojp" id="A8V-wE-f0b"/>
@@ -74,13 +74,13 @@
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJP-4v-ojp">
                     <rect key="frame" x="0.0" y="0.0" width="382" height="410"/>
                 </customView>
-                <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sBq-WO-boa" userLabel="SpinnerView">
+                <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sBq-WO-boa" userLabel="SpinnerView" customClass="NonClickableView" customModule="FontStore" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="382" height="410"/>
                     <subviews>
                         <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-bs-1h2">
                             <rect key="frame" x="147" y="168" width="88" height="75"/>
                             <subviews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWt-l2-Ecn" customClass="AnimatedImageView" customModule="FontYou" customModuleProvider="target">
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWt-l2-Ecn" customClass="AnimatedImageView" customModule="FontStore" customModuleProvider="target">
                                     <rect key="frame" x="9" y="25" width="70" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="70" id="Un6-Bz-Wow"/>
@@ -88,7 +88,7 @@
                                     </constraints>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="No0-FQ-SbZ"/>
                                 </imageView>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MWj-DT-PlD">
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MWj-DT-PlD">
                                     <rect key="frame" x="-2" y="0.0" width="92" height="17"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Multiline Label" id="g3P-Ra-WFY">
                                         <font key="font" metaFont="system"/>

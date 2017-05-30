@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220797571EDDFBB700B3C503 /* NonClickableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220797561EDDFBB700B3C503 /* NonClickableView.swift */; };
 		2219CB6A1EB357DC0053EE86 /* Data+XOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219CB691EB357DC0053EE86 /* Data+XOR.swift */; };
 		221E636E1E3237A500944B1B /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E636D1E3237A500944B1B /* StyleKit.swift */; };
 		221E63731E36125700944B1B /* ArrowWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E63721E36125700944B1B /* ArrowWindow.swift */; };
@@ -192,6 +193,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		220797561EDDFBB700B3C503 /* NonClickableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonClickableView.swift; sourceTree = "<group>"; };
 		2219CB691EB357DC0053EE86 /* Data+XOR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+XOR.swift"; sourceTree = "<group>"; };
 		221E636D1E3237A500944B1B /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		221E63721E36125700944B1B /* ArrowWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowWindow.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				22B16A181E7AF2390012BAF0 /* RoundedView.swift */,
 				22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */,
 				221F86C01E978C70001097A8 /* AnimatedImageView.swift */,
+				220797561EDDFBB700B3C503 /* NonClickableView.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				2223DE4C1E31177700D7B0FE /* DetachableWindow.swift in Sources */,
 				221E63731E36125700944B1B /* ArrowWindow.swift in Sources */,
 				22B16A521E8010AB0012BAF0 /* Socket.swift in Sources */,
+				220797571EDDFBB700B3C503 /* NonClickableView.swift in Sources */,
 				2219CB6A1EB357DC0053EE86 /* Data+XOR.swift in Sources */,
 				221F86C11E978C70001097A8 /* AnimatedImageView.swift in Sources */,
 				2223DE4A1E30FC6C00D7B0FE /* EventMonitor.swift in Sources */,
