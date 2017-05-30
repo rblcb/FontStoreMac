@@ -24,8 +24,6 @@ struct AuthDetails: Mappable {
     var lastName: String
     var accountUrl: URL?
     var settingsUrl: URL?
-    var updateUrl: URL?
-    var visitUrl: URL?
     var reuseToken: String
 
     init?(map: Map) {
@@ -40,16 +38,13 @@ struct AuthDetails: Mappable {
          lastName: String,
          accountUrl: URL?,
          settingsUrl: URL?,
-         updateUrl: URL?,
-         visitUrl: URL?,
          reuseToken: String) {
         
         self.uid = uid
         self.firstName = firstName
         self.lastName = lastName
         self.accountUrl = accountUrl
-        self.updateUrl = updateUrl
-        self.visitUrl = visitUrl
+        self.settingsUrl = settingsUrl
         self.reuseToken = reuseToken
     }
     
@@ -59,8 +54,6 @@ struct AuthDetails: Mappable {
         lastName <- map["lastName"]
         accountUrl <- (map["accountUrl"], URLTransform(shouldEncodeURLString: false))
         settingsUrl <- (map["settingsUrl"], URLTransform(shouldEncodeURLString: false))
-        updateUrl <- (map["updateUrl"], URLTransform(shouldEncodeURLString: false))
-        visitUrl <- (map["visitUrl"], URLTransform(shouldEncodeURLString: false))
         reuseToken <- map["reuseToken"]
 
     }
@@ -98,6 +91,8 @@ class FontStore {
             "os_version": "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)"
         ]
         
+        status.value = "Connecting to server"
+        
         Alamofire.request(authEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate().responseJSON { response in
                 switch response.result {
@@ -110,8 +105,6 @@ class FontStore {
                         let lastName = json["last_name"] as? String,
                         let accountUrl = urls["account"],
                         let settingsUrl = urls["settings"],
-                        let updateUrl = urls["update"],
-                        let visitUrl = urls["visit"],
                         let reuseToken = json["reusable_token"] as? String {
                         
                         self.authDetails.value = AuthDetails(uid: uid,
@@ -119,8 +112,6 @@ class FontStore {
                                                              lastName: lastName,
                                                              accountUrl: URL(string: accountUrl),
                                                              settingsUrl: URL(string: settingsUrl),
-                                                             updateUrl: URL(string: updateUrl),
-                                                             visitUrl: URL(string: visitUrl),
                                                              reuseToken: reuseToken)
                         
                         // Remember if required
@@ -133,6 +124,7 @@ class FontStore {
                     }
                     
                 case .failure(let error):
+                    self.status.value = nil
                     print(error)
                 }
         }
@@ -205,7 +197,7 @@ class FontStore {
     
     func connectWebSocket() {
         
-        status.value = "Connecting to server"
+        self.status.value = "Updating catalog..."
         
         socket = Socket(url: URL(string: webSocketEndpoint)!, params: ["reusable_token" : authDetails.value!.reuseToken])
         socket.enableLogging = true
@@ -214,8 +206,6 @@ class FontStore {
             
             let catalogChannel = self.socket.channel("catalog")
             self.userChannel = self.socket.channel("users:\(self.authDetails.value!.uid)")
-            
-            self.status.value = "Updating catalog..."
             
             // Catalog channel events
             

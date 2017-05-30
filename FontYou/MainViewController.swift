@@ -68,7 +68,7 @@ class MainViewController: NSViewController {
         
         // Observe for logins
         
-        FontStore.sharedInstance.authDetails.observeNext { [weak self] authDetails in
+        FontStore.sharedInstance.authDetails.observeOn(.main).observeNext { [weak self] authDetails in
             if let authDetails = authDetails {
                 self?.usernameLabel.stringValue = "\(authDetails.firstName) \(authDetails.lastName)"
                 self?.usernameLabel.textColor = NSColor.white
@@ -91,17 +91,19 @@ class MainViewController: NSViewController {
         
         // Observer for catalog changes
         
-        FontStore.sharedInstance.catalog.observeNext { [weak self] catalog in
+        FontStore.sharedInstance.catalog.observeOn(.main).observeNext { [weak self] catalog in
             if catalog != nil {
                 self?.currentViewController = self?.listingViewController
             }
         }.dispose(in: reactive.bag)
         
-        FontStore.sharedInstance.status.observeNext { [weak self] status in
+        FontStore.sharedInstance.status.observeOn(.main).observeNext { [weak self] status in
             if let status = status {
                 self?.spinnerLabel.stringValue = status
                 self?.spinnerView.animator().isHidden = false
-                self?.spinnerImageView.startAnimation()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) { [weak self] in
+                    self?.spinnerImageView.startAnimation()
+                }
             }
             else {
                 self?.spinnerView.animator().isHidden = true
