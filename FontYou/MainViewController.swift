@@ -102,6 +102,7 @@ class MainViewController: NSViewController {
                 self?.spinnerLabel.stringValue = status
                 self?.spinnerView.animator().isHidden = false
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) { [weak self] in
+                    // Just starting this immediately doesn't always work (no idea why). A little delay fixes it.
                     self?.spinnerImageView.startAnimation()
                 }
             }
@@ -139,6 +140,7 @@ class MainViewController: NSViewController {
     }
     
     @IBAction func quit(_ sender: Any) {
+        FontStore.sharedInstance.catalog.value?.saveCatalog()
         NSApp.terminate(sender)
     }
 }

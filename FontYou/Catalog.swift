@@ -34,7 +34,7 @@ let transformURLIfExists = TransformOf<URL, Any?>(
 class CatalogItem: Mappable {
     
     var uid: String
-    var date: Double
+    var isNew: Bool
     var family: String
     var style: String
     var weight: Float?
@@ -71,9 +71,9 @@ class CatalogItem: Mappable {
         }
     }
     
-    init(uid: String, date: Double, family: String, style: String) {
+    init(uid: String, family: String, style: String) {
         self.uid = uid
-        self.date = date
+        self.isNew = true
         self.family = family
         self.style = style
         self.installed = false
@@ -81,15 +81,15 @@ class CatalogItem: Mappable {
 
     required init?(map: Map) {
         uid = ""
-        date = 0
         family = ""
         style = ""
+        isNew = false
         installed = false
     }
 
     func mapping(map: Map) {
         uid <- map["uid"]
-        date <- map["date"]
+        isNew <- map["isNew"]
         family <- map["family"]
         style <- map["style"]
         weight <- map["weight"]
@@ -107,6 +107,8 @@ struct Catalog: Mappable {
     var fonts = MutableObservableDictionary<String, CatalogItem>([:])
     var lastCatalogUpdate: Double?
     var lastUserUpdate: Double?
+    
+    let semaphore = DispatchSemaphore(value: 1)
     
     private var lock = NSLock()
     
@@ -127,7 +129,6 @@ struct Catalog: Mappable {
     
     @discardableResult
     mutating func addFont(uid: String,
-                          date: Double,
                           familyName: String,
                           style: String,
                           weight: Float? = nil,
@@ -141,18 +142,13 @@ struct Catalog: Mappable {
         var item: CatalogItem? = fonts[uid]
         
         if item != nil {
-            if item!.date != date {
-                // We have it, but the date's changed, so we need to download it again
-                
-                item!.downloadUrl = downloadUrl
-                item!.encryptedUrl = nil
-            } else {
-                // We have it already, just return
-                return item!
-            }
+            // We have it, but we need to download it again
+            
+            item!.downloadUrl = downloadUrl
+            item!.encryptedUrl = nil
         } else {
             // We don't have this item in the catalog - we need to add it
-            item = CatalogItem(uid: uid, date: date, family: familyName, style: style)
+            item = CatalogItem(uid: uid, family: familyName, style: style)
             item!.weight = weight
             item!.slant = slant
             item!.downloadUrl = downloadUrl
@@ -160,10 +156,9 @@ struct Catalog: Mappable {
             item!.fontDescriptor = fontDescriptor
         }
         
-        // Update the catalog. 
+        // Update the catalog
         
         fonts[uid] = item!
-        lastCatalogUpdate = max(date, lastCatalogUpdate ?? 0)
         
         return item!
     }

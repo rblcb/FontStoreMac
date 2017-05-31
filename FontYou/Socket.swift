@@ -121,7 +121,7 @@ public final class Socket {
     func send(_ message: Push) -> Push {
         do {
             let data = try message.toJson()
-            log("Sending: \(message.payload)")
+            log("Sending: \(message.topic) - \(message.event) - \(message.payload)")
             if let ref = message.ref {
                 awaitingResponses[ref] = message
                 socket.write(data: data, completion: nil)
@@ -173,7 +173,7 @@ extension Socket: WebSocketDelegate {
                 awaitingResponses.removeValue(forKey: response.ref)
             }
             
-            log("Received message: \(response.payload)")
+            log("Received message: \(response.topic) - \(response.event) - \(response.payload)")
             
             if let push = awaitingResponses[response.ref] {
                 push.handleResponse(response)

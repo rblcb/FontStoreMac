@@ -209,6 +209,15 @@ class FontStore {
             
             // Catalog channel events
             
+            catalogChannel.on("fonts-package") { _ in
+                self.catalog.value!.semaphore.wait()
+                defer { self.catalog.value!.semaphore.signal() }
+                for (_, item) in self.catalog.value!.fonts {
+                    item.isNew = false
+                    self.catalog.value!.update(item: item)
+                }
+            }
+            
             catalogChannel.on("font:description") { message in
                 if let data = message.payload as? [String:String] {
                     
@@ -217,8 +226,10 @@ class FontStore {
                     // include the fonts that we've already been told about, but that won't matter since they'll still be stored in
                     // the catalog awaiting download
 
+                    self.catalog.value!.semaphore.wait()
+                    defer { self.catalog.value!.semaphore.signal() }
+
                     let item = self.catalog.value!.addFont(uid: data["uid"]!,
-                                                           date: Double(data["created_at"]!)!,
                                                            familyName: data["font_family"]!,
                                                            style: data["font_style"]!,
                                                            downloadUrl: URL(string: data["download_url"]!)!)
@@ -237,17 +248,30 @@ class FontStore {
                         try? FileManager.default.removeItem(at: url)
                     }
                     
+                    self.catalog.value!.semaphore.wait()
+                    defer { self.catalog.value!.semaphore.signal() }
+
                     self.catalog.value?.remove(uid: uid)
                 }
             }
             
-            catalogChannel.on("update:complete") { _ in
+            catalogChannel.on("update:complete") { message in
                 
-                // Once the font list is up-to-date we join the user channel
-                
-                self.userChannel!.join()
-                let payload: Socket.Payload = self.catalog.value?.lastUserUpdate != nil ? ["last_update_date": self.catalog.value!.lastUserUpdate!] : [:]
-                self.userChannel!.send("update:request", payload: payload)
+                if let data = message.payload as? [String:String] {
+                    self.catalog.value!.lastCatalogUpdate = max(Double(data["transmitted_at"]!)!, self.catalog.value!.lastCatalogUpdate ?? 0)
+                    
+                    // Once the font list is up-to-date we join the user channel
+                    
+                    self.userChannel!.join()?.receive("ok") { _ in
+                        var payload:Socket.Payload = [:]
+                        if let date = self.catalog.value?.lastUserUpdate {
+                            payload = ["last_update_date": String(format: "%.0f", date)]
+                        }
+                        
+                        self.catalog.value!.saveCatalog()
+                        self.userChannel!.send("update:request", payload: payload)
+                    }
+                }
             }
             
             // User channel events
@@ -264,13 +288,21 @@ class FontStore {
                 }
             }
             
-            self.userChannel!.on("update:complete") { _ in
-                self.status.value = nil
+            self.userChannel!.on("update:complete") { message in
+                if let data = message.payload as? [String:String] {
+                    self.catalog.value!.lastUserUpdate = max(Double(data["transmitted_at"]!)!, self.catalog.value!.lastUserUpdate ?? 0)
+                    self.catalog.value!.saveCatalog()
+                    self.status.value = nil
+                }
             }
             
-            catalogChannel.join()
-            let payload: Socket.Payload = self.catalog.value?.lastCatalogUpdate != nil ? ["last_update_date": self.catalog.value!.lastCatalogUpdate!] : [:]
-            catalogChannel.send("update:request", payload: payload)
+            catalogChannel.join()?.receive("ok") { _ in
+                var payload:Socket.Payload = [:]
+                if let date = self.catalog.value?.lastCatalogUpdate {
+                    payload = ["last_update_date": String(format: "%.0f", date)]
+                }
+                catalogChannel.send("update:request", payload: payload)
+            }
         }
         
         socket.onDisconnect = { error in
@@ -309,7 +341,7 @@ class FontStore {
         
         downloadQueue.addOperation {
             
-            print("Downloading \(item.style)")
+            print("Downloading \(item.family) \(item.style)")
             
             // Function to return the destination path
             
@@ -342,7 +374,7 @@ class FontStore {
                 
                 guard let font = FontUtility.createCGFont(from: data) else { print("Unable to create font from data for \(item.family).\(item.style)"); return; }
                 guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); return; }
-                if let desc = CTFontManagerCreateFontDescriptorFromData(data as! CFData) as? NSFontDescriptor {
+                if let desc:NSFontDescriptor = CTFontManagerCreateFontDescriptorFromData(data! as CFData) {
                     let downloadItem = item
                     let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
                     downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
@@ -353,9 +385,18 @@ class FontStore {
                     // Update the catalog synchronously so that multiple download queues don't try to manipulate
                     // it at the same time.
                     
-                    DispatchQueue.main.sync {
-                        self.catalog.value?.update(item: downloadItem)
+                    self.catalog.value!.semaphore.wait()
+                    let oldItem = self.catalog.value!.fonts[item.uid]
+                    self.catalog.value?.update(item: downloadItem)
+                    self.catalog.value!.semaphore.signal()
+                    
+                    // If the item had been marked as installed while it was downloading, then we
+                    // install it now.
+                    
+                    if oldItem?.installed == true {
+                        self.installFont(uid: item.uid, installed: true)
                     }
+                    
                 } else {
                     print("Unable to create descriptors for \(item.family).\(item.style)")
                 }
@@ -379,7 +420,15 @@ class FontStore {
     }
     
     func installFont(uid: String, installed: Bool) {
+        catalog.value!.semaphore.wait()
+        defer {  catalog.value!.semaphore.signal() }
+        
         guard let item = catalog.value?.fonts[uid] else { return }
+        
+        // Do this synchrounously so that we don't try to update items from several places at once (such
+        // as the download finishing as we try to install)
+        
+        print("Installing  \(item.family) \(item.style)")
         
         if (item.encryptedUrl != nil) {
             if installed {

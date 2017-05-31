@@ -44,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func togglePopover(_ sender: AnyObject?) {
         detachableWindow.togglePopover(sender)
     }
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }

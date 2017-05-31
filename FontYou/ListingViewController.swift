@@ -172,17 +172,12 @@ class ListingViewController: NSViewController {
     }
     
     func isNew(item: CatalogItem) -> Bool {
-        if let fromDate = NSCalendar.current.date(byAdding: .day, value: -daysForNewFonts, to: Date()) {
-            return Date(timeIntervalSince1970: item.date) >= fromDate
-        }
-        
-        return false
+        return item.isNew
     }
     
     func hasFamilyNewFonts(familyName: String) -> Bool {
-        if let fromDate = NSCalendar.current.date(byAdding: .day, value: -daysForNewFonts, to: Date()),
-            let family = tree[familyName] {
-            if family.contains(where: { Date(timeIntervalSince1970: $0.date) >= fromDate }) {
+        if let family = tree[familyName] {
+            if family.contains(where: { $0.isNew }) {
                 return true
             }
             return false
@@ -335,7 +330,7 @@ class ListingViewController: NSViewController {
             }
             
             for (family, siblings) in tree {
-                tree[family] = siblings.sorted { $0.weight! > $1.weight! }
+                tree[family] = siblings.sorted { $0.weight ?? 0 > $1.weight ?? 0 }
             }
             
             self.tree = tree
@@ -353,10 +348,10 @@ class ListingViewController: NSViewController {
     
     func primaryFont(forFamily family:String) -> CatalogItem? {
         if let family = tree[family] {
-            let minSlant = family.reduce(family.first?.slant ?? 0) { return $0 < $1.slant! ? $0 : $1.slant! }
-            let leastSlanted = family.filter { return $0.slant! == minSlant }
-            let minWeight = leastSlanted.reduce(family.first?.weight! ?? 0) { return abs($0) < abs($1.weight!) ? $0 : $1.weight! }
-            let mostRegular = leastSlanted.first { return $0.weight! == minWeight }
+            let minSlant = family.reduce(family.first?.slant ?? 0) { return $0 < $1.slant ?? 0 ? $0 : $1.slant ?? 0 }
+            let leastSlanted = family.filter { return $0.slant ?? 0 == minSlant }
+            let minWeight = leastSlanted.reduce(family.first?.weight ?? 0) { return abs($0) < abs($1.weight ?? 0) ? $0 : $1.weight ?? 0 }
+            let mostRegular = leastSlanted.first { return $0.weight ?? 0 == minWeight }
             
             return mostRegular
         }
@@ -437,7 +432,9 @@ extension ListingViewController: NSOutlineViewDelegate {
             let view = outlineView.make(withIdentifier: "Family", owner: self) as? FamilyCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = family
-                textField.font =  NSFont.init(descriptor: primaryFont(forFamily: family)!.fontDescriptor!, size: 18)
+                if let desc = primaryFont(forFamily: family)?.fontDescriptor {
+                    textField.font =  NSFont.init(descriptor: desc, size: 18)
+                }
             }
             
             if let textField = view?.numFontsLabel {
