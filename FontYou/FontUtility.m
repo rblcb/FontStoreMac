@@ -10,6 +10,10 @@
 
 @implementation FontUtility
 
+
+NSString * ADD_KEY = @"CTFontManagerAvailableFontURLsAdded";
+NSString * REMOVE_KEY = @"CTFontManagerAvailableFontURLsRemoved";
+
 +(BOOL) activateFontFile:(NSURL *)fileUrl withScope:(CTFontManagerScope)scope {
     NSArray *fonts = @[fileUrl];
     CFArrayRef fontURLs = (__bridge CFArrayRef)fonts;
@@ -42,6 +46,11 @@
             
             if (error.code == 105) activationRes = YES;
         }
+    }
+
+    if (activationRes == YES) {
+        NSDictionary * nsInfo = [NSDictionary dictionaryWithObjectsAndKeys: ADD_KEY, fonts, nil];
+        ATSFontNotify(kATSFontNotifyActionFontsChanged, (__bridge void *)(nsInfo));
     }
 
     if (cfErrors != NULL) {
@@ -84,12 +93,16 @@
                 }
 
                 if(fontRes) {
+                    NSDictionary * nsInfo = [NSDictionary dictionaryWithObjectsAndKeys: REMOVE_KEY, fonts, nil];
+                    ATSFontNotify(kATSFontNotifyActionFontsChanged, (__bridge void *)(nsInfo));
                     return YES;
                 }
             }
         }
         return NO;
     } else {
+        NSDictionary * nsInfo = [NSDictionary dictionaryWithObjectsAndKeys: REMOVE_KEY, fonts, nil];
+        ATSFontNotify(kATSFontNotifyActionFontsChanged, (__bridge void *)(nsInfo));
         return YES;
     }
 }
