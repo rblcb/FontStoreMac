@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		220797571EDDFBB700B3C503 /* NonClickableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220797561EDDFBB700B3C503 /* NonClickableView.swift */; };
+		220797591EE1695700B3C503 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220797581EE1695700B3C503 /* Sparkle.framework */; };
+		2207975B1EE16F7200B3C503 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 220797581EE1695700B3C503 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2219CB6A1EB357DC0053EE86 /* Data+XOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219CB691EB357DC0053EE86 /* Data+XOR.swift */; };
 		221E636E1E3237A500944B1B /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E636D1E3237A500944B1B /* StyleKit.swift */; };
 		221E63731E36125700944B1B /* ArrowWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E63721E36125700944B1B /* ArrowWindow.swift */; };
@@ -171,6 +173,7 @@
 				22B16A3A1E7BFCD50012BAF0 /* ReactiveKit.framework in Embed Frameworks */,
 				22B16A381E7BFCD50012BAF0 /* Bond.framework in Embed Frameworks */,
 				22B16A3C1E7BFCD50012BAF0 /* Diff.framework in Embed Frameworks */,
+				2207975B1EE16F7200B3C503 /* Sparkle.framework in Embed Frameworks */,
 				22B16A211E7BEB650012BAF0 /* Starscream.framework in Embed Frameworks */,
 				22B16A231E7BEB650012BAF0 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -194,6 +197,7 @@
 
 /* Begin PBXFileReference section */
 		220797561EDDFBB700B3C503 /* NonClickableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonClickableView.swift; sourceTree = "<group>"; };
+		220797581EE1695700B3C503 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2219CB691EB357DC0053EE86 /* Data+XOR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+XOR.swift"; sourceTree = "<group>"; };
 		221E636D1E3237A500944B1B /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		221E63721E36125700944B1B /* ArrowWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowWindow.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 				22B16A3B1E7BFCD50012BAF0 /* Diff.framework in Frameworks */,
 				22B16A201E7BEB650012BAF0 /* Starscream.framework in Frameworks */,
 				22B16A221E7BEB650012BAF0 /* Alamofire.framework in Frameworks */,
+				220797591EE1695700B3C503 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +582,7 @@
 		226212121E9B93B000E61B9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220797581EE1695700B3C503 /* Sparkle.framework */,
 				226212131E9B93B000E61B9C /* Security.framework */,
 			);
 			name = Frameworks;
@@ -1050,6 +1056,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1071,6 +1078,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
