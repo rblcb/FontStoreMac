@@ -433,7 +433,7 @@ class FontStore {
         if (item.encryptedUrl != nil) {
             if installed {
                 let data = item.decryptedData
-                let installedUrl = Catalog.installedUrl().appendingPathComponent(item.uid)
+                let installedUrl = Catalog.installedUrl().appendingPathComponent(item.uid + ".otf")
                 try? FileManager.default.removeItem(at: installedUrl)
                 
                 do {
