@@ -219,7 +219,7 @@ struct Catalog: Mappable {
     
     static func appSupportUrl() -> URL {
         let dir = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .allDomainsMask, true).first!
-        let folderUrl = URL(fileURLWithPath: dir).appendingPathComponent("FontStore")
+        let folderUrl = URL(fileURLWithPath: dir).appendingPathComponent("Fontstore")
         if !FileManager.default.fileExists(atPath: folderUrl.absoluteString) {
             try? FileManager.default.createDirectory(at: folderUrl, withIntermediateDirectories: true, attributes: nil)
         }

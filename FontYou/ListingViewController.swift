@@ -135,7 +135,7 @@ class ListingViewController: NSViewController {
             let family = tree[familyName] {
             let allInstalled = isFamilyInstalled(familyName: familyName)
             for item in family {
-                FontStore.sharedInstance.requestFontInstall(uid: item.uid, installed: !allInstalled)
+                Fontstore.sharedInstance.requestFontInstall(uid: item.uid, installed: !allInstalled)
             }
         }
     }
@@ -145,7 +145,7 @@ class ListingViewController: NSViewController {
         let item = outlineView.item(atRow: row)
         
         if let catalogItem = item as? CatalogItem {
-            FontStore.sharedInstance.toggleInstall(uid: catalogItem.uid)
+            Fontstore.sharedInstance.toggleInstall(uid: catalogItem.uid)
         }
     }
     
@@ -190,7 +190,7 @@ class ListingViewController: NSViewController {
         
         // Watch for for store changes
         
-        FontStore.sharedInstance.catalog.observeNext { catalog in
+        Fontstore.sharedInstance.catalog.observeNext { catalog in
             if let catalog = catalog {
                 
                 catalog.fonts.observeOn(.main).observeNext { [weak self] update in
@@ -317,7 +317,7 @@ class ListingViewController: NSViewController {
     // Creates a tree of available fonts based on family name
     
     func updateTree() {
-        if let fonts = FontStore.sharedInstance.catalog.value?.fonts {
+        if let fonts = Fontstore.sharedInstance.catalog.value?.fonts {
         
             var tree: [String:[CatalogItem]] = [:]
             for (_, item) in fonts {
