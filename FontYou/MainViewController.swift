@@ -68,7 +68,7 @@ class MainViewController: NSViewController {
         
         // Observe for logins
         
-        FontStore.sharedInstance.authDetails.observeOn(.main).observeNext { [weak self] authDetails in
+        Fontstore.sharedInstance.authDetails.observeOn(.main).observeNext { [weak self] authDetails in
             if let authDetails = authDetails {
                 self?.usernameLabel.stringValue = "\(authDetails.firstName) \(authDetails.lastName)"
                 self?.usernameLabel.textColor = NSColor.white
@@ -91,13 +91,13 @@ class MainViewController: NSViewController {
         
         // Observer for catalog changes
         
-        FontStore.sharedInstance.catalog.observeOn(.main).observeNext { [weak self] catalog in
+        Fontstore.sharedInstance.catalog.observeOn(.main).observeNext { [weak self] catalog in
             if catalog != nil {
                 self?.currentViewController = self?.listingViewController
             }
         }.dispose(in: reactive.bag)
         
-        FontStore.sharedInstance.status.observeOn(.main).observeNext { [weak self] status in
+        Fontstore.sharedInstance.status.observeOn(.main).observeNext { [weak self] status in
             if let status = status {
                 self?.spinnerLabel.stringValue = status
                 self?.spinnerView.animator().isHidden = false
@@ -114,7 +114,7 @@ class MainViewController: NSViewController {
         
         // Try to log in from stored details
 
-        FontStore.sharedInstance.logonUsingStoredDetails()
+        Fontstore.sharedInstance.logonUsingStoredDetails()
     }
     
     func setUpMenu(loggedOn: Bool) {
@@ -130,7 +130,7 @@ class MainViewController: NSViewController {
     }
     
     @IBAction func goToAccount(_ sender: Any) {
-        if let url = FontStore.sharedInstance.authDetails.value?.accountUrl {
+        if let url = Fontstore.sharedInstance.authDetails.value?.accountUrl {
             NSWorkspace.shared().open(url)
         }
     }
@@ -151,11 +151,11 @@ class MainViewController: NSViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        FontStore.sharedInstance.logout()
+        Fontstore.sharedInstance.logout()
     }
     
     @IBAction func quit(_ sender: Any) {
-        FontStore.sharedInstance.catalog.value?.saveCatalog()
+        Fontstore.sharedInstance.catalog.value?.saveCatalog()
         NSApp.terminate(sender)
     }
 }

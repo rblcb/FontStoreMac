@@ -144,7 +144,7 @@
                 <menuItem title="Settings" id="CcL-vD-Rbz">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
-                <menuItem title="Visit FontStore" id="ymG-JC-0qh">
+                <menuItem title="Visit Fontstore" id="ymG-JC-0qh">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="visitFontstore:" target="-2" id="yEU-7f-085"/>

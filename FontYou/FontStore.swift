@@ -1,5 +1,5 @@
 //
-//  FontStore.swift
+//  Fontstore.swift
 //  FontYou
 //
 //  Created by Timothy Armes on 13/03/2017.
@@ -59,9 +59,9 @@ struct AuthDetails: Mappable {
     }
 }
 
-class FontStore {
+class Fontstore {
     
-    static let sharedInstance: FontStore = FontStore()
+    static let sharedInstance: Fontstore = Fontstore()
     
     var authDetails = Property<AuthDetails?>(nil)
     var catalog = Property<Catalog?>(nil)

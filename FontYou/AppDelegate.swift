@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     var detachableWindow: DetachableWindow!
-    let fontStore = FontStore.sharedInstance
+    let fontStore = Fontstore.sharedInstance
     
     let mainViewController = MainViewController(nibName: "MainViewController", bundle: nil)
 
