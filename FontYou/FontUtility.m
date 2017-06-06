@@ -15,6 +15,15 @@ NSString * ADD_KEY = @"CTFontManagerAvailableFontURLsAdded";
 NSString * REMOVE_KEY = @"CTFontManagerAvailableFontURLsRemoved";
 
 +(BOOL) activateFontFile:(NSURL *)fileUrl withScope:(CTFontManagerScope)scope {
+    // we do not activate an already activated font
+    if ([FontUtility isFontActive:fileUrl withScope:scope]) {
+        return YES;
+    }
+
+    if (CTFontManagerIsSupportedFont((__bridge CFURLRef)fileUrl) == NO) {
+        return NO;
+    }
+
     NSArray *fonts = @[fileUrl];
     CFArrayRef fontURLs = (__bridge CFArrayRef)fonts;
     CFArrayRef cfErrors = NULL;
@@ -38,13 +47,6 @@ NSString * REMOVE_KEY = @"CTFontManagerAvailableFontURLsRemoved";
             @catch (NSException *e) {
                 activationRes = NO;
             }
-        } else {
-            NSArray *errors = (__bridge NSArray*)cfErrors;
-            NSError *error = errors[0];
-            
-            // We allow error 105 (Font already activated for this scope)
-            
-            if (error.code == 105) activationRes = YES;
         }
     }
 
@@ -80,31 +82,27 @@ NSString * REMOVE_KEY = @"CTFontManagerAvailableFontURLsRemoved";
         if(errors == NULL || CFArrayGetCount(errors) == 0) {
             int fontScope = CTFontManagerGetScopeForURL((__bridge CFURLRef)fileUrl);
             if (fontScope == kCTFontManagerScopeNone) {
-                return YES;
+                res = YES;
             } else {
                 CFErrorRef fontError = NULL;
-                BOOL fontRes = YES;
+                res = YES;
 
                 @try {
-                    fontRes = CTFontManagerUnregisterFontsForURL((__bridge CFURLRef)fileUrl, fontScope, &fontError);
+                    res = CTFontManagerUnregisterFontsForURL((__bridge CFURLRef)fileUrl, fontScope, &fontError);
                 }
                 @catch (NSException *e) {
-                    fontRes = NO;
-                }
-
-                if(fontRes) {
-                    NSDictionary * nsInfo = [NSDictionary dictionaryWithObjectsAndKeys: REMOVE_KEY, fonts, nil];
-                    ATSFontNotify(kATSFontNotifyActionFontsChanged, (__bridge void *)(nsInfo));
-                    return YES;
+                    res = NO;
                 }
             }
         }
-        return NO;
-    } else {
+    }
+
+    if (res) {
         NSDictionary * nsInfo = [NSDictionary dictionaryWithObjectsAndKeys: REMOVE_KEY, fonts, nil];
         ATSFontNotify(kATSFontNotifyActionFontsChanged, (__bridge void *)(nsInfo));
-        return YES;
     }
+
+    return res;
 }
 
 +(BOOL) isFontActive:(NSURL *)fileUrl withScope:(CTFontManagerScope)expectedScope {
@@ -138,7 +136,7 @@ NSString * REMOVE_KEY = @"CTFontManagerAvailableFontURLsRemoved";
     if (font == NULL) {
         return NO;
     }
-
+    
     return CTFontManagerUnregisterGraphicsFont(font, NULL);
 }
 

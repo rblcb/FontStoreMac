@@ -181,7 +181,7 @@ class FontStore {
             DispatchQueue.global().async {
                 for (_, item) in catalog.fonts {
                     if let fontUrl = item.encryptedUrl, item.installed {
-                        FontUtility.deactivateFontFile(fontUrl, with: .user)
+                        FontUtility.deactivateFontFile(fontUrl, with: .session)
                     }
                 }
             }
@@ -433,13 +433,13 @@ class FontStore {
         if (item.encryptedUrl != nil) {
             if installed {
                 let data = item.decryptedData
-                let installedUrl = Catalog.installedUrl().appendingPathComponent(item.uid)
+                let installedUrl = Catalog.installedUrl().appendingPathComponent(item.uid + ".otf")
                 try? FileManager.default.removeItem(at: installedUrl)
                 
                 do {
                     try data!.write(to: installedUrl, options: .atomicWrite)
                     item.installedUrl = installedUrl
-                    FontUtility.activateFontFile(item.installedUrl, with: .user)
+                    FontUtility.activateFontFile(item.installedUrl, with: .session)
                 }
                 catch {
                     print("Unable to write to \(installedUrl)")
@@ -447,7 +447,7 @@ class FontStore {
                 
             } else {
                 if let installedUrl = item.installedUrl {
-                    FontUtility.deactivateFontFile(installedUrl, with: .user)
+                    FontUtility.deactivateFontFile(installedUrl, with: .session)
                     try? FileManager.default.removeItem(at: installedUrl)
                     item.installedUrl = nil
                 }
