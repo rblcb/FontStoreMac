@@ -94,4 +94,8 @@ class LogonViewController: NSViewController {
     @IBAction func forgottonPassword(_ sender: Any) {
         NSWorkspace.shared().open(URL(string: "http://www.fontstore.com/reset-password")!)
     }
+    
+    @IBAction func signUp(_ sender: Any) {
+        NSWorkspace.shared().open(URL(string: "http://www.fontstore.com/sign-up")!)
+    }
 }

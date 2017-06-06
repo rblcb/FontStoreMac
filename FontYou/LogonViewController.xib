@@ -136,6 +136,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="signUp:" target="-2" id="1mB-vb-vyX"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
