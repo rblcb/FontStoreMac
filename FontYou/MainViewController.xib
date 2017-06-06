@@ -144,9 +144,6 @@
                 <menuItem title="Settings" id="CcL-vD-Rbz">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
-                <menuItem title="Update App" id="0Xd-Yv-QFG">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
                 <menuItem title="Visit FontStore" id="ymG-JC-0qh">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
