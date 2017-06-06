@@ -135,6 +135,21 @@ class MainViewController: NSViewController {
         }
     }
     
+    @IBAction func visitFontstore(_ sender: Any) {
+        NSWorkspace.shared().open(URL(string: "http://www.fontstore.com")!)
+    }
+    
+    @IBAction func openHelp(_ sender: Any) {
+        NSWorkspace.shared().open(URL(string: "http://www.fontstore.com/help")!)
+    }
+    
+    @IBAction func openAbout(_ sender: Any) {
+        NSApp.orderFrontStandardAboutPanel(options: [
+            "ApplicationName": "Fontstore Installer",
+            "Copyright":"Copyright © 2017 - Fontstore Pte Ltd"
+        ])
+    }
+    
     @IBAction func logout(_ sender: Any) {
         FontStore.sharedInstance.logout()
     }
