@@ -89,13 +89,15 @@ class MainViewController: NSViewController {
             }
         }.dispose(in: reactive.bag)
         
-        // Observer for catalog changes
+        // Observe for catalog changes
         
         Fontstore.sharedInstance.catalog.observeOn(.main).observeNext { [weak self] catalog in
             if catalog != nil {
                 self?.currentViewController = self?.listingViewController
             }
         }.dispose(in: reactive.bag)
+        
+        // Observe for catalog status changes
         
         Fontstore.sharedInstance.status.observeOn(.main).observeNext { [weak self] status in
             if let status = status {
@@ -155,7 +157,6 @@ class MainViewController: NSViewController {
     }
     
     @IBAction func quit(_ sender: Any) {
-        Fontstore.sharedInstance.catalog.value?.saveCatalog()
         NSApp.terminate(sender)
     }
 }

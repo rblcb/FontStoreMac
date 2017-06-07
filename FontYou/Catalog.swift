@@ -61,7 +61,7 @@ class CatalogItem: Mappable {
             
             do {
                 var data = try Data.init(contentsOf: encryptedUrl)
-                data.xor(key: "lvcypbhupbdmg".data(using: .ascii)!)
+                data.xor(key: Constants.Keys.fontEncryptionKey.data(using: .ascii)!)
                 cachedDecryptedData = data
                 return cachedDecryptedData
             } catch {

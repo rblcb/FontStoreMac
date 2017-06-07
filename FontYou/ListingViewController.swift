@@ -418,7 +418,12 @@ extension ListingViewController: NSOutlineViewDelegate {
             let view = outlineView.make(withIdentifier: "Font", owner: self) as? FontCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = font.style
-                textField.font = NSFont.init(descriptor: font.fontDescriptor!, size: 16)
+                if let fontDescriptor = font.fontDescriptor {
+                    textField.font = NSFont.init(descriptor: fontDescriptor, size: 16)
+                }
+                else {
+                    print("ERROR: No font descriptor for \(font.family) \(font.style)")
+                }
             }
             
             view?.installButton.title = font.installed ? "Uninstall" : "Install"
