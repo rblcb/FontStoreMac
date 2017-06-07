@@ -315,6 +315,8 @@ class Fontstore {
                     self.catalog.value!.lastUserUpdate = max(Double(transmitted_at)!, self.catalog.value!.lastUserUpdate ?? 0)
                     self.catalog.value!.saveCatalog()
                     self.status.value = nil
+                    
+                    self.userChannel!.send("ready", payload: [:])
                 }
                 else {
                     print("ERROR: Unable to decode user update:complete")
