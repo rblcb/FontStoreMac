@@ -28,10 +28,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="dKT-Ok-smv">
-                    <rect key="frame" x="36" y="102" width="340" height="414"/>
+                    <rect key="frame" x="36" y="103" width="340" height="413"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qom-tB-fkQ">
-                            <rect key="frame" x="148" y="357" width="44" height="17"/>
+                            <rect key="frame" x="148" y="356" width="44" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LOGIN" id="JfC-qG-bGx">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -39,7 +39,7 @@
                             </textFieldCell>
                         </textField>
                         <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHO-ak-Abx" userLabel="Username Field">
-                            <rect key="frame" x="20" y="304" width="300" height="43"/>
+                            <rect key="frame" x="20" y="303" width="300" height="43"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="Abf-bu-MID"/>
                                 <constraint firstAttribute="height" constant="43" id="Flw-IB-sFX"/>
@@ -51,14 +51,14 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="KZC-K6-cVD" userLabel="Separator View">
-                            <rect key="frame" x="149" y="302" width="42" height="2"/>
+                            <rect key="frame" x="149" y="301" width="42" height="2"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="USF-E5-RFH"/>
                                 <constraint firstAttribute="width" constant="42" id="sIX-e1-0Th"/>
                             </constraints>
                         </customView>
                         <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwh-IY-2Yh" userLabel="Password Field">
-                            <rect key="frame" x="20" y="273" width="300" height="29"/>
+                            <rect key="frame" x="20" y="272" width="300" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="29" id="Ph5-rq-nqQ"/>
                             </constraints>
@@ -69,10 +69,10 @@
                             </textFieldCell>
                         </textField>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-ME-ZCq" userLabel="Remember Me Button">
-                            <rect key="frame" x="160" y="241" width="21" height="21"/>
+                            <rect key="frame" x="160" y="241" width="20" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="aEt-Je-8TZ"/>
-                                <constraint firstAttribute="width" constant="21" id="xSN-3m-MZu"/>
+                                <constraint firstAttribute="height" constant="20" id="aEt-Je-8TZ"/>
+                                <constraint firstAttribute="width" constant="20" id="xSN-3m-MZu"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="Checkbox" imagePosition="overlaps" alignment="center" alternateImage="CheckboxSelected" imageScaling="proportionallyDown" inset="2" id="OpQ-bz-Xxp">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -179,7 +179,7 @@
         <userDefaultsController representsSharedInstance="YES" id="7Qj-yo-M7V"/>
     </objects>
     <resources>
-        <image name="Checkbox" width="42" height="42"/>
-        <image name="CheckboxSelected" width="42" height="42"/>
+        <image name="Checkbox" width="40" height="40"/>
+        <image name="CheckboxSelected" width="40" height="40"/>
     </resources>
 </document>
