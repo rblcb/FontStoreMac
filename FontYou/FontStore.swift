@@ -163,14 +163,20 @@ class Fontstore {
         }
     }
     
+    func sendDisconnectMessage(reason: String) {
+         userChannel!.send("disconnect", payload: ["reason": reason])
+    }
+    
     func logout() {
-        self.authDetails.value = nil
+        sendDisconnectMessage(reason: "User has logged out.")
+        
+        authDetails.value = nil
         socket?.disconnect()
         socket = nil
         
         status.value = nil
         
-        try? FileManager.default.removeItem(at: preferencesUrl())
+        try? FileManager.default.removeItem(at: self.preferencesUrl())
         
         downloadQueue.cancelAllOperations()
         
@@ -188,7 +194,7 @@ class Fontstore {
         
         catalog.value = nil
     }
-    
+
     func preferencesUrl() -> URL {
         let dir = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .allDomainsMask, true).first!
         return URL(fileURLWithPath: dir).appendingPathComponent("Preferences/com.fontstore.logon.json")

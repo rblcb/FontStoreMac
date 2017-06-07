@@ -48,5 +48,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         Fontstore.sharedInstance.catalog.value?.saveCatalog()
         Fontstore.sharedInstance.activateInstalledFonts(activate: false)
+        Fontstore.sharedInstance.sendDisconnectMessage(reason: "User has quit application.")
     }
 }
