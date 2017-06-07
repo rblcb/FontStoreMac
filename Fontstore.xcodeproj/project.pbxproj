@@ -300,7 +300,7 @@
 		2262120F1E9B930D00E61B9C /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
 		226212101E9B930D00E61B9C /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		226212131E9B93B000E61B9C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		2275FE781E76A91000B357E7 /* FontStore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FontStore-Bridging-Header.h"; sourceTree = "<group>"; };
+		2275FE781E76A91000B357E7 /* Fontstore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fontstore-Bridging-Header.h"; sourceTree = "<group>"; };
 		2275FE791E76A91000B357E7 /* FontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontUtility.h; sourceTree = "<group>"; };
 		2275FE7A1E76A91000B357E7 /* FontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontUtility.m; sourceTree = "<group>"; };
 		2275FE7C1E76A98A00B357E7 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
@@ -516,7 +516,7 @@
 				2275FE771E76A8F400B357E7 /* FontUtility */,
 				221F85E11E978A93001097A8 /* Spinner Images */,
 				22B16A251E7BEB850012BAF0 /* Frameworks */,
-				2275FE781E76A91000B357E7 /* FontStore-Bridging-Header.h */,
+				2275FE781E76A91000B357E7 /* Fontstore-Bridging-Header.h */,
 				22DA52A61E7A9EA200697725 /* AppFonts */,
 				2275FE7C1E76A98A00B357E7 /* Fonts */,
 				2223DE1E1E30F74800D7B0FE /* Assets.xcassets */,
@@ -746,7 +746,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */;
+			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "Fontstore" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1060,9 +1060,9 @@
 				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontStore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.fontstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/FontStore-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/Fontstore-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1082,9 +1082,9 @@
 				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontStore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.fontstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/FontStore-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/Fontstore-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1101,7 +1101,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYouTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontStore.app/Contents/MacOS/FontStore";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fontstore.temp_caseinsensitive_rename.app/Contents/MacOS/Fontstore.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -1117,7 +1117,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.FontYouTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontStore.app/Contents/MacOS/FontStore";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fontstore.temp_caseinsensitive_rename.app/Contents/MacOS/Fontstore.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -1154,7 +1154,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */ = {
+		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "Fontstore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE3A1E30F74900D7B0FE /* Debug */,
