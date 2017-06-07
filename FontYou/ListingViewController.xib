@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ListingViewController" customModule="FontYou" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ListingViewController" customModule="FontStore" customModuleProvider="target">
             <connections>
                 <outlet property="allButton" destination="Ahh-XS-Qfa" id="NWm-wx-Yys"/>
                 <outlet property="indicatorView" destination="XHr-Rg-qyM" id="mz4-Ic-nJy"/>
@@ -30,10 +30,10 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yq1-s3-dPS" userLabel="Header View">
                     <rect key="frame" x="0.0" y="402" width="480" height="40"/>
                     <subviews>
-                        <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHr-Rg-qyM" customClass="IndicatorStackView" customModule="FontYou" customModuleProvider="target">
+                        <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHr-Rg-qyM" customClass="IndicatorStackView" customModule="FontStore" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                             <subviews>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qEo-mt-gTm" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qEo-mt-gTm" customClass="TabButton" customModule="FontStore" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="4" width="148.5" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="Installed (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="2QV-eQ-T5J">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -43,7 +43,7 @@
                                         <action selector="displayInstalled:" target="-2" id="umE-U7-ZtS"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAz-9M-lzQ" userLabel="New (1)" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAz-9M-lzQ" userLabel="New (1)" customClass="TabButton" customModule="FontStore" customModuleProvider="target">
                                     <rect key="frame" x="156.5" y="4" width="100.5" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="New (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="a4U-00-a0k">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -53,7 +53,7 @@
                                         <action selector="displayNew:" target="-2" id="m8b-bo-bhx"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-XS-Qfa" userLabel="All Fonts (1)" customClass="TabButton" customModule="FontYou" customModuleProvider="target">
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-XS-Qfa" userLabel="All Fonts (1)" customClass="TabButton" customModule="FontStore" customModuleProvider="target">
                                     <rect key="frame" x="265" y="4" width="153" height="32"/>
                                     <buttonCell key="cell" type="bevel" title="All Fonts (1)" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="HAx-1I-M27">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -108,7 +108,7 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DOX-Ek-Wwx" userLabel="Search View">
                     <rect key="frame" x="0.0" y="315" width="480" height="87"/>
                     <subviews>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="NA2-VU-4Zd" userLabel="Search Background" customClass="RoundedView" customModule="FontYou" customModuleProvider="target">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="NA2-VU-4Zd" userLabel="Search Background" customClass="RoundedView" customModule="FontStore" customModuleProvider="target">
                             <rect key="frame" x="14" y="37" width="452" height="30"/>
                             <subviews>
                                 <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciq-tC-t2R">
@@ -157,7 +157,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="315"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="dEy-IU-0nh" id="o9o-Nf-HHg" customClass="OutlineView" customModule="FontYou" customModuleProvider="target">
+                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="dEy-IU-0nh" id="o9o-Nf-HHg" customClass="OutlineView" customModule="FontStore" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="315"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -176,7 +176,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="Font" id="XGE-ea-f9a" userLabel="Font Cell View" customClass="FontCellView" customModule="FontYou" customModuleProvider="target">
+                                            <tableCellView identifier="Font" id="XGE-ea-f9a" userLabel="Font Cell View" customClass="FontCellView" customModule="FontStore" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -193,13 +193,13 @@
                                                             </textField>
                                                         </beginningViews>
                                                         <endViews>
-                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ra-vw-IDG" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
-                                                                <rect key="frame" x="418" y="2.5" width="46" height="25"/>
+                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ra-vw-IDG" customClass="RoundedButton" customModule="FontStore" customModuleProvider="target">
+                                                                <rect key="frame" x="402" y="2.5" width="62" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="cVp-en-CVd"/>
                                                                     <constraint firstAttribute="width" constant="80" id="lg7-sn-lMh"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="square" title="Install" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oV-W6-DaH" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
+                                                                <buttonCell key="cell" type="square" title="INSTALL" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oV-W6-DaH" customClass="RoundedButtonCell" customModule="FontStore" customModuleProvider="target">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
@@ -233,7 +233,7 @@
                                                     <outlet property="nameLabel" destination="YRH-YI-htK" id="nNz-53-LbG"/>
                                                 </connections>
                                             </tableCellView>
-                                            <tableCellView identifier="Family" id="vGQ-xw-FZ9" customClass="FamilyCellView" customModule="FontYou" customModuleProvider="target">
+                                            <tableCellView identifier="Family" id="vGQ-xw-FZ9" customClass="FamilyCellView" customModule="FontStore" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="40" width="480" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -251,20 +251,20 @@
                                                         </beginningViews>
                                                         <endViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qag-cM-Ait">
-                                                                <rect key="frame" x="353" y="8" width="59" height="14"/>
-                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Num fonts" id="SYZ-bz-35c">
-                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                <rect key="frame" x="329" y="6.5" width="67" height="17"/>
+                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Num fonts" id="SYZ-bz-35c">
+                                                                    <font key="font" metaFont="system"/>
                                                                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
-                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0d-61-VmP" customClass="RoundedButton" customModule="FontYou" customModuleProvider="target">
-                                                                <rect key="frame" x="418" y="2.5" width="46" height="25"/>
+                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0d-61-VmP" customClass="RoundedButton" customModule="FontStore" customModuleProvider="target">
+                                                                <rect key="frame" x="402" y="2.5" width="62" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="coU-if-cta"/>
                                                                     <constraint firstAttribute="width" constant="80" id="hBn-cA-F2G"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="square" title="Install" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="TV9-Jl-wEj" customClass="RoundedButtonCell" customModule="FontYou" customModuleProvider="target">
+                                                                <buttonCell key="cell" type="square" title="INSTALL" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="TV9-Jl-wEj" customClass="RoundedButtonCell" customModule="FontStore" customModuleProvider="target">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>

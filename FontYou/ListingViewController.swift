@@ -426,7 +426,7 @@ extension ListingViewController: NSOutlineViewDelegate {
                 }
             }
             
-            view?.installButton.title = font.installed ? "Uninstall" : "Install"
+            view?.installButton.title = font.installed ? "UNINSTALL" : "INSTALL"
             view?.installButton.rectangleColor = font.installed ? StyleKit.textGrey : StyleKit.primary
             view?.installButton.highlightColor = font.installed ? StyleKit.primary : StyleKit.textGrey
             view?.installButton.textColor = NSColor.white
@@ -448,7 +448,7 @@ extension ListingViewController: NSOutlineViewDelegate {
             }
             
             let installed = isFamilyInstalled(familyName: family)
-            view?.installButton.title = installed ? "Uninstall" : "Install"
+            view?.installButton.title = installed ? "UNINSTALL" : "INSTALL"
             view?.installButton.rectangleColor = installed ? StyleKit.textGrey : StyleKit.primary
             view?.installButton.highlightColor = installed ? StyleKit.primary : StyleKit.textGrey
             view?.installButton.textColor = NSColor.white

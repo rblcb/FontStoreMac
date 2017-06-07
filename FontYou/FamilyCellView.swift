@@ -19,7 +19,7 @@ class FamilyCellView: NSTableCellView {
         numFontsLabel.textColor = StyleKit.textGrey
         installButton.rectangleColor = StyleKit.textGrey
         
-        numFontsLabel.font = NSFont(name: "Litmus-Regular", size: 9)
+        numFontsLabel.font = NSFont(name: "Litmus-Regular", size: 11)
         installButton.font = NSFont(name: "Litmus-Regular", size: 12)
     }
 }
