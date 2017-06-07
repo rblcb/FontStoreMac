@@ -106,7 +106,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pkz-vQ-w1e" userLabel="Forgotten Button">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pkz-vQ-w1e" userLabel="Forgotten Button" customClass="HoverButton" customModule="FontStore" customModuleProvider="target">
                             <rect key="frame" x="86" y="121" width="168" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="QoC-Fq-4JM"/>
@@ -127,7 +127,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CWx-ba-omb" userLabel="Signup Button">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CWx-ba-omb" userLabel="Signup Button" customClass="HoverButton" customModule="FontStore" customModuleProvider="target">
                             <rect key="frame" x="142" y="34" width="57" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="8rD-XC-iD2"/>

@@ -103,6 +103,7 @@
 		2223DE591E312E4F00D7B0FE /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE571E312E4F00D7B0FE /* ListingViewController.swift */; };
 		2223DE5A1E312E4F00D7B0FE /* ListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2223DE581E312E4F00D7B0FE /* ListingViewController.xib */; };
 		2223DE631E31531C00D7B0FE /* NSView+BackgroundColored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */; };
+		222FEEE41EE8797B0045B4CB /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222FEEE31EE8797B0045B4CB /* HoverButton.swift */; };
 		226212111E9B930D00E61B9C /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 226212101E9B930D00E61B9C /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		226212141E9B93B000E61B9C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226212131E9B93B000E61B9C /* Security.framework */; };
 		2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE7A1E76A91000B357E7 /* FontUtility.m */; };
@@ -297,6 +298,7 @@
 		2223DE571E312E4F00D7B0FE /* ListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		2223DE581E312E4F00D7B0FE /* ListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListingViewController.xib; sourceTree = "<group>"; };
 		2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+BackgroundColored.swift"; sourceTree = "<group>"; };
+		222FEEE31EE8797B0045B4CB /* HoverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoverButton.swift; sourceTree = "<group>"; };
 		2262120F1E9B930D00E61B9C /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
 		226212101E9B930D00E61B9C /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		226212131E9B93B000E61B9C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -380,6 +382,7 @@
 				22B16A3D1E7FD7550012BAF0 /* SecureTextFieldCell.swift */,
 				221F86C01E978C70001097A8 /* AnimatedImageView.swift */,
 				220797561EDDFBB700B3C503 /* NonClickableView.swift */,
+				222FEEE31EE8797B0045B4CB /* HoverButton.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				2283BBB91E793C6F0040A34E /* IndicatorStackView.swift in Sources */,
 				2223DE631E31531C00D7B0FE /* NSView+BackgroundColored.swift in Sources */,
 				226212111E9B930D00E61B9C /* PFMoveApplication.m in Sources */,
+				222FEEE41EE8797B0045B4CB /* HoverButton.swift in Sources */,
 				2283BBB31E7711DD0040A34E /* FontCellView.swift in Sources */,
 				2223DE471E30FA8A00D7B0FE /* MainViewController.swift in Sources */,
 				2283BBB71E77D31F0040A34E /* RoundedButton.swift in Sources */,

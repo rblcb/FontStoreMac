@@ -22,8 +22,8 @@ class LogonViewController: NSViewController {
     @IBOutlet weak var rememberMeButton: NSButton!
     
     @IBOutlet weak var loginButton: RoundedButton!
-    @IBOutlet weak var forgottenButton: NSButton!
-    @IBOutlet weak var signupButton: NSButton!
+    @IBOutlet weak var forgottenButton: HoverButton!
+    @IBOutlet weak var signupButton: HoverButton!
     
     let emailAddress = Observable<String>("")
     let password = Observable<String>("")
@@ -66,6 +66,11 @@ class LogonViewController: NSViewController {
         // Set text
         
         forgottenButton.attributedTitle = NSAttributedString(string: "I've forgotten my password", attributes: attributes)
+        
+        // Set up hover cursors
+        
+        forgottenButton.cursor = NSCursor.pointingHand()
+        signupButton.cursor = NSCursor.pointingHand()
         
         // Set up bindings
         
