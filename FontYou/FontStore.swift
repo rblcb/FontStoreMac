@@ -228,7 +228,8 @@ class Fontstore {
                 if let uid = data["uid"] as? String,
                     let familyName = data["font_family"] as? String,
                     let style = data["font_style"] as? String,
-                    let downloadUrl = data["download_url"] as? String {
+                    let downloadUrl = data["download_url"] as? String,
+                    let orderNumber = data["font_number"] as? Int {
                     
                     // Note that we add items *before* they are downloaded. This allows to save the catalog as the
                     // downloads proceed. In the event of en error or disconnection, the next request to the server won't
@@ -240,6 +241,7 @@ class Fontstore {
 
                     let item = self.catalog.value!.addFont(uid: uid,
                                                            familyName: familyName,
+                                                           orderNumber: orderNumber,
                                                            style: style,
                                                            downloadUrl: URL(string: downloadUrl))
                     

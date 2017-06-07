@@ -330,7 +330,7 @@ class ListingViewController: NSViewController {
             }
             
             for (family, siblings) in tree {
-                tree[family] = siblings.sorted { $0.weight ?? 0 > $1.weight ?? 0 }
+                tree[family] = siblings.sorted { $0.orderNumber ?? 0 < $1.orderNumber ?? 0 }
             }
             
             self.tree = tree

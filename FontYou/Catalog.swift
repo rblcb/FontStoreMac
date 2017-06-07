@@ -39,6 +39,7 @@ class CatalogItem: Mappable {
     var style: String
     var weight: Float?
     var slant: Float?
+    var orderNumber: Int?
     var installed: Bool
     var downloadUrl: URL?
     var installedUrl: URL?
@@ -71,11 +72,12 @@ class CatalogItem: Mappable {
         }
     }
     
-    init(uid: String, family: String, style: String) {
+    init(uid: String, family: String, style: String, orderNumber: Int) {
         self.uid = uid
         self.isNew = true
         self.family = family
         self.style = style
+        self.orderNumber = orderNumber
         self.installed = false
     }
 
@@ -84,6 +86,7 @@ class CatalogItem: Mappable {
         family = ""
         style = ""
         isNew = false
+        orderNumber = 0
         installed = false
     }
 
@@ -94,6 +97,7 @@ class CatalogItem: Mappable {
         style <- map["style"]
         weight <- map["weight"]
         slant <- map["slant"]
+        orderNumber <- map["orderNumber"]
         installed <- map["installed"]
         downloadUrl <- (map["downloadUrl"], URLTransform(shouldEncodeURLString: false))
         installedUrl <- (map["installedUrl"], transformURLIfExists)
@@ -130,6 +134,7 @@ struct Catalog: Mappable {
     @discardableResult
     mutating func addFont(uid: String,
                           familyName: String,
+                          orderNumber: Int,
                           style: String,
                           weight: Float? = nil,
                           slant: Float? = nil,
@@ -148,7 +153,7 @@ struct Catalog: Mappable {
             item!.encryptedUrl = nil
         } else {
             // We don't have this item in the catalog - we need to add it
-            item = CatalogItem(uid: uid, family: familyName, style: style)
+            item = CatalogItem(uid: uid, family: familyName, style: style, orderNumber: orderNumber)
             item!.weight = weight
             item!.slant = slant
             item!.downloadUrl = downloadUrl
