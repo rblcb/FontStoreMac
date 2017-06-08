@@ -54,6 +54,12 @@ struct AuthDetails: Mappable {
     }
 }
 
+enum FontstoreNotification {
+    case fontAdded(String, String)
+    case fontInstalled(String, String)
+    case fontUninstalled(String, String)
+}
+
 class Fontstore {
     
     static let sharedInstance: Fontstore = Fontstore()
@@ -62,6 +68,7 @@ class Fontstore {
     var catalog = Property<Catalog?>(nil)
     var status = Property<String?>(nil)
     var error = Property<String?>(nil)
+    var notification = Property<FontstoreNotification?>(nil)
     let downloadQueue = OperationQueue()
     
     fileprivate var socket: Socket! = nil
@@ -252,7 +259,7 @@ class Fontstore {
 
                     self.catalog.value!.semaphore.wait()
                     defer { self.catalog.value!.semaphore.signal() }
-
+                    
                     let item = self.catalog.value!.addFont(uid: uid,
                                                            familyName: familyName,
                                                            orderNumber: orderNumber,
@@ -453,6 +460,8 @@ class Fontstore {
                     
                     if oldItem?.installed == true {
                         self.installFontAndUpdateCatalog(uid: item.uid, installed: true)
+                    } else {
+                        self.notification.value = .fontAdded(item.family, item.style)
                     }
                     
                 } else {
@@ -516,8 +525,17 @@ class Fontstore {
         
         self.installFont(item: item, installed: installed)
         
-        item.installed = installed
-        catalog.value!.update(item: item)
+        if item.installed != installed {
+            
+            item.installed = installed
+            catalog.value!.update(item: item)
+            
+            if installed {
+                notification.value = .fontInstalled(item.family, item.style)
+            } else {
+                notification.value = .fontUninstalled(item.family, item.style)
+            }
+        }
     }
     
     func activateInstalledFonts(activate: Bool) {

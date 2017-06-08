@@ -35,10 +35,40 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         detachableWindow.maxSize = NSSize(width: 600, height: 1500)
         
         // Set up status bar icon
+        
         if let button = statusItem.button {
             button.image = NSImage(named: "MenuBarIcon")
             button.target = detachableWindow
         }
+        
+        // Set up desktop notifications
+        
+        NSUserNotificationCenter.default.delegate = self
+        
+        Fontstore.sharedInstance.notification.observeOn(.main).observeNext { notification in
+            
+            let delegate = NSApp.delegate as! AppDelegate
+            
+            if let notification = notification {
+                switch notification {
+                case .fontAdded(let family, let style):
+                    delegate.showNotification(title: "New font available", text: "\(family) \(style)")
+                case .fontInstalled(let family, let style):
+                    delegate.showNotification(title: "Font installed", text: "\(family) \(style)")
+                case .fontUninstalled(let family, let style):
+                    delegate.showNotification(title: "Font uninstalled", text: "\(family) \(style)")
+                }
+            }
+
+        }.dispose(in: reactive.bag)
+    }
+    
+    func showNotification(title: String, text: String) -> Void {
+        let notification = NSUserNotification()
+        notification.title = title
+        notification.informativeText = text
+        
+        NSUserNotificationCenter.default.deliver(notification)
     }
 
     func togglePopover(_ sender: AnyObject?) {
@@ -50,4 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Fontstore.sharedInstance.activateInstalledFonts(activate: false)
         Fontstore.sharedInstance.sendDisconnectMessage(reason: "User has quit application.")
     }
+}
+
+extension AppDelegate: NSUserNotificationCenterDelegate {
 }
