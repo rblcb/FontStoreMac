@@ -185,10 +185,10 @@
                                                         <beginningViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-YI-htK">
                                                                 <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
-                                                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" title="Name" id="rD2-D7-lGQ">
+                                                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" title="Name" id="rD2-D7-lGQ" customClass="VerticallyCenteredTextFieldCell" customModule="Fontstore" customModuleProvider="target">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
                                                         </beginningViews>
@@ -241,11 +241,11 @@
                                                         <rect key="frame" x="8" y="5" width="464" height="30"/>
                                                         <beginningViews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-v7-CnL">
-                                                                <rect key="frame" x="-2" y="6.5" width="40" height="17"/>
-                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Name" id="CmK-lQ-uDB">
+                                                                <rect key="frame" x="0.0" y="6.5" width="40" height="17"/>
+                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Name" id="CmK-lQ-uDB" customClass="VerticallyCenteredTextFieldCell" customModule="Fontstore" customModuleProvider="target">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" red="1" green="0.11124115078529284" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </textFieldCell>
                                                             </textField>
                                                         </beginningViews>
