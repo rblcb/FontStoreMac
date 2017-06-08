@@ -114,6 +114,17 @@ class MainViewController: NSViewController {
             }
         }.dispose(in: reactive.bag)
         
+        // Observe for errors
+        
+        Fontstore.sharedInstance.error.observeOn(.main).observeNext { [weak self] errorMessage in
+            if let errorMessage = errorMessage {
+                let alert = NSAlert()
+                alert.messageText = errorMessage
+                alert.beginSheetModal(for: self!.view.window!)
+            }
+        }.dispose(in: reactive.bag)
+        
+        
         // Try to log in from stored details
 
         Fontstore.sharedInstance.logonUsingStoredDetails()

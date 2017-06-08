@@ -61,6 +61,7 @@ class Fontstore {
     var authDetails = Property<AuthDetails?>(nil)
     var catalog = Property<Catalog?>(nil)
     var status = Property<String?>(nil)
+    var error = Property<String?>(nil)
     let downloadQueue = OperationQueue()
     
     fileprivate var socket: Socket! = nil
@@ -119,7 +120,20 @@ class Fontstore {
                     }
                     
                 case .failure(let error):
+                    
+                    var errorMessage = error.localizedDescription
+                    
+                    // Try to get the underlying error message sent back from the server
+                    
+                    if let data = response.data {
+                        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: String],
+                            let error = json["message"] {
+                            errorMessage = error
+                        }
+                    }
+                    
                     self.status.value = nil
+                    self.error.value = errorMessage
                     print(error)
                 }
         }
