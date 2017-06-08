@@ -82,6 +82,7 @@ class ListingViewController: NSViewController {
         bindViewModel()
     }
     
+    var prevDisplayed: DisplayedInfo = .installed
     var displayed: DisplayedInfo = .installed {
         didSet {
             switch displayed {
@@ -124,7 +125,14 @@ class ListingViewController: NSViewController {
     }
     
     @IBAction func displaySearch(_ sender: Any) {
-        displayed = .search
+        if displayed != .search {
+            prevDisplayed = displayed
+            displayed = .search
+        }
+        else {
+            // Return to previous display when clicking again
+            displayed = prevDisplayed
+        }
     }
 
     @IBAction func installedFamilyPressed(_ sender: Any) {
