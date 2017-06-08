@@ -3,61 +3,61 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_16.png",
+      "filename" : "FS_icone_16.png",
       "scale" : "1x"
     },
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_32.png",
+      "filename" : "FS_icone_32.png",
       "scale" : "2x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_32-1.png",
+      "filename" : "FS_icone_32-1.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_64.png",
+      "filename" : "FS_icone_64.png",
       "scale" : "2x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_128.png",
+      "filename" : "FS_icone_128.png",
       "scale" : "1x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_256-1.png",
+      "filename" : "FS_icone_256.png",
       "scale" : "2x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_256.png",
+      "filename" : "FS_icone_256-1.png",
       "scale" : "1x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_512-1.png",
+      "filename" : "FS_icone_512.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_512.png",
+      "filename" : "FS_icone_512-1.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Icon_Finder_1024.png",
+      "filename" : "FS_icone_1024.png",
       "scale" : "2x"
     }
   ],
