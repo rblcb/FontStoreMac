@@ -285,7 +285,7 @@ class ListingViewController: NSViewController {
             filteredfontFamilies = fontFamilies.filter { hasFamilyNewFonts(familyName: $0) }
         case .search:
             if searchField.stringValue.characters.count > 0 {
-                filteredfontFamilies = fontFamilies.filter { $0.localizedCaseInsensitiveContains(searchField.stringValue) }
+                filteredfontFamilies = fontFamilies.filter { $0.caseInsensitiveHasPrefix(searchField.stringValue) }
             } else {
                 filteredfontFamilies = fontFamilies
             }
