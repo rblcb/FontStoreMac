@@ -148,6 +148,12 @@ class MainViewController: NSViewController {
         }
     }
     
+    @IBAction func openSettings(_ sender: Any) {
+        if let url = Fontstore.sharedInstance.authDetails.value?.settingsUrl {
+            NSWorkspace.shared().open(url)
+        }
+    }
+    
     @IBAction func visitFontstore(_ sender: Any) {
         NSWorkspace.shared().open(URL(string: "http://www.fontstore.com")!)
     }

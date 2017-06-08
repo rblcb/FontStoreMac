@@ -7,7 +7,7 @@
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="FontStore" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="Fontstore" customModuleProvider="target">
             <connections>
                 <outlet property="accountMenuItem" destination="4Mk-Jf-eLp" id="xCS-zr-NZA"/>
                 <outlet property="contentView" destination="wJP-4v-ojp" id="A8V-wE-f0b"/>
@@ -56,7 +56,7 @@
                             </textFieldCell>
                         </textField>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AUP-JE-WXU">
-                            <rect key="frame" x="14" y="13" width="250" height="30"/>
+                            <rect key="frame" x="14" y="13" width="110" height="20"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Logo" id="Qvl-w4-gtT"/>
                         </imageView>
                     </subviews>
@@ -74,13 +74,13 @@
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJP-4v-ojp">
                     <rect key="frame" x="0.0" y="0.0" width="382" height="410"/>
                 </customView>
-                <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sBq-WO-boa" userLabel="SpinnerView" customClass="NonClickableView" customModule="FontStore" customModuleProvider="target">
+                <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sBq-WO-boa" userLabel="SpinnerView" customClass="NonClickableView" customModule="Fontstore" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="382" height="410"/>
                     <subviews>
                         <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-bs-1h2">
                             <rect key="frame" x="147" y="168" width="88" height="75"/>
                             <subviews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWt-l2-Ecn" customClass="AnimatedImageView" customModule="FontStore" customModuleProvider="target">
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWt-l2-Ecn" customClass="AnimatedImageView" customModule="Fontstore" customModuleProvider="target">
                                     <rect key="frame" x="9" y="25" width="70" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="70" id="Un6-Bz-Wow"/>
@@ -143,6 +143,9 @@
                 </menuItem>
                 <menuItem title="Settings" id="CcL-vD-Rbz">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openSettings:" target="-2" id="iPo-bS-zoj"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Visit Fontstore" id="ymG-JC-0qh">
                     <modifierMask key="keyEquivalentModifierMask"/>
@@ -180,7 +183,7 @@
         </menu>
     </objects>
     <resources>
-        <image name="Logo" width="250" height="30"/>
+        <image name="Logo" width="220" height="40"/>
         <image name="MenuIconWhite" width="20" height="10"/>
     </resources>
 </document>
