@@ -189,8 +189,29 @@ class Fontstore {
     }
     
     func logout() {
+        
+        downloadQueue.cancelAllOperations()
+        
+        // Disactivate fonts
+        
+        if let fonts = catalog.value?.fonts {
+            DispatchQueue.global().async { [weak self] in
+                for (_, item) in fonts {
+                    if item.installed {
+                        self?.installFont(item: item, installed: false)
+                    }
+                }
+            }
+        }
+        
+        catalog.value = nil
+        
+        // Tell the server
+        
         sendDisconnectMessage(reason: "User has logged out.")
         
+        // Remove login details
+
         authDetails.value = nil
         socket?.disconnect()
         socket = nil
@@ -198,22 +219,7 @@ class Fontstore {
         status.value = nil
         
         try? FileManager.default.removeItem(at: self.preferencesUrl())
-        
-        downloadQueue.cancelAllOperations()
-        
-        // Disactivate fonts
-        
-        if let catalog = catalog.value {
-            DispatchQueue.global().async {
-                for (_, item) in catalog.fonts {
-                    if let fontUrl = item.encryptedUrl, item.installed {
-                        FontUtility.deactivateFontFile(fontUrl, with: .session)
-                    }
-                }
-            }
-        }
-        
-        catalog.value = nil
+
     }
 
     func preferencesUrl() -> URL {
