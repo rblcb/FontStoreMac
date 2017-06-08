@@ -37,8 +37,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Set up status bar icon
         
         if let button = statusItem.button {
-            button.image = NSImage(named: "MenuBarIcon")
+            button.image = NSImage(named: "MenuBarIconGrey")
             button.target = detachableWindow
+        
+            // Observe for logins and change menu bar icon appropriately
+            
+            Fontstore.sharedInstance.authDetails.observeOn(.main).observeNext { [weak self] authDetails in
+                if authDetails != nil {
+                    button.image = NSImage(named: "MenuBarIcon")
+                } else {
+                    button.image = NSImage(named: "MenuBarIconGrey")
+                }
+            }.dispose(in: reactive.bag)
         }
         
         // Set up desktop notifications
