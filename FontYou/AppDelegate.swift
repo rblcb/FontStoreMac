@@ -34,6 +34,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         detachableWindow.minSize = NSSize(width: 200, height: 400)
         detachableWindow.maxSize = NSSize(width: 600, height: 1500)
         
+        // Change window's corner radius
+        
+        detachableWindow.backgroundColor = NSColor.clear
+        detachableWindow.isOpaque = false
+        detachableWindow.contentView!.wantsLayer = true
+        detachableWindow.contentView!.layer!.cornerRadius = 15
+        detachableWindow.contentView!.layer!.backgroundColor = StyleKit.lightGrey.cgColor
+    
         // Set up status bar icon
         
         if let button = statusItem.button {
@@ -42,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
             // Observe for logins and change menu bar icon appropriately
             
-            Fontstore.sharedInstance.authDetails.observeOn(.main).observeNext { [weak self] authDetails in
+            Fontstore.sharedInstance.authDetails.observeOn(.main).observeNext { authDetails in
                 if authDetails != nil {
                     button.image = NSImage(named: "MenuBarIcon")
                 } else {
