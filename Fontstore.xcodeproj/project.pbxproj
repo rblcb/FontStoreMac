@@ -735,7 +735,7 @@
 				TargetAttributes = {
 					2223DE181E30F74800D7B0FE = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = MXZ782EHFK;
+						DevelopmentTeam = J9GJY5BYX5;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -755,7 +755,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "Fontstore" */;
+			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1063,8 +1063,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = MXZ782EHFK;
+				DEVELOPMENT_TEAM = J9GJY5BYX5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -1085,8 +1086,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = MXZ782EHFK;
+				DEVELOPMENT_TEAM = J9GJY5BYX5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -1166,7 +1168,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "Fontstore" */ = {
+		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE3A1E30F74900D7B0FE /* Debug */,
