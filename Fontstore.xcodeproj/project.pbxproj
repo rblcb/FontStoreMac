@@ -146,6 +146,7 @@
 		22DA52A51E7A75AE00697725 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA52A41E7A75AE00697725 /* TabButton.swift */; };
 		22DA52A71E7A9EA200697725 /* AppFonts in Resources */ = {isa = PBXBuildFile; fileRef = 22DA52A61E7A9EA200697725 /* AppFonts */; };
 		22EDFCDB1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */; };
+		DE47F9E11EFD4489009F6CE0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = DE47F9E01EFD4489009F6CE0 /* dsa_pub.pem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,6 +343,7 @@
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };
 		22EDFCDA1E72A81700D221C7 /* NSStatusBarButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+Highlighting.swift"; sourceTree = "<group>"; };
+		DE47F9E01EFD4489009F6CE0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +511,7 @@
 		2223DE1B1E30F74800D7B0FE /* Fontstore */ = {
 			isa = PBXGroup;
 			children = (
+				DE47F9E01EFD4489009F6CE0 /* dsa_pub.pem */,
 				22B16A3F1E7FEFA10012BAF0 /* Externals */,
 				2223DE4F1E3129E000D7B0FE /* Constants.swift */,
 				221E636D1E3237A500944B1B /* StyleKit.swift */,
@@ -791,6 +794,7 @@
 				221F86B21E978B31001097A8 /* loader_00023@2x.png in Resources */,
 				221F86B61E978B31001097A8 /* loader_00027@2x.png in Resources */,
 				2223DE5A1E312E4F00D7B0FE /* ListingViewController.xib in Resources */,
+				DE47F9E11EFD4489009F6CE0 /* dsa_pub.pem in Resources */,
 				221F86A61E978B31001097A8 /* loader_00011@2x.png in Resources */,
 				221F869C1E978B31001097A8 /* loader_00001@2x.png in Resources */,
 				221F86201E978AB6001097A8 /* loader_00025.png in Resources */,

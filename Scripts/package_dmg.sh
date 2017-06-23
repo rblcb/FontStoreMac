@@ -3,20 +3,18 @@
 if ( [ $# -gt 1 ] ) then
 
   APP="$1"
-  DMG_DIR="$2"
+  DST_DMG="$2"
   DATE=`date +%Y%m%d_%H%M%S`
-  SIGN_ID="J9GJY5BYX5"
+  SIGN_ID="Mac Developer: satya@fontstore.com (C33HCANT84)"
 
   DISK_NAME="Fonstore"
-
-  DMG_NAME="fontstore.dmg"
-  DST_DMG="${DMG_DIR}/${DMG_NAME}"
 
   TMP_DIR="/tmp/fontstore"
   TMP_DMG_DIR="${TMP_DIR}/DMG_${DATE}"
   TMP_DMG_NAME="fontstore_${DATE}.tmp.dmg"
   TMP_DMG="${TMP_DIR}/${TMP_DMG_NAME}"
-  TMP_RELEASE_DMG="${TMP_DIR}/${DMG_NAME}"
+  TMP_RELEASE_NAME="fontstore_${DATE}.dmg"
+  TMP_RELEASE_DMG="${TMP_DIR}/${TMP_RELEASE_NAME}"
 
   echo "Creating tmp directory ${TMP_DMG_DIR}"
   rm -rf "${TMP_DMG_DIR}"
@@ -45,8 +43,8 @@ if ( [ $# -gt 1 ] ) then
   hdiutil convert "${TMP_DMG}" -format UDZO -imagekey zlib-level=9 -o "${TMP_RELEASE_DMG}"
   rm -f "${TMP_DMG}"
 
-  echo "Copying ${TMP_RELEASE_DMG} to ${DST_DMG}"
-  cp "${TMP_RELEASE_DMG}" "${DST_DMG}"
+  echo "Moving ${TMP_RELEASE_DMG} to ${DST_DMG}"
+  mv "${TMP_RELEASE_DMG}" "${DST_DMG}"
 
   echo "Signing ${DST_DMG}"
   codesign -s"${SIGN_ID}" -v "${DST_DMG}"
@@ -54,6 +52,6 @@ if ( [ $# -gt 1 ] ) then
   echo "Done."
   exit 0
 else
-  echo "Usage: ./package_dmg.sh <APPLICATION_PACKAGE> <DMG_OUTPUT_DIRECTORY>"
+  echo "Usage: ./package_dmg.sh <APPLICATION_PACKAGE> <DMG_OUTPUT>"
   exit -1
 fi
