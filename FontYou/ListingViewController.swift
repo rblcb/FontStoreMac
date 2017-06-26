@@ -370,14 +370,14 @@ class ListingViewController: NSViewController {
         }
     }
 
-    // The primary font is that one that's displayed as the family name. We choose the least slanted that as near as
+    // The primary font is that one that's displayed as the family name. We choose the least slanted that's as near as
     // possible to zero in weight
     
     func primaryFont(forFamily family:String) -> CatalogItem? {
-        if let family = tree[family] {
-            let minSlant = family.reduce(family.first?.slant ?? 0) { return $0 < $1.slant ?? 0 ? $0 : $1.slant ?? 0 }
-            let leastSlanted = family.filter { return $0.slant ?? 0 == minSlant }
-            let minWeight = leastSlanted.reduce(family.first?.weight ?? 0) { return abs($0) < abs($1.weight ?? 0) ? $0 : $1.weight ?? 0 }
+        if let familyMembers = tree[family] {
+            let minSlant = familyMembers.reduce(familyMembers.first?.slant ?? 0) { return $0 < $1.slant ?? 0 ? $0 : $1.slant ?? 0 }
+            let leastSlanted = familyMembers.filter { return $0.slant ?? 0 == minSlant }
+            let minWeight = leastSlanted.reduce(leastSlanted.first?.weight ?? 0) { return abs($0) < abs($1.weight ?? 0) ? $0 : $1.weight ?? 0 }
             let mostRegular = leastSlanted.first { return $0.weight ?? 0 == minWeight }
             
             return mostRegular
@@ -464,6 +464,7 @@ extension ListingViewController: NSOutlineViewDelegate {
             let view = outlineView.make(withIdentifier: "Family", owner: self) as? FamilyCellView
             if let textField = view?.nameLabel {
                 textField.stringValue = family
+
                 if let desc = primaryFont(forFamily: family)?.fontDescriptor {
                     textField.font =  NSFont.init(descriptor: desc, size: 18)
                 }
