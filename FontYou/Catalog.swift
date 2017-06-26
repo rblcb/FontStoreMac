@@ -173,7 +173,6 @@ struct Catalog: Mappable {
         // Update the catalog
         
         fonts[item.uid] = item
-        saveCatalog()
     }
     
     mutating func remove(uid: String) {

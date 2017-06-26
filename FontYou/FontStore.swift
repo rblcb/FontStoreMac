@@ -232,7 +232,7 @@ class Fontstore {
         self.status.value = "Updating catalog..."
         
         socket = Socket(url: URL(string: Constants.Endpoints.webSocketEndpoint)!, params: ["reusable_token" : authDetails.value!.reuseToken])
-        socket.enableLogging = true
+        socket.enableLogging = false
         
         socket.onConnect = {
             
@@ -242,128 +242,146 @@ class Fontstore {
             // Catalog channel events
             
             catalogChannel.on("fonts-package") { _ in
-                self.catalog.value!.semaphore.wait()
-                defer { self.catalog.value!.semaphore.signal() }
-                for (_, item) in self.catalog.value!.fonts {
-                    item.isNew = false
-                    self.catalog.value!.update(item: item)
+                
+                DispatchQueue.global(qos: .default).async {
+                    self.catalog.value!.semaphore.wait()
+                    defer { self.catalog.value!.semaphore.signal() }
+                    for (_, item) in self.catalog.value!.fonts {
+                        item.isNew = false
+                        self.catalog.value!.update(item: item)
+                    }
                 }
             }
             
             catalogChannel.on("font:description") { message in
-                let data = message.payload
-                if let uid = data["uid"] as? String,
-                    let familyName = data["font_family"] as? String,
-                    let style = data["font_style"] as? String,
-                    let downloadUrl = data["download_url"] as? String,
-                    let orderNumber = data["font_number"] as? Int {
-                    
-                    // Note that we add items *before* they are downloaded. This allows to save the catalog as the
-                    // downloads proceed. In the event of en error or disconnection, the next request to the server won't
-                    // include the fonts that we've already been told about, but that won't matter since they'll still be stored in
-                    // the catalog awaiting download
-
-                    self.catalog.value!.semaphore.wait()
-                    defer { self.catalog.value!.semaphore.signal() }
-                    
-                    let item = self.catalog.value!.addFont(uid: uid,
-                                                           familyName: familyName,
-                                                           orderNumber: orderNumber,
-                                                           style: style,
-                                                           downloadUrl: URL(string: downloadUrl))
-                    
-                    self.downloadFont(item: item)
-                }
-                else {
-                    print("ERROR: Unable to decode catalog font:description")
+                
+                DispatchQueue.global(qos: .default).async {
+                    let data = message.payload
+                    if let uid = data["uid"] as? String,
+                        let familyName = data["font_family"] as? String,
+                        let style = data["font_style"] as? String,
+                        let downloadUrl = data["download_url"] as? String,
+                        let orderNumber = data["font_number"] as? Int {
+                        
+                        // Note that we add items *before* they are downloaded. This allows to save the catalog as the
+                        // downloads proceed. In the event of en error or disconnection, the next request to the server won't
+                        // include the fonts that we've already been told about, but that won't matter since they'll still be stored in
+                        // the catalog awaiting download
+                        
+                        self.catalog.value!.semaphore.wait()
+                        defer { self.catalog.value!.semaphore.signal() }
+                        
+                        let item = self.catalog.value!.addFont(uid: uid,
+                                                               familyName: familyName,
+                                                               orderNumber: orderNumber,
+                                                               style: style,
+                                                               downloadUrl: URL(string: downloadUrl))
+                        
+                        self.downloadFont(item: item)
+                    }
+                    else {
+                        print("ERROR: Unable to decode catalog font:description")
+                    }
                 }
             }
             
             catalogChannel.on("font:deletion") { message in
                 
-                let data = message.payload
-                if let uid = data["uid"] as? String,
-                    let item = self.catalog.value?.fonts[uid] {
-                    
-                    if let url = item.encryptedUrl {
-                        try? FileManager.default.removeItem(at: url)
+                DispatchQueue.global(qos: .default).async {
+                    let data = message.payload
+                    if let uid = data["uid"] as? String,
+                        let item = self.catalog.value?.fonts[uid] {
+                        
+                        if let url = item.encryptedUrl {
+                            try? FileManager.default.removeItem(at: url)
+                        }
+                        
+                        self.catalog.value!.semaphore.wait()
+                        defer { self.catalog.value!.semaphore.signal() }
+                        
+                        self.catalog.value?.remove(uid: uid)
                     }
-                    
-                    self.catalog.value!.semaphore.wait()
-                    defer { self.catalog.value!.semaphore.signal() }
-
-                    self.catalog.value?.remove(uid: uid)
-                }
-                else {
-                    print("ERROR: Unable to decode catalog font:deletion")
+                    else {
+                        print("ERROR: Unable to decode catalog font:deletion")
+                    }
                 }
             }
             
             catalogChannel.on("update:complete") { message in
                 
-                let data = message.payload
-                if let lastCatalogUpdate = data["transmitted_at"] as? String {
-                    self.catalog.value!.lastCatalogUpdate = max(Double(lastCatalogUpdate)!, self.catalog.value!.lastCatalogUpdate ?? 0)
-                    
-                    // Once the font list is up-to-date we join the user channel
-                    
-                    self.userChannel!.join()?.receive("ok") { _ in
-                        var payload:Socket.Payload = [:]
-                        if let date = self.catalog.value?.lastUserUpdate {
-                            payload = ["last_update_date": String(format: "%.0f", date)]
-                        }
+                DispatchQueue.global(qos: .default).async {
+                    let data = message.payload
+                    if let lastCatalogUpdate = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastCatalogUpdate = max(Double(lastCatalogUpdate)!, self.catalog.value!.lastCatalogUpdate ?? 0)
                         
-                        self.catalog.value!.saveCatalog()
-                        self.userChannel!.send("update:request", payload: payload)
+                        // Once the font list is up-to-date we join the user channel
+                        
+                        self.userChannel!.join()?.receive("ok") { _ in
+                            var payload:Socket.Payload = [:]
+                            if let date = self.catalog.value?.lastUserUpdate {
+                                payload = ["last_update_date": String(format: "%.0f", date)]
+                            }
+                            
+                            self.catalog.value!.saveCatalog()
+                            self.userChannel!.send("update:request", payload: payload)
+                        }
                     }
-                }
-                else {
-                    print("ERROR: Unable to decode catalog update:complete")
+                    else {
+                        print("ERROR: Unable to decode catalog update:complete")
+                    }
                 }
             }
             
             // User channel events
             
             self.userChannel!.on("font:activation") { message in
-                let data = message.payload
-                if let uid = data["uid"] as? String {
-                    self.installFontAndUpdateCatalog(uid: uid, installed: true)
-                }
-                else {
-                    print("ERROR: Unable to decode user font:activation")
+                DispatchQueue.global(qos: .default).async {
+                    let data = message.payload
+                    if let uid = data["uid"] as? String {
+                        self.installFontAndUpdateCatalog(uid: uid, installed: true)
+                    }
+                    else {
+                        print("ERROR: Unable to decode user font:activation")
+                    }
                 }
             }
             
             self.userChannel!.on("font:deactivation") { message in
-                let data = message.payload
-                if let uid = data["uid"] as? String {
-                    self.installFontAndUpdateCatalog(uid: uid, installed: false)
-                }
-                else {
-                    print("ERROR: Unable to decode user font:deactivation")
+                DispatchQueue.global(qos: .default).async {
+                    let data = message.payload
+                    if let uid = data["uid"] as? String {
+                        self.installFontAndUpdateCatalog(uid: uid, installed: false)
+                    }
+                    else {
+                        print("ERROR: Unable to decode user font:deactivation")
+                    }
                 }
             }
             
             self.userChannel!.on("update:complete") { message in
-                let data = message.payload
-                if let transmitted_at = data["transmitted_at"] as? String {
-                    self.catalog.value!.lastUserUpdate = max(Double(transmitted_at)!, self.catalog.value!.lastUserUpdate ?? 0)
-                    self.catalog.value!.saveCatalog()
-                    self.status.value = nil
-                    
-                    self.userChannel!.send("ready", payload: [:])
-                }
-                else {
-                    print("ERROR: Unable to decode user update:complete")
+                DispatchQueue.global(qos: .default).async {
+                    let data = message.payload
+                    if let transmitted_at = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastUserUpdate = max(Double(transmitted_at)!, self.catalog.value!.lastUserUpdate ?? 0)
+                        self.catalog.value!.saveCatalog()
+                        self.status.value = nil
+                        
+                        self.userChannel!.send("ready", payload: [:])
+                    }
+                    else {
+                        print("ERROR: Unable to decode user update:complete")
+                    }
                 }
             }
             
             catalogChannel.join()?.receive("ok") { _ in
-                var payload:Socket.Payload = [:]
-                if let date = self.catalog.value?.lastCatalogUpdate {
-                    payload = ["last_update_date": String(format: "%.0f", date)]
+                DispatchQueue.global(qos: .default).async {
+                    var payload:Socket.Payload = [:]
+                    if let date = self.catalog.value?.lastCatalogUpdate {
+                        payload = ["last_update_date": String(format: "%.0f", date)]
+                    }
+                    catalogChannel.send("update:request", payload: payload)
                 }
-                catalogChannel.send("update:request", payload: payload)
             }
         }
         
@@ -401,77 +419,80 @@ class Fontstore {
         guard let downloadUrl = item.downloadUrl else { return }
         guard item.encryptedUrl == nil else { return }
         
-        downloadQueue.addOperation {
-            
-            print("Downloading \(item.family) \(item.style) from \(downloadUrl)")
-            
-            // Function to return the destination path
-            
-            let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-                var fileURL = Catalog.fontsUrl()
-                fileURL.appendPathComponent(item.uid)
-                fileURL.appendPathExtension(downloadUrl.pathExtension)
-                return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
-            }
-            
-            // Download "synchronously" within this task so that we don't return before we've finished
-            // downloading. This ensures that the downloadQueue remains full until the task is truly finished.
-            
-            let semaphore = DispatchSemaphore(value: 0)
-            var result: DefaultDownloadResponse!
-            
-            Alamofire.download(downloadUrl, to: destination).response { response in
-                result = response
-                semaphore.signal()
-            }
-            
-            _ = semaphore.wait()
-            
-            // Downloading complete, get the font's characteristics
-            
-            guard result.error == nil else {
-                print("ERROR when downloading: \(result.error!.localizedDescription)")
-                return
-            }
-            
-            if let fontUrl = result.destinationURL {
+        DispatchQueue.main.async {
+            self.downloadQueue.addOperation {
                 
-                item.encryptedUrl = fontUrl
-                let data = item.decryptedData
+                print("Downloading \(item.family) \(item.style) from \(downloadUrl)")
                 
-                guard let font = FontUtility.createCGFont(from: data) else {
-                    print("Unable to create font from data for \(item.family).\(item.style)")
+                // Function to return the destination path
+                
+                let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+                    var fileURL = Catalog.fontsUrl()
+                    fileURL.appendPathComponent(item.uid)
+                    fileURL.appendPathExtension(downloadUrl.pathExtension)
+                    return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+                }
+                
+                // Download "synchronously" within this task so that we don't return before we've finished
+                // downloading. This ensures that the downloadQueue remains full until the task is truly finished.
+                
+                let semaphore = DispatchSemaphore(value: 0)
+                var result: DefaultDownloadResponse!
+                
+                let dl = Alamofire.download(downloadUrl, to: destination)
+                dl.response(queue: DispatchQueue.global(qos: .default)) { response in
+                    result = response
+                    semaphore.signal()
+                }
+                
+                _ = semaphore.wait()
+                
+                // Downloading complete, get the font's characteristics
+                
+                guard result.error == nil else {
+                    print("ERROR when downloading: \(result.error!.localizedDescription)")
                     return
                 }
                 
-                guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); return; }
-                if let desc:NSFontDescriptor = CTFontManagerCreateFontDescriptorFromData(data! as CFData) {
-                    let downloadItem = item
-                    let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
-                    downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
-                    downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
-                    downloadItem.encryptedUrl = fontUrl
-                    downloadItem.fontDescriptor = desc
+                if let fontUrl = result.destinationURL {
                     
-                    // Update the catalog synchronously so that multiple download queues don't try to manipulate
-                    // it at the same time.
+                    item.encryptedUrl = fontUrl
+                    let data = item.decryptedData
                     
-                    self.catalog.value!.semaphore.wait()
-                    let oldItem = self.catalog.value!.fonts[item.uid]
-                    self.catalog.value?.update(item: downloadItem)
-                    self.catalog.value!.semaphore.signal()
-                    
-                    // If the item had been marked as installed while it was downloading, then we
-                    // install it now.
-                    
-                    if oldItem?.installed == true {
-                        self.installFontAndUpdateCatalog(uid: item.uid, installed: true)
-                    } else {
-                        self.notification.value = .fontAdded(item.family, item.style)
+                    guard let font = FontUtility.createCGFont(from: data) else {
+                        print("Unable to create font from data for \(item.family).\(item.style)")
+                        return
                     }
                     
-                } else {
-                    print("Unable to create descriptors for \(item.family).\(item.style)")
+                    guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); return; }
+                    if let desc:NSFontDescriptor = CTFontManagerCreateFontDescriptorFromData(data! as CFData) {
+                        let downloadItem = item
+                        let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
+                        downloadItem.weight = traits?["NSCTFontWeightTrait"] as? Float ?? 0.0
+                        downloadItem.slant = traits?["NSCTFontSlantTrait"] as? Float ?? 0.0
+                        downloadItem.encryptedUrl = fontUrl
+                        downloadItem.fontDescriptor = desc
+                        
+                        // Update the catalog synchronously so that multiple download queues don't try to manipulate
+                        // it at the same time.
+                        
+                        self.catalog.value!.semaphore.wait()
+                        let oldItem = self.catalog.value!.fonts[item.uid]
+                        self.catalog.value?.update(item: downloadItem)
+                        self.catalog.value!.semaphore.signal()
+                        
+                        // If the item had been marked as installed while it was downloading, then we
+                        // install it now.
+                        
+                        if oldItem?.installed == true {
+                            self.installFontAndUpdateCatalog(uid: item.uid, installed: true)
+                        } else {
+                            self.notification.value = .fontAdded(item.family, item.style)
+                        }
+                        
+                    } else {
+                        print("Unable to create descriptors for \(item.family).\(item.style)")
+                    }
                 }
             }
         }

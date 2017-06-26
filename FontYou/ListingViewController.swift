@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ReactiveKit
 
 enum DisplayedInfo {
     case installed
@@ -196,57 +197,74 @@ class ListingViewController: NSViewController {
     
     func bindViewModel() {
         
-        // Watch for for store changes
+        // Watch for  store changes
         
-        Fontstore.sharedInstance.catalog.observeNext { catalog in
-            if let catalog = catalog {
+        Fontstore.sharedInstance.catalog
+            .observeOn(.main)
+            .distinct { a, b in if let a = a, let b = b { return a.fonts !== b.fonts } else { return false } }
+            .observeNext { [weak self] catalog in
                 
-                catalog.fonts.observeOn(.main).observeNext { [weak self] update in
-
-                    func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
-                        for index in indexes {
-                            if catalog.fonts.dictionary.indices.contains(index) {
-                                let (_, item) = catalog.fonts[index]
-                                if item.encryptedUrl != nil {
-                                    self?.updateTree()
-                                    return
-                                }
-                            }
-                        }
-                    }
+                if let catalog = catalog {
                     
-                    func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
-                        let rows = NSMutableIndexSet()
-                        for index in indexes {
-                            let (uid, item) = catalog.fonts[index]
-                            if let siblings = self?.tree[item.family],
-                                let i = siblings.index(where: { $0.uid == uid }) {
-                                self?.tree[item.family]![i] = item
-                                if let row = self?.outlineView.row(forItem: item), row != -1 {
-                                    rows.add(row)
-                                }
-                            }
-                        }
+                    let atMostOncePerXSeconds = catalog.fonts.throttle(seconds: 2)
+                    let onYSecondsAfterFinalEntry = catalog.fonts.debounce(interval: 2)
+                    let doTheCall = merge(atMostOncePerXSeconds, onYSecondsAfterFinalEntry)
                         
-                        self?.outlineView.reloadData(forRowIndexes: rows as IndexSet, columnIndexes: IndexSet(integer: 0))
-                    }
-                    
-                    switch update.kind {
-                    case .reset:
-                        self?.updateTree()
-                    case .inserts(let indexes):
-                        updateTreeIfNecessary(forIndexes: indexes)
-                    case .deletes:
-                        self?.updateTree()
-                    case .updates(let indexes):
-                        updateItemsIfNecessary(forIndexes: indexes)
-                    default:
-                        break
-                    }
-                    }.dispose(in: self.reactive.bag)
+                    doTheCall.observeNext { update in
+                        
+                        DispatchQueue.main.async {
+                            func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                                for index in indexes {
+                                    if catalog.fonts.dictionary.indices.contains(index) {
+                                        let (_, item) = catalog.fonts[index]
+                                        if item.encryptedUrl != nil {
+                                            self?.updateTree()
+                                            return
+                                        }
+                                    }
+                                }
+                                catalog.semaphore.signal()
+                            }
+                            
+                            func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                                let rows = NSMutableIndexSet()
+                                for index in indexes {
+                                    let (uid, item) = catalog.fonts[index]
+                                    if let siblings = self?.tree[item.family],
+                                        let i = siblings.index(where: { $0.uid == uid }) {
+                                        self?.tree[item.family]![i] = item
+                                        if let row = self?.outlineView.row(forItem: item), row != -1 {
+                                            rows.add(row)
+                                        }
+                                    } else {
+                                        self?.updateTree()
+                                    }
+                                }
+                                
+                                self?.outlineView.reloadData(forRowIndexes: rows as IndexSet, columnIndexes: IndexSet(integer: 0))
+                            }
+                            
+                            catalog.semaphore.wait()
+                            defer { catalog.semaphore.signal() }
+                            
+                            switch update.kind {
+                            case .reset:
+                                self?.updateTree()
+                            case .inserts(let indexes):
+                                updateTreeIfNecessary(forIndexes: indexes)
+                            case .deletes:
+                                self?.updateTree()
+                            case .updates(let indexes):
+                                updateItemsIfNecessary(forIndexes: indexes)
+                            default:
+                                break
+                            }
+                        }
+                    }.dispose(in: self!.reactive.bag)
                 }
+    
             }.dispose(in: self.reactive.bag)
-        
+    
         // Prepare initial listing
         
         updateFontList()
@@ -325,6 +343,7 @@ class ListingViewController: NSViewController {
     // Creates a tree of available fonts based on family name
     
     func updateTree() {
+        
         if let fonts = Fontstore.sharedInstance.catalog.value?.fonts {
         
             var tree: [String:[CatalogItem]] = [:]
