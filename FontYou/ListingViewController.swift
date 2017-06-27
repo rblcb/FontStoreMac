@@ -206,11 +206,7 @@ class ListingViewController: NSViewController {
                 
                 if let catalog = catalog {
                     
-                    let atMostOncePerXSeconds = catalog.fonts.throttle(seconds: 2)
-                    let onYSecondsAfterFinalEntry = catalog.fonts.debounce(interval: 2)
-                    let doTheCall = merge(atMostOncePerXSeconds, onYSecondsAfterFinalEntry)
-                        
-                    doTheCall.observeNext { update in
+                    catalog.fonts.observeNext { update in
                         
                         DispatchQueue.main.async {
                             func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
@@ -236,8 +232,16 @@ class ListingViewController: NSViewController {
                                         if let row = self?.outlineView.row(forItem: item), row != -1 {
                                             rows.add(row)
                                         }
+                                        
+                                        // Update the family row too
+                                        
+                                        if let row = self?.outlineView.row(forItem: item.family), row != -1 {
+                                            rows.add(row)
+                                        }
+                                        
                                     } else {
                                         self?.updateTree()
+                                        return
                                     }
                                 }
                                 
