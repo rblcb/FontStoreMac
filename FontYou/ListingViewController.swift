@@ -246,6 +246,7 @@ class ListingViewController: NSViewController {
                                 }
                                 
                                 self?.outlineView.reloadData(forRowIndexes: rows as IndexSet, columnIndexes: IndexSet(integer: 0))
+                                self?.updateCounters()
                             }
                             
                             catalog.semaphore.wait()
@@ -343,7 +344,15 @@ class ListingViewController: NSViewController {
             resultsLabel.attributedStringValue = str
         }
     }
+    
+    // Update the counters on the tabs
 
+    func updateCounters() {
+        installedButton.count = fontFamilies.filter { !isFamilyUninstalled(familyName: $0) }.count
+        newButton.count = fontFamilies.filter { hasFamilyNewFonts(familyName: $0) }.count
+        allButton.count = fontFamilies.count
+    }
+    
     // Creates a tree of available fonts based on family name
     
     func updateTree() {
@@ -367,10 +376,7 @@ class ListingViewController: NSViewController {
             self.tree = tree
             self.fontFamilies = tree.keys.sorted()
             updateFontList()
-            
-            installedButton.count = fontFamilies.filter { !isFamilyUninstalled(familyName: $0) }.count
-            newButton.count = fontFamilies.filter { hasFamilyNewFonts(familyName: $0) }.count
-            allButton.count = fontFamilies.count
+            updateCounters()
         }
     }
 
