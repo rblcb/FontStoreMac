@@ -223,6 +223,17 @@ class ListingViewController: NSViewController {
                             }
                             
                             func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                                
+                                // Items updating from the installed view are probably being uninstalled, and need to be
+                                // removed from the list. We just update the tree.
+                                
+                                if self?.displayed == .installed {
+                                    self?.updateTree()
+                                    return
+                                }
+                                
+                                // Otherwise, we try to update the affected rows
+                                
                                 let rows = NSMutableIndexSet()
                                 for index in indexes {
                                     let (uid, item) = catalog.fonts[index]
