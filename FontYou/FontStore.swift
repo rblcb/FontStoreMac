@@ -232,7 +232,12 @@ class Fontstore {
         self.status.value = "Updating catalog..."
         
         socket = Socket(url: URL(string: Constants.Endpoints.webSocketEndpoint)!, params: ["reusable_token" : authDetails.value!.reuseToken])
+
+#if PROD
         socket.enableLogging = false
+#else
+        socket.enableLogging = true
+#endif
         
         socket.onConnect = {
             

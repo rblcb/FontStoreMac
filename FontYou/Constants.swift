@@ -9,18 +9,29 @@ import Cocoa
 
 let DEV = false
 
+#if PROD
+let serverUrl = "api.fontstore.com"
+let secret = "ugpmfjbtlzpdgrut"
+#else
+let serverUrl = "api.staging.fontstore.com"
+let secret = "lvcypbhupbdmg"
+#endif
+
+let devServerUrl = "192.168.55.55:4000"
+let devSecret = "secret"
+
 struct Constants {
     struct Dimensions {
         static let arrow = CGSize(width: 25, height: 15)
         static let arrowWindowOverlap: CGFloat = 3
     }
-
+    
     struct Endpoints {
-        static let authEndpoint = DEV ? "http://192.168.55.55:4000/session/desktop" : "https://api.staging.fontstore.com/session/desktop"
-        static let webSocketEndpoint = DEV ? "ws://192.168.55.55:4000/socket/websocket" : "wss://api.staging.fontstore.com/socket/websocket"
+        static let authEndpoint = "https://\(DEV ? devServerUrl : serverUrl)/session/desktop"
+        static let webSocketEndpoint = "wss://\(DEV ? devServerUrl : serverUrl)/socket/websocket"
     }
     
     struct Keys {
-        static let fontEncryptionKey = DEV ? "secret" : "lvcypbhupbdmg"
+        static let fontEncryptionKey = DEV ? devSecret : secret
     }
 }
