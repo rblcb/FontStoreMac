@@ -94,7 +94,7 @@ class Fontstore {
             "os_version": "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)"
         ]
         
-        status.value = "Connecting to server"
+        status.value = "Authenticating..."
         
         Alamofire.request(Constants.Endpoints.authEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate().responseJSON { response in
@@ -147,14 +147,16 @@ class Fontstore {
     }
     
     func logonUsingStoredDetails() {
-        do {
-            let json = try String(contentsOf: preferencesUrl(), encoding: String.Encoding.utf8)
-            if let authDetails = AuthDetails(JSONString: json) {
-                self.authDetails.value = authDetails
-                self.completeLogin()
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let json = try String(contentsOf: self.preferencesUrl(), encoding: String.Encoding.utf8)
+                if let authDetails = AuthDetails(JSONString: json) {
+                    self.authDetails.value = authDetails
+                    self.completeLogin()
+                }
             }
-        }
-        catch {
+            catch {
+            }
         }
     }
     
@@ -162,13 +164,21 @@ class Fontstore {
         
         if let uid = authDetails.value?.uid {
             
+            self.status.value = "Loading catalog..."
+            
             // Try to load the saved catalog
             
             if let savedCatalog = Catalog.loadCatalog(userId: uid) {
-                self.catalog.value = savedCatalog
+                if authDetails.value != nil {
+                    self.catalog.value = savedCatalog
+                }
             } else {
                 self.catalog.value = Catalog(userId: uid)
             }
+            
+            // The user may have logged out during the loading of the catalog...
+            
+            guard authDetails.value != nil else { return }
             
             // Re-activate installed fonts
             
@@ -185,7 +195,7 @@ class Fontstore {
     }
     
     func sendDisconnectMessage(reason: String) {
-         userChannel!.send("disconnect", payload: ["reason": reason])
+         userChannel?.send("disconnect", payload: ["reason": reason])
     }
     
     func logout() {

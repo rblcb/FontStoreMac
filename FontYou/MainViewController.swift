@@ -99,19 +99,9 @@ class MainViewController: NSViewController {
         
         // Observe for catalog status changes
         
+        updateStatus(status: Fontstore.sharedInstance.status.value)
         Fontstore.sharedInstance.status.observeOn(.main).observeNext { [weak self] status in
-            if let status = status {
-                self?.spinnerLabel.stringValue = status
-                self?.spinnerView.animator().isHidden = false
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) { [weak self] in
-                    // Just starting this immediately doesn't always work (no idea why). A little delay fixes it.
-                    self?.spinnerImageView.startAnimation()
-                }
-            }
-            else {
-                self?.spinnerView.animator().isHidden = true
-                self?.spinnerImageView.stopAnimation()
-            }
+            self?.updateStatus(status: status)
         }.dispose(in: reactive.bag)
         
         // Observe for errors
@@ -123,11 +113,21 @@ class MainViewController: NSViewController {
                 alert.beginSheetModal(for: self!.view.window!)
             }
         }.dispose(in: reactive.bag)
-        
-        
-        // Try to log in from stored details
-
-        Fontstore.sharedInstance.logonUsingStoredDetails()
+    }
+    
+    func updateStatus(status: String?) {
+        if let status = status {
+            self.spinnerLabel.stringValue = status
+            self.spinnerView.animator().isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) { [weak self] in
+                // Just starting this immediately doesn't always work (no idea why). A little delay fixes it.
+                self?.spinnerImageView.startAnimation()
+            }
+        }
+        else {
+            self.spinnerView.animator().isHidden = true
+            self.spinnerImageView.stopAnimation()
+        }
     }
     
     func setUpMenu(loggedOn: Bool) {

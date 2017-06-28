@@ -77,6 +77,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
 
         }.dispose(in: reactive.bag)
+        
+        // Try to log in automatically
+        
+        Fontstore.sharedInstance.logonUsingStoredDetails()
     }
     
     func showNotification(title: String, text: String) -> Void {
