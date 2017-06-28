@@ -47,5 +47,7 @@
 	<string>dsa_pub.pem</string>
 	<key>SUShowReleaseNotes</key>
 	<false/>
+	<key>SUScheduledCheckInterval</key>
+	<integer>3600</integer>
 </dict>
 </plist>
