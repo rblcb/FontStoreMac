@@ -192,6 +192,10 @@ class Fontstore {
         
         downloadQueue.cancelAllOperations()
         
+        // Save this user's catalogue now so that they can log back in again later
+        
+        catalog.value?.saveCatalog()
+        
         // Disactivate fonts
         
         if let fonts = catalog.value?.fonts {
@@ -246,11 +250,18 @@ class Fontstore {
             
             // Catalog channel events
             
-            catalogChannel.on("fonts-package") { _ in
+            catalogChannel.on("fonts-package") { message in
                 
                 DispatchQueue.global(qos: .default).async {
                     self.catalog.value!.semaphore.wait()
                     defer { self.catalog.value!.semaphore.signal() }
+                    
+                    let data = message.payload
+                    
+                    if let lastCatalogUpdate = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastCatalogUpdate = max(Double(lastCatalogUpdate)!, self.catalog.value!.lastCatalogUpdate ?? 0)
+                    }
+                    
                     for (_, item) in self.catalog.value!.fonts {
                         item.isNew = false
                         self.catalog.value!.update(item: item)
@@ -261,7 +272,16 @@ class Fontstore {
             catalogChannel.on("font:description") { message in
                 
                 DispatchQueue.global(qos: .default).async {
+                    
+                    self.catalog.value!.semaphore.wait()
+                    defer { self.catalog.value!.semaphore.signal() }
+                    
                     let data = message.payload
+                    
+                    if let lastCatalogUpdate = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastCatalogUpdate = max(Double(lastCatalogUpdate)!, self.catalog.value!.lastCatalogUpdate ?? 0)
+                    }
+                    
                     if let uid = data["uid"] as? String,
                         let familyName = data["font_family"] as? String,
                         let style = data["font_style"] as? String,
@@ -272,9 +292,6 @@ class Fontstore {
                         // downloads proceed. In the event of en error or disconnection, the next request to the server won't
                         // include the fonts that we've already been told about, but that won't matter since they'll still be stored in
                         // the catalog awaiting download
-                        
-                        self.catalog.value!.semaphore.wait()
-                        defer { self.catalog.value!.semaphore.signal() }
                         
                         let item = self.catalog.value!.addFont(uid: uid,
                                                                familyName: familyName,
@@ -294,15 +311,20 @@ class Fontstore {
                 
                 DispatchQueue.global(qos: .default).async {
                     let data = message.payload
+                    
+                    self.catalog.value!.semaphore.wait()
+                    defer { self.catalog.value!.semaphore.signal() }
+                    
+                    if let lastCatalogUpdate = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastCatalogUpdate = max(Double(lastCatalogUpdate)!, self.catalog.value!.lastCatalogUpdate ?? 0)
+                    }
+
                     if let uid = data["uid"] as? String,
                         let item = self.catalog.value?.fonts[uid] {
                         
                         if let url = item.encryptedUrl {
                             try? FileManager.default.removeItem(at: url)
                         }
-                        
-                        self.catalog.value!.semaphore.wait()
-                        defer { self.catalog.value!.semaphore.signal() }
                         
                         self.catalog.value?.remove(uid: uid)
                     }
@@ -342,6 +364,11 @@ class Fontstore {
             self.userChannel!.on("font:activation") { message in
                 DispatchQueue.global(qos: .default).async {
                     let data = message.payload
+                    
+                    if let transmitted_at = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastUserUpdate = max(Double(transmitted_at)!, self.catalog.value!.lastUserUpdate ?? 0)
+                    }
+                    
                     if let uid = data["uid"] as? String {
                         self.installFontAndUpdateCatalog(uid: uid, installed: true)
                     }
@@ -354,6 +381,11 @@ class Fontstore {
             self.userChannel!.on("font:deactivation") { message in
                 DispatchQueue.global(qos: .default).async {
                     let data = message.payload
+                    
+                    if let transmitted_at = data["transmitted_at"] as? String {
+                        self.catalog.value!.lastUserUpdate = max(Double(transmitted_at)!, self.catalog.value!.lastUserUpdate ?? 0)
+                    }
+                    
                     if let uid = data["uid"] as? String {
                         self.installFontAndUpdateCatalog(uid: uid, installed: false)
                     }

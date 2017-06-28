@@ -201,7 +201,7 @@ class ListingViewController: NSViewController {
         
         Fontstore.sharedInstance.catalog
             .observeOn(.main)
-            .distinct { a, b in if let a = a, let b = b { return a.fonts !== b.fonts } else { return false } }
+            .distinct { a, b in if let a = a, let b = b { return a.fonts !== b.fonts } else { return true } }
             .observeNext { [weak self] catalog in
                 
                 if let catalog = catalog {
