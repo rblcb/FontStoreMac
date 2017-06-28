@@ -758,7 +758,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "Fontstore" */;
+			buildConfigurationList = 2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1173,7 +1173,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "Fontstore" */ = {
+		2223DE141E30F74800D7B0FE /* Build configuration list for PBXProject "FontStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2223DE3A1E30F74900D7B0FE /* Debug */,
