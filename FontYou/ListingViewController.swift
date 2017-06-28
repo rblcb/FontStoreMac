@@ -208,21 +208,38 @@ class ListingViewController: NSViewController {
                     
                     catalog.fonts.observeNext { update in
                         
+                        var indexes:[DictionaryIndex<String, CatalogItem>] = []
+                        var affectedItems:[CatalogItem] = []
+                        
+                        if case let .inserts(idxs) = update.kind {
+                            indexes = idxs
+                        } else if case let .updates(idxs) = update.kind {
+                            indexes = idxs
+                        }
+
+                        // Make a copy of the affected items so that we can work on them asynchronously
+                        // in the main thread
+                        
+                        for index in indexes {
+                            if catalog.fonts.dictionary.indices.contains(index) {
+                                let (_, item) = catalog.fonts[index]
+                                affectedItems.append(item)
+                            }
+                        }
+                        
+                        // Update the UI on the main thread
+                        
                         DispatchQueue.main.async {
-                            func updateTreeIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
-                                for index in indexes {
-                                    if catalog.fonts.dictionary.indices.contains(index) {
-                                        let (_, item) = catalog.fonts[index]
-                                        if item.encryptedUrl != nil {
-                                            self?.updateTree()
-                                            return
-                                        }
+                            func updateTreeIfNecessary() {
+                                for item in affectedItems {
+                                    if item.encryptedUrl != nil {
+                                        self?.updateTree()
+                                        return
                                     }
                                 }
-                                catalog.semaphore.signal()
                             }
                             
-                            func updateItemsIfNecessary(forIndexes indexes: [DictionaryIndex<String, CatalogItem>]) {
+                            func updateItemsIfNecessary() {
                                 
                                 // Items updating from the installed view are probably being uninstalled, and need to be
                                 // removed from the list. We just update the tree.
@@ -235,10 +252,9 @@ class ListingViewController: NSViewController {
                                 // Otherwise, we try to update the affected rows
                                 
                                 let rows = NSMutableIndexSet()
-                                for index in indexes {
-                                    let (uid, item) = catalog.fonts[index]
+                                for item in affectedItems {
                                     if let siblings = self?.tree[item.family],
-                                        let i = siblings.index(where: { $0.uid == uid }) {
+                                        let i = siblings.index(where: { $0.uid == item.uid }) {
                                         self?.tree[item.family]![i] = item
                                         if let row = self?.outlineView.row(forItem: item), row != -1 {
                                             rows.add(row)
@@ -266,12 +282,12 @@ class ListingViewController: NSViewController {
                             switch update.kind {
                             case .reset:
                                 self?.updateTree()
-                            case .inserts(let indexes):
-                                updateTreeIfNecessary(forIndexes: indexes)
+                            case .inserts:
+                                updateTreeIfNecessary()
                             case .deletes:
                                 self?.updateTree()
-                            case .updates(let indexes):
-                                updateItemsIfNecessary(forIndexes: indexes)
+                            case .updates:
+                                updateItemsIfNecessary()
                             default:
                                 break
                             }

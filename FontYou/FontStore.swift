@@ -481,10 +481,10 @@ class Fontstore {
                         // Update the catalog synchronously so that multiple download queues don't try to manipulate
                         // it at the same time.
                         
-                        self.catalog.value!.semaphore.wait()
-                        let oldItem = self.catalog.value!.fonts[item.uid]
+                        self.catalog.value?.semaphore.wait()
+                        let oldItem = self.catalog.value?.fonts[item.uid]
                         self.catalog.value?.update(item: downloadItem)
-                        self.catalog.value!.semaphore.signal()
+                        self.catalog.value?.semaphore.signal()
                         
                         // If the item had been marked as installed while it was downloading, then we
                         // install it now.
