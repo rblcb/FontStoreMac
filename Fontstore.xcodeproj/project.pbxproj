@@ -108,7 +108,6 @@
 		222FEEE41EE8797B0045B4CB /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222FEEE31EE8797B0045B4CB /* HoverButton.swift */; };
 		226212141E9B93B000E61B9C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226212131E9B93B000E61B9C /* Security.framework */; };
 		2275FE7B1E76A91000B357E7 /* FontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE7A1E76A91000B357E7 /* FontUtility.m */; };
-		2275FE7D1E76A98A00B357E7 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2275FE7C1E76A98A00B357E7 /* Fonts */; };
 		2275FE801E76A9C300B357E7 /* FontStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE7F1E76A9C300B357E7 /* FontStore.swift */; };
 		2275FE821E77002700B357E7 /* FamilyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275FE811E77002700B357E7 /* FamilyCellView.swift */; };
 		2283BBB11E7709D90040A34E /* ListingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283BBB01E7709D90040A34E /* ListingRowView.swift */; };
@@ -307,7 +306,6 @@
 		2275FE781E76A91000B357E7 /* Fontstore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fontstore-Bridging-Header.h"; sourceTree = "<group>"; };
 		2275FE791E76A91000B357E7 /* FontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontUtility.h; sourceTree = "<group>"; };
 		2275FE7A1E76A91000B357E7 /* FontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontUtility.m; sourceTree = "<group>"; };
-		2275FE7C1E76A98A00B357E7 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		2275FE7F1E76A9C300B357E7 /* FontStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontStore.swift; sourceTree = "<group>"; };
 		2275FE811E77002700B357E7 /* FamilyCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCellView.swift; sourceTree = "<group>"; };
 		2283BBB01E7709D90040A34E /* ListingRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingRowView.swift; sourceTree = "<group>"; };
@@ -526,7 +524,6 @@
 				22B16A251E7BEB850012BAF0 /* Frameworks */,
 				2275FE781E76A91000B357E7 /* Fontstore-Bridging-Header.h */,
 				22DA52A61E7A9EA200697725 /* AppFonts */,
-				2275FE7C1E76A98A00B357E7 /* Fonts */,
 				2223DE1E1E30F74800D7B0FE /* Assets.xcassets */,
 				2223DE201E30F74800D7B0FE /* MainMenu.xib */,
 				2223DE231E30F74800D7B0FE /* Info.plist */,
@@ -834,7 +831,6 @@
 				221F86B51E978B31001097A8 /* loader_00026@2x.png in Resources */,
 				221F861B1E978AB6001097A8 /* loader_00020.png in Resources */,
 				221F86231E978AB6001097A8 /* loader_00028.png in Resources */,
-				2275FE7D1E76A98A00B357E7 /* Fonts in Resources */,
 				221F861A1E978AB6001097A8 /* loader_00019.png in Resources */,
 				221F869D1E978B31001097A8 /* loader_00002@2x.png in Resources */,
 				221F86BB1E978B31001097A8 /* loader_00032@2x.png in Resources */,
@@ -1063,7 +1059,7 @@
 				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.fontstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FontYou/Fontstore-Bridging-Header.h";
@@ -1087,7 +1083,7 @@
 				);
 				INFOPLIST_FILE = FontYou/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D PROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcticwhiteness.fontstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
