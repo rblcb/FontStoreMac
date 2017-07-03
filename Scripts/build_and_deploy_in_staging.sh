@@ -18,7 +18,7 @@ else
 	BUILD_NUMBER=`/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "${PLIST_FILE}"`
 	
 	BUILD_DIR="${PROJECT_ROOT}/build"
-  OUTPUT_APP_DIR="${BUILD_DIR}/Release"
+  OUTPUT_APP_DIR="${BUILD_DIR}/Debug"
   OUTPUT_APP_NAME="Fontstore.app"
 	OUTPUT_APP="${OUTPUT_APP_DIR}/${OUTPUT_APP_NAME}"
 
