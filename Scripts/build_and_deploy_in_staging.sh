@@ -1,18 +1,17 @@
 #!/bin/sh
 
-if ( [ $# -ne 2 ] ) then
-	echo "Usage: ./build_and_deploy.sh <PROJECT_ROOT> <release|staging>"
+if ( [ $# -ne 1 ] ) then
+	echo "Usage: ./build_and_deploy_in_staging.sh <PROJECT_ROOT>"
 	exit -1
 else
   PROJECT_ROOT="$1"
-  MODE="$2"
 	PROJECT_FILE="${PROJECT_ROOT}/FontStore.xcodeproj"
 	PLIST_FILE="${PROJECT_ROOT}/FontYou/Info.plist"
 
 	# Clean project
-	xcodebuild -configuration Release clean -project "${PROJECT_FILE}"
+	xcodebuild -configuration Debug clean -project "${PROJECT_FILE}"
 	# Build project
-	xcodebuild -configuration Release -project "${PROJECT_FILE}"
+	xcodebuild -configuration Debug -project "${PROJECT_FILE}"
 
 	# Parse version and build for updates
 	VERSION=`/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "${PLIST_FILE}"`
@@ -51,17 +50,12 @@ else
 
 	# Generate APPCAST
   echo "Generating update appcast"
-  ${PROJECT_ROOT}/Scripts/generate_appcast.sh "${TAR_NAME}" "${VERSION}" "${BUILD_NUMBER}" "${SIGNATURE}" "${OUTPUT_APPCAST}"
+  ${PROJECT_ROOT}/Scripts/generate_staging_appcast.sh "${TAR_NAME}" "${VERSION}" "${BUILD_NUMBER}" "${SIGNATURE}" "${OUTPUT_APPCAST}"
   echo "Update appcast generated"
 
   # Deploy to FTP
-  if ( [ MODE -e "release" ] ) then
-    echo "Deploying to FTP"
-    ${PROJECT_ROOT}/Scripts/deploy.sh "${BUILD_DIR}" "${TAR_NAME}" "${DMG_NAME}" "${APPCAST_NAME}" "apps/mac"
-  else
-    echo "Deploying to staging FTP"
-    ${PROJECT_ROOT}/Scripts/deploy.sh "${BUILD_DIR}" "${TAR_NAME}" "${DMG_NAME}" "${APPCAST_NAME}" "apps/staging/mac"
-  fi
+  echo "Deploying to staging FTP"
+  ${PROJECT_ROOT}/Scripts/deploy.sh "${BUILD_DIR}" "${TAR_NAME}" "${DMG_NAME}" "${APPCAST_NAME}" "apps/staging/mac"
   echo "Deploy done"
 
 	exit 0
