@@ -198,7 +198,7 @@ class Fontstore {
          userChannel?.send("disconnect", payload: ["reason": reason])
     }
     
-    func logout() {
+    func logout(tellServer: Bool = true) {
         
         downloadQueue.cancelAllOperations()
         
@@ -418,6 +418,12 @@ class Fontstore {
                     else {
                         print("ERROR: Unable to decode user update:complete")
                     }
+                }
+            }
+            
+            self.userChannel!.on("disconnect") { message in
+                DispatchQueue.global(qos: .default).async {
+                    self.logout(tellServer: false)
                 }
             }
             
