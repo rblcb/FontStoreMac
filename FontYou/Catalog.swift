@@ -66,7 +66,7 @@ class CatalogItem: Mappable {
                 cachedDecryptedData = data
                 return cachedDecryptedData
             } catch {
-                print("Exception when loading contents of \(encryptedUrl)")
+                NSLog("Exception when loading contents of \(encryptedUrl)")
                 return nil
             }
         }
@@ -201,12 +201,12 @@ struct Catalog: Mappable {
                 for (uid, item) in catalog.fonts {
                     guard item.encryptedUrl != nil else { continue }
                     let data = item.decryptedData
-                    guard let font = FontUtility.createCGFont(from: data) else { print("Unable to create font from data for \(item.family).\(item.style)"); continue; }
-                    guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); continue; }
+                    guard let font = FontUtility.createCGFont(from: data) else { NSLog("Unable to create font from data for \(item.family).\(item.style)"); continue; }
+                    guard FontUtility.activate(font) else { NSLog("Unable to activate \(item.family).\(item.style)"); continue; }
                     if let desc = CTFontManagerCreateFontDescriptorFromData(data! as CFData) {
                         catalog.fonts[uid]!.fontDescriptor = desc
                     } else {
-                        print("Unable to create descriptors for \(item.family).\(item.style)")
+                        NSLog("Unable to create descriptors for \(item.family).\(item.style)")
                     }
                 }
                 

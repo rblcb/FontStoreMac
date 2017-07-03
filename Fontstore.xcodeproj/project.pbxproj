@@ -296,7 +296,7 @@
 		2223DE4F1E3129E000D7B0FE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2223DE531E312E1000D7B0FE /* LogonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogonViewController.swift; sourceTree = "<group>"; };
 		2223DE541E312E1000D7B0FE /* LogonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogonViewController.xib; sourceTree = "<group>"; };
-		2223DE571E312E4F00D7B0FE /* ListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
+		2223DE571E312E4F00D7B0FE /* ListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ListingViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2223DE581E312E4F00D7B0FE /* ListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListingViewController.xib; sourceTree = "<group>"; };
 		2223DE621E31531C00D7B0FE /* NSView+BackgroundColored.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+BackgroundColored.swift"; sourceTree = "<group>"; };
 		22291ABC1EE9519E00625DBF /* String+InsensitivePrefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+InsensitivePrefix.swift"; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 		2275FE781E76A91000B357E7 /* Fontstore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fontstore-Bridging-Header.h"; sourceTree = "<group>"; };
 		2275FE791E76A91000B357E7 /* FontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontUtility.h; sourceTree = "<group>"; };
 		2275FE7A1E76A91000B357E7 /* FontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontUtility.m; sourceTree = "<group>"; };
-		2275FE7F1E76A9C300B357E7 /* FontStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontStore.swift; sourceTree = "<group>"; };
+		2275FE7F1E76A9C300B357E7 /* FontStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FontStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2275FE811E77002700B357E7 /* FamilyCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCellView.swift; sourceTree = "<group>"; };
 		2283BBB01E7709D90040A34E /* ListingRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingRowView.swift; sourceTree = "<group>"; };
 		2283BBB21E7711DD0040A34E /* FontCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontCellView.swift; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 		22B16A4A1E8010AB0012BAF0 /* Presence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
 		22B16A4B1E8010AB0012BAF0 /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
 		22B16A4C1E8010AB0012BAF0 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		22B16A4D1E8010AB0012BAF0 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		22B16A4D1E8010AB0012BAF0 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Socket.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		22B16A551E801DC40012BAF0 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../Carthage/Build/Mac/ObjectMapper.framework; sourceTree = "<group>"; };
 		22B16A581E801DEB0012BAF0 /* ObjectMapper.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ObjectMapper.framework.dSYM; path = ../Carthage/Build/Mac/ObjectMapper.framework.dSYM; sourceTree = "<group>"; };
 		22B16A591E801DEB0012BAF0 /* Bond.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Bond.framework.dSYM; path = ../Carthage/Build/Mac/Bond.framework.dSYM; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 		22B16A5B1E801DEB0012BAF0 /* Diff.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Diff.framework.dSYM; path = ../Carthage/Build/Mac/Diff.framework.dSYM; sourceTree = "<group>"; };
 		22B16A5C1E801DEB0012BAF0 /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = ../Carthage/Build/Mac/Alamofire.framework.dSYM; sourceTree = "<group>"; };
 		22B16A5D1E801DEB0012BAF0 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = ../Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
-		22B16A621E801ED20012BAF0 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
+		22B16A621E801ED20012BAF0 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Catalog.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		22B16A661E82ADF10012BAF0 /* MutableObservableDictionary+Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MutableObservableDictionary+Mappable.swift"; sourceTree = "<group>"; };
 		22DA52A41E7A75AE00697725 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		22DA52A61E7A9EA200697725 /* AppFonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppFonts; sourceTree = "<group>"; };

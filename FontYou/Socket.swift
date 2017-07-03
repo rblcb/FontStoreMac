@@ -46,7 +46,7 @@ public final class Socket {
             self.init(url: parsedURL, params: params)
         }
         else {
-            print("[Birdsong] Invalid URL in init. Defaulting to localhost URL.")
+            NSLog("[Birdsong] Invalid URL in init. Defaulting to localhost URL.")
             self.init()
         }
     }
@@ -195,7 +195,7 @@ extension Socket: WebSocketDelegate {
 extension Socket {
     fileprivate func log(_ message: String) {
         if enableLogging {
-            print("[Birdsong]: \(message)")
+            NSLog("[Birdsong]: \(message)")
         }
     }
 }

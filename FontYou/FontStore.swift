@@ -95,6 +95,7 @@ class Fontstore {
         ]
         
         status.value = "Authenticating..."
+        NSLog("Authenticating to \(Constants.Endpoints.authEndpoint)...");
         
         Alamofire.request(Constants.Endpoints.authEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate().responseJSON { response in
@@ -141,7 +142,7 @@ class Fontstore {
                     
                     self.status.value = nil
                     self.error.value = errorMessage
-                    print(error)
+                    NSLog("Authentication failed: \(error)")
                 }
         }
     }
@@ -312,7 +313,7 @@ class Fontstore {
                         self.downloadFont(item: item)
                     }
                     else {
-                        print("ERROR: Unable to decode catalog font:description")
+                        NSLog("ERROR: Unable to decode catalog font:description")
                     }
                 }
             }
@@ -339,7 +340,7 @@ class Fontstore {
                         self.catalog.value?.remove(uid: uid)
                     }
                     else {
-                        print("ERROR: Unable to decode catalog font:deletion")
+                        NSLog("ERROR: Unable to decode catalog font:deletion")
                     }
                 }
             }
@@ -364,7 +365,7 @@ class Fontstore {
                         }
                     }
                     else {
-                        print("ERROR: Unable to decode catalog update:complete")
+                        NSLog("ERROR: Unable to decode catalog update:complete")
                     }
                 }
             }
@@ -383,7 +384,7 @@ class Fontstore {
                         self.installFontAndUpdateCatalog(uid: uid, installed: true)
                     }
                     else {
-                        print("ERROR: Unable to decode user font:activation")
+                        NSLog("ERROR: Unable to decode user font:activation")
                     }
                 }
             }
@@ -400,7 +401,7 @@ class Fontstore {
                         self.installFontAndUpdateCatalog(uid: uid, installed: false)
                     }
                     else {
-                        print("ERROR: Unable to decode user font:deactivation")
+                        NSLog("ERROR: Unable to decode user font:deactivation")
                     }
                 }
             }
@@ -416,7 +417,7 @@ class Fontstore {
                         self.userChannel!.send("ready", payload: [:])
                     }
                     else {
-                        print("ERROR: Unable to decode user update:complete")
+                        NSLog("ERROR: Unable to decode user update:complete")
                     }
                 }
             }
@@ -475,7 +476,7 @@ class Fontstore {
         DispatchQueue.main.async {
             self.downloadQueue.addOperation {
                 
-                print("Downloading \(item.family) \(item.style) from \(downloadUrl)")
+                NSLog("Downloading \(item.family) \(item.style) from \(downloadUrl)")
                 
                 // Function to return the destination path
                 
@@ -503,7 +504,7 @@ class Fontstore {
                 // Downloading complete, get the font's characteristics
                 
                 guard result.error == nil else {
-                    print("ERROR when downloading: \(result.error!.localizedDescription)")
+                    NSLog("ERROR when downloading: \(result.error!.localizedDescription)")
                     return
                 }
                 
@@ -513,11 +514,11 @@ class Fontstore {
                     let data = item.decryptedData
                     
                     guard let font = FontUtility.createCGFont(from: data) else {
-                        print("Unable to create font from data for \(item.family).\(item.style)")
+                        NSLog("Unable to create font from data for \(item.family).\(item.style)")
                         return
                     }
                     
-                    guard FontUtility.activate(font) else { print("Unable to activate \(item.family).\(item.style)"); return; }
+                    guard FontUtility.activate(font) else { NSLog("Unable to activate \(item.family).\(item.style)"); return; }
                     if let desc:NSFontDescriptor = CTFontManagerCreateFontDescriptorFromData(data! as CFData) {
                         let downloadItem = item
                         let traits = desc.object(forKey: NSFontTraitsAttribute) as? NSDictionary
@@ -544,7 +545,7 @@ class Fontstore {
                         }
                         
                     } else {
-                        print("Unable to create descriptors for \(item.family).\(item.style)")
+                        NSLog("Unable to create descriptors for \(item.family).\(item.style)")
                     }
                 }
             }
@@ -579,7 +580,7 @@ class Fontstore {
                     FontUtility.activateFontFile(item.installedUrl, with: .session)
                 }
                 catch {
-                    print("Unable to write to \(installedUrl)")
+                    NSLog("Unable to write to \(installedUrl)")
                 }
                 
             } else {
@@ -601,7 +602,7 @@ class Fontstore {
         
         guard let item = catalog.value?.fonts[uid] else { return }
         
-        print("Installing  \(item.family) \(item.style)")
+        NSLog("Installing  \(item.family) \(item.style)")
         
         self.installFont(item: item, installed: installed)
         

@@ -486,7 +486,7 @@ extension ListingViewController: NSOutlineViewDelegate {
                     textField.font = NSFont.init(descriptor: fontDescriptor, size: 16)
                 }
                 else {
-                    print("ERROR: No font descriptor for \(font.family) \(font.style)")
+                    NSLog("ERROR: No font descriptor for \(font.family) \(font.style)")
                 }
             }
             
